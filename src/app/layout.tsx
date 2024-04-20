@@ -1,9 +1,13 @@
+import { ColorSchemeScript, MantineProvider, createTheme } from "@mantine/core";
+import "@mantine/core/styles.css";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Tech Tips",
   description: "ためになる技術置き場",
 };
+
+const theme = createTheme({});
 
 export default function RootLayout({
   children,
@@ -12,7 +16,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <head>
+        <ColorSchemeScript />
+        <link rel="shortcut icon" href="/favicon.svg" />
+      </head>
+      <body>
+        <MantineProvider>{children}</MantineProvider>
+      </body>
     </html>
   );
 }
