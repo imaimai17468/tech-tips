@@ -1,13 +1,17 @@
+import { MainLayout } from "@/components/layout/MainLayout";
 import { ColorSchemeScript, MantineProvider, createTheme } from "@mantine/core";
 import "@mantine/core/styles.css";
 import type { Metadata } from "next";
+import "@/styles/global.css";
 
 export const metadata: Metadata = {
   title: "Tech Tips",
   description: "ためになる技術置き場",
 };
 
-const theme = createTheme({});
+const theme = createTheme({
+  fontFamily: "Raleway, Sawarabi Gothic, sans-serif",
+});
 
 export default function RootLayout({
   children,
@@ -21,7 +25,9 @@ export default function RootLayout({
         <link rel="shortcut icon" href="/favicon.svg" />
       </head>
       <body>
-        <MantineProvider>{children}</MantineProvider>
+        <MantineProvider theme={theme} withGlobalClasses>
+          <MainLayout>{children}</MainLayout>
+        </MantineProvider>
       </body>
     </html>
   );
