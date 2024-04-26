@@ -1,5 +1,7 @@
+import { PATHS } from "@/constants/paths";
 import {
   ActionIcon,
+  Anchor,
   Avatar,
   Box,
   Card,
@@ -13,14 +15,16 @@ export const Header: React.FC = () => {
   return (
     <Box py={16} pl={32} pr={16} style={{ position: "sticky", top: 0 }}>
       <Flex justify="space-between" align="center">
-        <Text
-          size="xl"
-          fw={700}
-          variant="gradient"
-          gradient={{ from: "blue", to: "cyan", deg: 90 }}
-        >
-          Tech Tips
-        </Text>
+        <Anchor href={PATHS.TOP}>
+          <Text
+            size="xl"
+            fw={700}
+            variant="gradient"
+            gradient={{ from: "blue", to: "cyan", deg: 90 }}
+          >
+            Tech Tips
+          </Text>
+        </Anchor>
         <Card shadow="md" radius="md">
           <Flex gap={16} align="center">
             <ActionIcon variant="outline" radius="xl">
