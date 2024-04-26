@@ -25,7 +25,7 @@ export const Header: React.FC = () => {
             Tech Tips
           </Text>
         </Anchor>
-        <Card shadow="md" radius="md">
+        <Card shadow="md" radius="md" py={8} px={24}>
           <Flex gap={16} align="center">
             <ActionIcon variant="outline" radius="xl">
               <BellIcon />
