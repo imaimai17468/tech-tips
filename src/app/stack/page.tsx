@@ -1,10 +1,10 @@
 import { NavigationTabs } from "@/components/parts/NavigationTabs";
 
-export default function Home() {
+export default function Stack() {
   return (
     <main>
-      <NavigationTabs defaultTab="Your Tips" />
-      <p>Your Tips</p>
+      <NavigationTabs defaultTab="Stacks" />
+      <p>stacks</p>
     </main>
   );
 }
