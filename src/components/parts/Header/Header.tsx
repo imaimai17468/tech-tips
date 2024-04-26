@@ -11,7 +11,7 @@ import { BellIcon } from "@radix-ui/react-icons";
 
 export const Header: React.FC = () => {
   return (
-    <Box p={16} style={{ position: "sticky", top: 0 }}>
+    <Box py={16} pl={32} pr={16} style={{ position: "sticky", top: 0 }}>
       <Flex justify="space-between" align="center">
         <Text
           size="xl"
