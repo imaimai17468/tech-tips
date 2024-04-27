@@ -2,12 +2,12 @@ import { faker } from "@faker-js/faker";
 import { createMockUser } from "../user/mock";
 import type { Tip } from "./types";
 
-const createNewMockTip = (): Tip => {
+export const createMockTip = (): Tip => {
   return {
     id: faker.string.nanoid(),
     title: faker.lorem.sentence(),
     description: faker.lorem.sentence(),
-    content: faker.lorem.words(),
+    content: faker.lorem.paragraphs(),
     favCount: faker.number.int({ max: 10000 }),
     author: createMockUser(),
     createdAt: faker.date.recent().toISOString(),
@@ -15,5 +15,5 @@ const createNewMockTip = (): Tip => {
 };
 
 export const createMockTips = (count: number): Tip[] => {
-  return Array.from({ length: count }, () => createNewMockTip());
+  return Array.from({ length: count }, () => createMockTip());
 };
