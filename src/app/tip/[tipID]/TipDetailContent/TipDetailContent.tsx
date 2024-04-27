@@ -1,4 +1,4 @@
-import { Card, Stack, Text, Title } from "@mantine/core";
+import { Badge, Card, Flex, Stack, Text, Title } from "@mantine/core";
 import { createMockTip } from "../../../../repositories/tips/mock";
 
 export const TipDetailContent: React.FC = () => {
@@ -11,6 +11,11 @@ export const TipDetailContent: React.FC = () => {
           <Title>{tip.title}</Title>
           <Text size="xl">{tip.description}</Text>
         </Stack>
+        <Flex gap={8}>
+          {tip.tags.map((tag) => (
+            <Badge key={tag}>{tag}</Badge>
+          ))}
+        </Flex>
         <Text>{tip.content}</Text>
       </Stack>
     </Card>
