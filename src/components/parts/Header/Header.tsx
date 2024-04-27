@@ -15,7 +15,7 @@ export const Header: React.FC = () => {
   return (
     <Box py={16} pl={32} pr={16} pos="sticky" top={0}>
       <Flex justify="space-between" align="center">
-        <Anchor href={PATHS.TOP}>
+        <Anchor href={PATHS.TOP} underline="never">
           <Logo />
         </Anchor>
         <Card shadow="md" radius="md" py={8} px={24}>
