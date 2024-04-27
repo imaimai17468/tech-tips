@@ -1,0 +1,1 @@
+export { TipDetailContent } from "./TipDetailContent";
