@@ -1,3 +1,4 @@
+import { Footer } from "@/components/parts/Footer";
 import { Header } from "@/components/parts/Header";
 import { Box } from "@mantine/core";
 
@@ -12,6 +13,7 @@ export const MainLayout: React.FC<Props> = ({ children }: Props) => {
       <Box maw={1120} mx="auto">
         {children}
       </Box>
+      <Footer />
     </Box>
   );
 };
