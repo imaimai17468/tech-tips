@@ -4,7 +4,7 @@ import { TipCard } from "../TipCard";
 
 export const TipList: React.FC<{ tips: Tip[] }> = ({ tips }) => {
   return (
-    <SimpleGrid cols={3}>
+    <SimpleGrid cols={3} spacing="lg" verticalSpacing="lg">
       {tips.map((tip) => (
         <TipCard key={tip.id} tip={tip} />
       ))}
