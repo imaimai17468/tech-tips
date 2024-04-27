@@ -1,10 +1,9 @@
-import { NavigationTabs } from "@/components/parts/NavigationTabs";
+import { TabsLayout } from "@/components/layout/TabsLayout";
 
 export default function Stack() {
   return (
-    <main>
-      <NavigationTabs defaultTab="Stacks" />
+    <TabsLayout tabName="Stacks">
       <p>stacks</p>
-    </main>
+    </TabsLayout>
   );
 }

@@ -1,10 +1,9 @@
-import { NavigationTabs } from "@/components/parts/NavigationTabs";
+import { TabsLayout } from "@/components/layout/TabsLayout";
 
-export default function Home() {
+export default function Explore() {
   return (
-    <main>
-      <NavigationTabs defaultTab="Explore" />
-      <p>Explore</p>
-    </main>
+    <TabsLayout tabName="Explore">
+      <p>explore</p>
+    </TabsLayout>
   );
 }

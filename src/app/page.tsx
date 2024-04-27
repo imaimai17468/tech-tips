@@ -1,10 +1,10 @@
-import { NavigationTabs } from "@/components/parts/NavigationTabs";
+import { TabsLayout } from "@/components/layout/TabsLayout";
+import { TopContent } from "@/components/template/top/TopCotent/TopContent";
 
-export default function Home() {
+export default function Top() {
   return (
-    <main>
-      <NavigationTabs defaultTab="Your Tips" />
-      <p>Your Tips</p>
-    </main>
+    <TabsLayout tabName="Your Tips">
+      <TopContent />
+    </TabsLayout>
   );
 }
