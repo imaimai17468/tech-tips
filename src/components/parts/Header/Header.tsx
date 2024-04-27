@@ -13,7 +13,7 @@ import { Logo } from "../Logo";
 
 export const Header: React.FC = () => {
   return (
-    <Box py={16} pl={32} pr={16} style={{ position: "sticky", top: 0 }}>
+    <Box py={16} pl={32} pr={16} pos="sticky" top={0}>
       <Flex justify="space-between" align="center">
         <Anchor href={PATHS.TOP}>
           <Logo />
