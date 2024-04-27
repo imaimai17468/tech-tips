@@ -1,5 +1,5 @@
+import { createMockTip } from "@/repositories/tips/mock";
 import { Badge, Card, Flex, Stack, Text, Title } from "@mantine/core";
-import { createMockTip } from "../../../../repositories/tips/mock";
 
 export const TipDetailContent: React.FC = () => {
   const tip = createMockTip();
