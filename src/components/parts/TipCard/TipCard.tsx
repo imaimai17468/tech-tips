@@ -19,9 +19,7 @@ export const TipCard: React.FC<{ tip: Tip }> = ({ tip }) => {
           </Flex>
           <Flex align="center" gap={4}>
             <HeartIcon color="#F783AC" />
-            <Text size="xs" style={{ fontFamily: "sans-serif" }}>
-              {tip.favCount}
-            </Text>
+            <Text size="xs">{tip.favCount}</Text>
           </Flex>
         </Flex>
       </Stack>
