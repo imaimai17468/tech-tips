@@ -5,8 +5,8 @@ import type { Tip } from "./types";
 const createNewMockTip = (): Tip => {
   return {
     id: faker.string.uuid(),
-    title: faker.lorem.words(),
-    description: faker.lorem.words(),
+    title: faker.lorem.sentence(),
+    description: faker.lorem.sentence(),
     content: faker.lorem.words(),
     favCount: faker.number.int({ max: 10000 }),
     author: createMockUser(),
