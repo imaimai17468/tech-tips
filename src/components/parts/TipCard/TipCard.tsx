@@ -17,8 +17,8 @@ export const TipCard: React.FC<{ tip: Tip }> = ({ tip }) => {
             <Avatar src={tip.author.userImageURL} alt={tip.author.username} />
             <Text lineClamp={1}>{tip.author.username}</Text>
           </Flex>
-          <Flex align="center" gap={8}>
-            <HeartIcon />
+          <Flex align="center" gap={4}>
+            <HeartIcon color="#F783AC" />
             <Text size="xs" style={{ fontFamily: "sans-serif" }}>
               {tip.favCount}
             </Text>
