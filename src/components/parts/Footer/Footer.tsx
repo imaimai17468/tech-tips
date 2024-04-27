@@ -3,7 +3,15 @@ import { Logo } from "../Logo";
 
 export const Footer: React.FC = () => {
   return (
-    <Card shadow="md" radius="md" w="fit-content" m={32} ml="auto">
+    <Card
+      shadow="md"
+      radius="md"
+      w="fit-content"
+      m={32}
+      ml="auto"
+      pos="sticky"
+      top="100%"
+    >
       <Flex gap={16} align="end">
         <Stack gap={4}>
           <Logo />
