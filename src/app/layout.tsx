@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 };
 
 const theme = createTheme({
-  fontFamily: "Raleway, Sawarabi Gothic, sans-serif",
+  fontFamily: "Roboto, Raleway, Sawarabi Gothic, sans-serif",
 });
 
 export default function RootLayout({
