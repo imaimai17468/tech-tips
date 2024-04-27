@@ -3,7 +3,7 @@ import type { User } from "./types";
 
 export const createMockUser = (): User => {
   return {
-    id: faker.string.uuid(),
+    id: faker.string.nanoid(),
     username: faker.internet.userName(),
     bio: faker.lorem.sentence(),
     twitterUsername: faker.internet.userName(),
