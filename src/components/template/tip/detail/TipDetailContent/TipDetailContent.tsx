@@ -7,7 +7,7 @@ export const TipDetailContent: React.FC = () => {
 
   return (
     <Flex gap={32}>
-      <Card shadow="xs" padding="xl" radius="lg">
+      <Card shadow="xs" padding="xl" radius="lg" h="fit-content">
         <Stack gap={16}>
           <Stack gap={4}>
             <Title>{tip.title}</Title>
@@ -30,7 +30,7 @@ export const TipDetailContent: React.FC = () => {
             <Link1Icon />
           </ActionIcon>
         </Flex>
-        <Card shadow="xs" padding="xl" radius="lg" w={300} style={{ flexShrink: 0 }}>
+        <Card shadow="xs" padding="xl" radius="lg" w={300} style={{ flexShrink: 0 }} h="fit-content">
           <Stack gap={16}>
             <Flex align="center" gap={8}>
               <Avatar src={tip.author.userImageURL} alt={tip.author.username} />
