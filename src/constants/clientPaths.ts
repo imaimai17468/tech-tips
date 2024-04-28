@@ -3,4 +3,5 @@ export const CLIENT_PATHS = {
   STACK: "/stack",
   EXPLORE: "/explore",
   TIP_DETAIL: "/tip/[id]",
+  TIP_CREATE: "/tip/create",
 };
