@@ -7,7 +7,7 @@ export const TipDetailContent: React.FC = () => {
 
   return (
     <Flex gap={32}>
-      <Card shadow="xs" padding="xl" radius="lg" h="fit-content">
+      <Card shadow="xs" padding="xl" radius="lg" h="fit-content" w="100%">
         <Stack gap={16}>
           <Stack gap={4}>
             <Title>{tip.title}</Title>
