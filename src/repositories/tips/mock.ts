@@ -9,9 +9,7 @@ export const createMockTip = (): Tip => {
     description: faker.lorem.sentence(),
     content: faker.lorem.paragraphs(),
     favCount: faker.number.int({ max: 10000 }),
-    tags: Array.from({ length: faker.number.int({ min: 1, max: 5 }) }, () =>
-      faker.lorem.word(),
-    ),
+    tags: Array.from({ length: faker.number.int({ min: 1, max: 5 }) }, () => faker.lorem.word()),
     author: createMockUser(),
     createdAt: faker.date.recent().toISOString(),
   };

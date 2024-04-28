@@ -1,8 +1,8 @@
 import { MainLayout } from "@/components/layout/MainLayout";
+import "@/styles/global.css";
 import { ColorSchemeScript, MantineProvider, createTheme } from "@mantine/core";
 import "@mantine/core/styles.css";
 import type { Metadata } from "next";
-import "@/styles/global.css";
 
 export const metadata: Metadata = {
   title: "Tech Tips",

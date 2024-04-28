@@ -1,13 +1,5 @@
 import { CLIENT_PATHS } from "@/constants/clientPaths";
-import {
-  ActionIcon,
-  Anchor,
-  Avatar,
-  Box,
-  Card,
-  Flex,
-  UnstyledButton,
-} from "@mantine/core";
+import { ActionIcon, Anchor, Avatar, Box, Card, Flex, UnstyledButton } from "@mantine/core";
 import { BellIcon } from "@radix-ui/react-icons";
 import { Logo } from "../Logo";
 
