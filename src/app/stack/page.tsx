@@ -3,7 +3,7 @@ import { StackContent } from "@/components/template/stack/StackContent";
 
 export default function Home() {
   return (
-    <TabsLayout tabName="Stacks">
+    <TabsLayout tabName="Your Stocks">
       <StackContent />
     </TabsLayout>
   );
