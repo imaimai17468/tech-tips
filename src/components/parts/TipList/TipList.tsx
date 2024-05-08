@@ -1,6 +1,6 @@
 import { SimpleGrid } from "@mantine/core";
 import type { Tip } from "../../../repositories/tips/types";
-import { TipCard } from "../TipCard";
+import { TipCard } from "./components/TipCard";
 
 export const TipList: React.FC<{ tips: Tip[] }> = ({ tips }) => {
   return (
