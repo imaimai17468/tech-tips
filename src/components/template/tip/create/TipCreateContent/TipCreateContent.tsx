@@ -1,3 +1,4 @@
+import { Editor } from "@/components/parts/Editor";
 import { createMockTip } from "@/repositories/tips/mock";
 import {
   ActionIcon,
@@ -12,21 +13,34 @@ import {
   TextInput,
   Textarea,
 } from "@mantine/core";
+import { TipPostButton } from "./components/TipPostButton";
+import { TipSaveButton } from "./components/TipSaveButton";
 
 export const TipCreateContent: React.FC = () => {
   const tip = createMockTip();
 
   return (
     <Flex gap={32}>
-      <Card shadow="xs" padding="xl" radius="lg" h="fit-content" w="100%">
-        <Stack gap={16}>
-          <Stack gap={4}>
-            <TextInput label="Title" />
-            <Textarea label="Description" rows={3} />
-          </Stack>
-          <TagsInput label="Tags" description="Press Enter to submit a tag" />
+      <Stack w="100%" gap={32}>
+        <Stack>
+          <Flex justify="end" gap={16}>
+            <TipSaveButton />
+            <TipPostButton />
+          </Flex>
+          <Card shadow="xs" padding="xl" radius="lg" h="fit-content" w="100%">
+            <Stack gap={16}>
+              <Stack gap={4}>
+                <TextInput label="Title" />
+                <Textarea label="Description" rows={3} />
+              </Stack>
+              <TagsInput label="Tags" description="Press Enter to submit a tag" />
+            </Stack>
+          </Card>
         </Stack>
-      </Card>
+        <Card shadow="xs" padding="xl" radius="lg" h="fit-content" w="100%" mih="50vh">
+          <Editor />
+        </Card>
+      </Stack>
       <Card shadow="xs" padding="xl" radius="lg" w={300} style={{ flexShrink: 0 }} h="fit-content">
         <Stack gap={16}>
           <Flex align="center" gap={8}>
