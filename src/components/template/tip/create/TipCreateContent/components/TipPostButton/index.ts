@@ -1,0 +1,1 @@
+export { TipPostButton } from "./TipPostButton";
