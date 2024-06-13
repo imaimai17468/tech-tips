@@ -7,7 +7,6 @@ export const TipValidator = z
     title: z.string(),
     description: z.string(),
     content: z.string(),
-    favCount: z.number(),
     tags: z.array(z.string()),
     author: UserValidator,
   })

@@ -2,7 +2,6 @@ import { CLIENT_PATHS } from "@/constants/clientPaths";
 import { replaceIDinPath } from "@/libs/replaceIDinPath";
 import type { Tip } from "@/repositories/tips/types";
 import { Anchor, Avatar, Badge, Card, Flex, Stack, Text } from "@mantine/core";
-import { HeartIcon } from "@radix-ui/react-icons";
 
 export const TipCard: React.FC<{ tip: Tip }> = ({ tip }) => {
   return (
@@ -23,10 +22,6 @@ export const TipCard: React.FC<{ tip: Tip }> = ({ tip }) => {
           <Flex align="center" gap={8}>
             <Avatar src={tip.author.userImageURL} alt={tip.author.username} />
             <Text lineClamp={1}>{tip.author.username}</Text>
-          </Flex>
-          <Flex align="center" gap={4}>
-            <HeartIcon color="#F783AC" />
-            <Text size="xs">{tip.favCount}</Text>
           </Flex>
         </Flex>
       </Stack>
