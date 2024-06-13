@@ -1,3 +1,5 @@
+"use client";
+
 import { Editor } from "@/components/parts/Editor";
 import { createMockTip } from "@/repositories/tips/mock";
 import {
@@ -38,7 +40,11 @@ export const TipCreateContent: React.FC = () => {
           </Card>
         </Stack>
         <Card shadow="xs" padding="xl" radius="lg" h="fit-content" w="100%" mih="50vh">
-          <Editor />
+          <Editor
+            onChange={(value) => {
+              console.log(value);
+            }}
+          />
         </Card>
       </Stack>
       <Card shadow="xs" padding="xl" radius="lg" w={300} style={{ flexShrink: 0 }} h="fit-content">
