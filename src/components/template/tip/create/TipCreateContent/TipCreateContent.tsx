@@ -1,7 +1,7 @@
 "use client";
 
 import { Editor } from "@/components/parts/Editor";
-import { TipValidator } from "@/repositories/tips/types";
+import { TipFormValidator } from "@/repositories/tips/types";
 import { createMockUser } from "@/repositories/user/mock";
 import {
   ActionIcon,
@@ -28,10 +28,9 @@ export const TipCreateContent: React.FC = () => {
   const form = useForm({
     mode: "uncontrolled",
     initialValues: {
-      author: user,
       isPublic: false,
     },
-    validate: zodResolver(TipValidator),
+    validate: zodResolver(TipFormValidator),
   });
 
   return (

@@ -14,3 +14,13 @@ export const TipValidator = z
   .merge(BaseTypeValidator);
 
 export type Tip = z.infer<typeof TipValidator>;
+
+export const TipFormValidator = TipValidator.pick({
+  title: true,
+  description: true,
+  content: true,
+  tags: true,
+  isPublic: true,
+});
+
+export type TipForm = z.infer<typeof TipFormValidator>;
