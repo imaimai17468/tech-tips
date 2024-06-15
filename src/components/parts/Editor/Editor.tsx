@@ -1,34 +1,28 @@
 "use client";
-
-import type { Block } from "@blocknote/core";
 import "@blocknote/core/fonts/inter.css";
 import { BlockNoteView } from "@blocknote/mantine";
 import "@blocknote/mantine/style.css";
 import { useCreateBlockNote } from "@blocknote/react";
-import { useEffect, useMemo, useState } from "react";
 
 type props = {
   onChange: (value: string) => void;
   defaultValue?: string;
+  editable?: boolean;
 };
 
-export const Editor: React.FC<props> = ({ onChange, defaultValue }: props) => {
-  const [blocks, setBlocks] = useState<Block[]>([]);
+export const Editor: React.FC<props> = ({ onChange, defaultValue, editable = true }: props) => {
   const editor = useCreateBlockNote({
     initialContent: defaultValue && JSON.parse(defaultValue),
   });
-  const contents = useMemo(() => JSON.stringify(blocks, null, 2), [blocks]);
-
-  useEffect(() => {
-    onChange(contents);
-  }, [contents]);
 
   return (
     <BlockNoteView
       editor={editor}
       onChange={() => {
-        setBlocks(editor.document);
+        const blocksJSON = JSON.stringify(editor.document, null, 2);
+        onChange(blocksJSON);
       }}
+      editable={editable}
     />
   );
 };
