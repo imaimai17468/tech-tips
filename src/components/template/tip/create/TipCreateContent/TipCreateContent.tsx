@@ -10,13 +10,13 @@ import {
   Flex,
   Image,
   Stack,
+  Switch,
   TagsInput,
   Text,
   TextInput,
   Textarea,
 } from "@mantine/core";
 import { TipPostButton } from "./components/TipPostButton";
-import { TipSaveButton } from "./components/TipSaveButton";
 
 export const TipCreateContent: React.FC = () => {
   const tip = createMockTip();
@@ -25,8 +25,8 @@ export const TipCreateContent: React.FC = () => {
     <Flex gap={32}>
       <Stack w="100%" gap={32}>
         <Stack>
-          <Flex justify="end" gap={16}>
-            <TipSaveButton />
+          <Flex justify="end" align="center" gap={16}>
+            <Switch label="公開" />
             <TipPostButton />
           </Flex>
           <Card shadow="xs" padding="xl" radius="lg" h="fit-content" w="100%">
