@@ -11,7 +11,7 @@ export const Footer: React.FC = () => {
             僕らの技術のはき捨てば
           </Text>
         </Stack>
-        <Flex gap={4}>
+        <Flex gap={4} c="gray.6">
           <Text size="sm">Build by</Text>
           <Anchor underline="hover" size="sm">
             imaimai17468
