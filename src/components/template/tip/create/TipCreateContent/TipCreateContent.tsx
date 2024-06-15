@@ -27,6 +27,10 @@ export const TipCreateContent: React.FC = () => {
 
   const form = useForm({
     mode: "uncontrolled",
+    initialValues: {
+      author: user,
+      isPublic: false,
+    },
     validate: zodResolver(TipValidator),
   });
 
@@ -36,7 +40,7 @@ export const TipCreateContent: React.FC = () => {
         <Stack w="100%" gap={32}>
           <Stack>
             <Flex justify="end" align="center" gap={16}>
-              <Switch label="公開" />
+              <Switch label="公開" key={form.key("isPublic")} {...form.getInputProps("isPublic")} />
               <Button w="fit-content" type="submit">
                 <Flex align="center" gap={4}>
                   <Text>Post</Text>
@@ -55,16 +59,17 @@ export const TipCreateContent: React.FC = () => {
                     {...form.getInputProps("description")}
                   />
                 </Stack>
-                <TagsInput label="Tags" description="Press Enter to submit a tag" />
+                <TagsInput
+                  label="Tags"
+                  description="Press Enter to submit a tag"
+                  key={form.key("tags")}
+                  {...form.getInputProps("tags")}
+                />
               </Stack>
             </Card>
           </Stack>
           <Card shadow="xs" padding="xl" radius="lg" h="fit-content" w="100%" mih="50vh">
-            <Editor
-              onChange={(value) => {
-                console.log(value);
-              }}
-            />
+            <Editor key={form.key("contents")} {...form.getInputProps("contents")} />
           </Card>
         </Stack>
         <Card shadow="xs" padding="xl" radius="lg" w={300} style={{ flexShrink: 0 }} h="fit-content">
