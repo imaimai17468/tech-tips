@@ -13,7 +13,7 @@ export const Footer: React.FC = () => {
         </Stack>
         <Flex gap={4} c="gray.6">
           <Text size="sm">Build by</Text>
-          <Anchor underline="hover" size="sm">
+          <Anchor underline="hover" size="sm" href="https://x.com/imaimai17468">
             imaimai17468
           </Anchor>
         </Flex>
