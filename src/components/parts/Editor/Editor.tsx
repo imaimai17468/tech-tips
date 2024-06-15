@@ -15,7 +15,7 @@ type props = {
 export const Editor: React.FC<props> = ({ onChange, defaultValue }: props) => {
   const [blocks, setBlocks] = useState<Block[]>([]);
   const editor = useCreateBlockNote({
-    initialContent: JSON.parse(defaultValue || "[]"),
+    initialContent: defaultValue && JSON.parse(defaultValue),
   });
   const contents = useMemo(() => JSON.stringify(blocks, null, 2), [blocks]);
 
