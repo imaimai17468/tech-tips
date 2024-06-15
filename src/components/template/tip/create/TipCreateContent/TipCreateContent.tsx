@@ -1,8 +1,8 @@
 "use client";
 
 import { Editor } from "@/components/parts/Editor";
-import { createMockTip } from "@/repositories/tips/mock";
 import { TipValidator } from "@/repositories/tips/types";
+import { createMockUser } from "@/repositories/user/mock";
 import {
   ActionIcon,
   Anchor,
@@ -23,7 +23,7 @@ import { PaperPlaneIcon } from "@radix-ui/react-icons";
 import { zodResolver } from "mantine-form-zod-resolver";
 
 export const TipCreateContent: React.FC = () => {
-  const tip = createMockTip();
+  const user = createMockUser();
 
   const form = useForm({
     mode: "uncontrolled",
@@ -47,8 +47,13 @@ export const TipCreateContent: React.FC = () => {
             <Card shadow="xs" padding="xl" radius="lg" h="fit-content" w="100%">
               <Stack gap={16}>
                 <Stack gap={4}>
-                  <TextInput label="Title" />
-                  <Textarea label="Description" rows={3} />
+                  <TextInput label="Title" key={form.key("title")} {...form.getInputProps("title")} />
+                  <Textarea
+                    label="Description"
+                    rows={3}
+                    key={form.key("description")}
+                    {...form.getInputProps("description")}
+                  />
                 </Stack>
                 <TagsInput label="Tags" description="Press Enter to submit a tag" />
               </Stack>
@@ -65,12 +70,12 @@ export const TipCreateContent: React.FC = () => {
         <Card shadow="xs" padding="xl" radius="lg" w={300} style={{ flexShrink: 0 }} h="fit-content">
           <Stack gap={16}>
             <Flex align="center" gap={8}>
-              <Avatar src={tip.author.userImageURL} alt={tip.author.username} />
+              <Avatar src={user.userImageURL} alt={user.username} />
               <Anchor lineClamp={1} c="black" fw={700}>
-                {tip.author.username}
+                {user.username}
               </Anchor>
             </Flex>
-            <Text>{tip.author.bio}</Text>
+            <Text>{user.bio}</Text>
             <Flex gap={8}>
               <ActionIcon radius="xl" variant="outline" color="black">
                 <Image src="/image/github-mark.svg" w={16} h={16} />
