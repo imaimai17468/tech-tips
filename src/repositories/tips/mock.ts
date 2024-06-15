@@ -11,6 +11,7 @@ export const createMockTip = (): Tip => {
     tags: Array.from({ length: faker.number.int({ min: 1, max: 5 }) }, () => faker.lorem.word()),
     author: createMockUser(),
     createdAt: faker.date.recent().toISOString(),
+    isPublic: faker.datatype.boolean(),
   };
 };
 

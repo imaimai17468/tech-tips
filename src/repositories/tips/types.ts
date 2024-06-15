@@ -9,6 +9,7 @@ export const TipValidator = z
     content: z.string(),
     tags: z.array(z.string()),
     author: UserValidator,
+    isPublic: z.boolean(),
   })
   .merge(BaseTypeValidator);
 
