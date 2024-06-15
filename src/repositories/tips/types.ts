@@ -5,9 +5,9 @@ import { UserValidator } from "../user/types";
 export const TipValidator = z
   .object({
     title: z.string(),
-    description: z.string(),
-    content: z.string(),
-    tags: z.array(z.string()),
+    description: z.string().optional(),
+    content: z.string().optional(),
+    tags: z.array(z.string()).optional(),
     author: UserValidator,
     isPublic: z.boolean(),
   })
