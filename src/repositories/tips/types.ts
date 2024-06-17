@@ -4,10 +4,10 @@ import { UserValidator } from "../user/types";
 
 export const TipValidator = z
   .object({
-    title: z.string(),
-    description: z.string().optional(),
+    title: z.string().min(1),
+    description: z.string().max(300).optional(),
     content: z.string().optional(),
-    tags: z.array(z.string()).optional(),
+    tags: z.array(z.string()).max(5).optional(),
     author: UserValidator,
     isPublic: z.boolean(),
   })
