@@ -1,7 +1,7 @@
 "use client";
 
 import { Editor } from "@/components/parts/Editor";
-import { TipFormValidator } from "@/repositories/tips/types";
+import { type TipForm, TipFormValidator } from "@/repositories/tips/types";
 import { createMockUser } from "@/repositories/user/mock";
 import {
   ActionIcon,
@@ -25,16 +25,24 @@ import { zodResolver } from "mantine-form-zod-resolver";
 export const TipCreateContent: React.FC = () => {
   const user = createMockUser();
 
-  const form = useForm({
+  const form = useForm<TipForm>({
     mode: "uncontrolled",
     initialValues: {
+      title: "",
       isPublic: false,
+      description: undefined,
+      content: undefined,
+      tags: undefined,
     },
     validate: zodResolver(TipFormValidator),
   });
 
+  const handleFormSubmit = (values: TipForm) => {
+    console.log(values);
+  };
+
   return (
-    <form onSubmit={form.onSubmit((values) => console.log(values))}>
+    <form onSubmit={form.onSubmit(handleFormSubmit)}>
       <Flex gap={32}>
         <Stack w="100%" gap={32}>
           <Stack>
