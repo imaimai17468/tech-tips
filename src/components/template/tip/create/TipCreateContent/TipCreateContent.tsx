@@ -1,7 +1,7 @@
 "use client";
 
 import { Editor } from "@/components/parts/Editor";
-import { type TipForm, TipFormValidator } from "@/repositories/tips/types";
+import { type Tip, type TipForm, TipFormValidator } from "@/repositories/tips/types";
 import { createMockUser } from "@/repositories/user/mock";
 import {
   ActionIcon,
@@ -21,6 +21,7 @@ import {
 import { useForm } from "@mantine/form";
 import { PaperPlaneIcon } from "@radix-ui/react-icons";
 import { zodResolver } from "mantine-form-zod-resolver";
+import { typeid } from "typeid-js";
 
 export const TipCreateContent: React.FC = () => {
   const user = createMockUser();
@@ -38,7 +39,15 @@ export const TipCreateContent: React.FC = () => {
   });
 
   const handleFormSubmit = (values: TipForm) => {
-    console.log(values);
+    const submitData: Tip = {
+      ...values,
+      id: typeid().toString(),
+      createdAt: Date.now(),
+      updatedAt: Date.now(),
+      author: user,
+    };
+
+    console.log(submitData);
   };
 
   return (
