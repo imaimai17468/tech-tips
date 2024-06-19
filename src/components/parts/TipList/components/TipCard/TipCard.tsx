@@ -2,6 +2,7 @@ import { CLIENT_PATHS } from "@/constants/clientPaths";
 import { replaceIDinPath } from "@/libs/replaceIDinPath";
 import type { Tip } from "@/repositories/tips/types";
 import { Anchor, Avatar, Badge, Card, Flex, Stack, Text } from "@mantine/core";
+import dayjs from "dayjs";
 
 export const TipCard: React.FC<{ tip: Tip }> = ({ tip }) => {
   return (
@@ -12,11 +13,14 @@ export const TipCard: React.FC<{ tip: Tip }> = ({ tip }) => {
             {tip.title}
           </Anchor>
           <Text lineClamp={3}>{tip.description}</Text>
-          <Flex gap={8} wrap="wrap">
-            {tip.tags.map((tag) => (
-              <Badge key={tag}>{tag}</Badge>
-            ))}
-          </Flex>
+          <Text size="xs">{dayjs(tip.createdAt).format("YYYY MM DD").toLocaleString()}</Text>
+          {tip.tags && tip.tags.length > 0 && (
+            <Flex gap={8} wrap="wrap">
+              {tip.tags.map((tag) => (
+                <Badge key={tag}>{tag}</Badge>
+              ))}
+            </Flex>
+          )}
         </Stack>
         <Flex justify="space-between" align="end">
           <Flex align="center" gap={8}>
