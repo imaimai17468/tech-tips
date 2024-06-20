@@ -7,7 +7,7 @@ export const TopContent: React.FC = () => {
   const tips = createMockTips(10);
 
   return (
-    <Stack>
+    <Stack align="end">
       <TipCreateButton />
       <TipList tips={tips} />
     </Stack>
