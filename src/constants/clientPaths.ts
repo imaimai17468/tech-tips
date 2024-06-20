@@ -4,4 +4,5 @@ export const CLIENT_PATHS = {
   EXPLORE: "/explore",
   TIP_DETAIL: "/tip/[id]",
   TIP_CREATE: "/tip/create",
+  TIP_EDIT: "/tip/[id]/edit",
 };
