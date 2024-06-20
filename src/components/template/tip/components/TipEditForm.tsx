@@ -1,6 +1,7 @@
 "use client";
 
 import { Editor } from "@/components/parts/Editor";
+import { createInitialTipForm } from "@/repositories/tips/mock";
 import { type Tip, type TipForm, TipFormValidator } from "@/repositories/tips/types";
 import type { User } from "@/repositories/user/types";
 import { Box, Button, Card, Flex, Stack, Switch, TagsInput, Text, TextInput, Textarea } from "@mantine/core";
@@ -11,18 +12,13 @@ import { typeid } from "typeid-js";
 
 type Props = {
   user: User;
+  initialValues?: TipForm;
 };
 
-export const TipEditForm: React.FC<Props> = ({ user }) => {
+export const TipEditForm: React.FC<Props> = ({ user, initialValues }) => {
   const form = useForm<TipForm>({
     mode: "uncontrolled",
-    initialValues: {
-      title: "",
-      isPublic: false,
-      description: undefined,
-      content: undefined,
-      tags: undefined,
-    },
+    initialValues: initialValues ?? createInitialTipForm(),
     validate: zodResolver(TipFormValidator),
   });
 
