@@ -1,6 +1,7 @@
 import { createMockTip } from "@/repositories/tips/mock";
 import { ActionIcon, Anchor, Avatar, Badge, Card, Flex, Image, Stack, Text, Title } from "@mantine/core";
 import { BookmarkIcon, Link1Icon } from "@radix-ui/react-icons";
+import { TipEditButton } from "../../edit/components/TipEditButton/TipEditButton";
 
 export const TipDetailContent: React.FC = () => {
   const tip = createMockTip();
@@ -13,11 +14,13 @@ export const TipDetailContent: React.FC = () => {
             <Title>{tip.title}</Title>
             <Text size="xl">{tip.description}</Text>
           </Stack>
-          <Flex gap={8}>
-            {tip.tags.map((tag) => (
-              <Badge key={tag}>{tag}</Badge>
-            ))}
-          </Flex>
+          {tip.tags && (
+            <Flex gap={8}>
+              {tip.tags.map((tag) => (
+                <Badge key={tag}>{tag}</Badge>
+              ))}
+            </Flex>
+          )}
           <Text>{tip.content}</Text>
         </Stack>
       </Card>
@@ -49,6 +52,7 @@ export const TipDetailContent: React.FC = () => {
             </Flex>
           </Stack>
         </Card>
+        <TipEditButton id={tip.id} />
       </Stack>
     </Flex>
   );
