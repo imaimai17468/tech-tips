@@ -1,5 +1,5 @@
 import { faker } from "@faker-js/faker";
-import { createBaseType } from "../baseType";
+import { createMockBaseType } from "../baseType";
 import type { User } from "./types";
 
 export const createMockUser = (): User => {
@@ -9,7 +9,7 @@ export const createMockUser = (): User => {
     twitterUsername: faker.internet.userName(),
     githubUsername: faker.internet.userName(),
     userImageURL: faker.image.avatar(),
-    ...createBaseType(),
+    ...createMockBaseType(),
   };
 };
 
