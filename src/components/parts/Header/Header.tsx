@@ -2,10 +2,11 @@ import { CLIENT_PATHS } from "@/constants/clientPaths";
 import { ActionIcon, Anchor, Avatar, Box, Card, Flex, UnstyledButton } from "@mantine/core";
 import { BellIcon } from "@radix-ui/react-icons";
 import { Logo } from "../Logo";
+import { TipCreateButton } from "./components/TipCreateButton";
 
 export const Header: React.FC = () => {
   return (
-    <Box py={16} pl={32} pr={16} pos="sticky" top={0}>
+    <Box py={16} px={32} pos="sticky" top={0}>
       <Flex justify="space-between" align="center">
         <Anchor href={CLIENT_PATHS.TOP} underline="never">
           <Logo />
@@ -18,6 +19,7 @@ export const Header: React.FC = () => {
             <UnstyledButton>
               <Avatar />
             </UnstyledButton>
+            <TipCreateButton />
           </Flex>
         </Card>
       </Flex>
