@@ -1,1 +1,0 @@
-export { TipCard } from "./TipCard";

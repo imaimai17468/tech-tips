@@ -1,1 +1,0 @@
-export { TipCreateButton } from "./TipCreateButton";
