@@ -8,7 +8,7 @@ export const Footer: React.FC = () => {
         <Stack gap={4}>
           <Logo />
           <Text size="xs" c="gray.6">
-            僕らの技術のはき捨てば
+            Where Technologies Rest.
           </Text>
         </Stack>
         <Flex gap={4} c="gray.6">
