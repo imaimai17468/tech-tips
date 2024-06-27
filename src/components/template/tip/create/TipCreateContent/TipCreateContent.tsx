@@ -7,7 +7,7 @@ export const TipCreateContent: React.FC = () => {
   const user = createMockUser();
 
   return (
-    <Flex gap={32}>
+    <Flex gap={32} mt={64}>
       <TipEditForm user={user} />
       <AuthorCard user={user} />
     </Flex>
