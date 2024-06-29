@@ -1,6 +1,6 @@
 import { AuthorCard } from "@/components/parts/authorCard";
 import { CLIENT_PATHS } from "@/constants/clientPaths";
-import { replaceIDinPath } from "@/libs/replaceIDinPath";
+import { replaceIDinPath } from "@/utils/replaceIDinPath";
 import { createMockTip } from "@/repositories/tips/mock";
 import { ActionIcon, Badge, Button, Card, Flex, Stack, Text, Title } from "@mantine/core";
 import { BookmarkIcon, Link1Icon, Pencil2Icon } from "@radix-ui/react-icons";

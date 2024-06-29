@@ -1,5 +1,5 @@
 import { CLIENT_PATHS } from "@/constants/clientPaths";
-import { replaceIDinPath } from "@/libs/replaceIDinPath";
+import { replaceIDinPath } from "@/utils/replaceIDinPath";
 import type { Tip } from "@/repositories/tips/types";
 import { Anchor, Avatar, Badge, Card, Flex, Stack, Text } from "@mantine/core";
 import dayjs from "dayjs";
