@@ -1,7 +1,6 @@
 import type { User } from "@/repositories/user/types";
-import { createSitePath } from "@/utils/createSiteURL";
-import { ActionIcon, Anchor, Avatar, Card, Flex, Image, Stack, Text } from "@mantine/core";
-import Link from "next/link";
+import { Anchor, Avatar, Card, Flex, Stack, Text } from "@mantine/core";
+import { SNSButtons } from "../SNSButtons/SNSButtons";
 
 type Props = {
   user: User;
@@ -18,29 +17,7 @@ export const AuthorCard: React.FC<Props> = ({ user }) => {
           </Anchor>
         </Flex>
         <Text>{user.bio}</Text>
-        <Flex gap={8}>
-          <ActionIcon
-            radius="xl"
-            variant="outline"
-            color="black"
-            component={Link}
-            target="_blank"
-            rel="noopener noreferrer"
-            href={createSitePath("github", user.githubUsername)}
-          >
-            <Image src="/image/github-mark.svg" w={16} h={16} />
-          </ActionIcon>
-          <ActionIcon
-            radius="xl"
-            color="black"
-            component={Link}
-            target="_blank"
-            rel="noopener noreferrer"
-            href={createSitePath("x", user.twitterUsername)}
-          >
-            <Image src="/image/logo.svg" w={16} h={16} />
-          </ActionIcon>
-        </Flex>
+        <SNSButtons githubUsername={user.githubUsername} twitterUsername={user.twitterUsername} />
       </Stack>
     </Card>
   );
