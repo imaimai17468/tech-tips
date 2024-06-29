@@ -1,5 +1,7 @@
 "use client";
 
+import { CLIENT_PATHS } from "@/constants/clientPaths";
+import { replaceIDinPath } from "@/utils/replaceIDinPath";
 import { Avatar, Menu, UnstyledButton } from "@mantine/core";
 import { ExitIcon, Pencil1Icon } from "@radix-ui/react-icons";
 
@@ -17,7 +19,9 @@ export const UserButton: React.FC<Props> = ({ href, userName }) => {
         </UnstyledButton>
       </Menu.Target>
       <Menu.Dropdown>
-        <Menu.Item>{userName}</Menu.Item>
+        <Menu.Item component="a" href={replaceIDinPath(CLIENT_PATHS.USER, userName)}>
+          {userName}
+        </Menu.Item>
 
         <Menu.Label>Settings</Menu.Label>
         <Menu.Item leftSection={<Pencil1Icon />}>Your Tips</Menu.Item>
