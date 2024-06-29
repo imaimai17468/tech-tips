@@ -1,29 +1,38 @@
 import { AuthorCard } from "@/components/parts/authorCard";
+import { CLIENT_PATHS } from "@/constants/clientPaths";
+import { replaceIDinPath } from "@/libs/replaceIDinPath";
 import { createMockTip } from "@/repositories/tips/mock";
-import { ActionIcon, Badge, Card, Flex, Stack, Text, Title } from "@mantine/core";
-import { BookmarkIcon, Link1Icon } from "@radix-ui/react-icons";
+import { ActionIcon, Badge, Button, Card, Flex, Stack, Text, Title } from "@mantine/core";
+import { BookmarkIcon, Link1Icon, Pencil2Icon } from "@radix-ui/react-icons";
 
 export const TipDetailContent: React.FC = () => {
   const tip = createMockTip();
 
   return (
     <Flex gap={32} mt={64}>
-      <Card shadow="xs" padding="xl" radius="lg" h="fit-content" w="100%">
-        <Stack gap={16}>
-          <Stack gap={4}>
-            <Title>{tip.title}</Title>
-            <Text size="xl">{tip.description}</Text>
+      <Stack>
+        <Button w="fit-content" component="a" href={replaceIDinPath(CLIENT_PATHS.TIP_EDIT, tip.id)}>
+          <Flex gap={4} align="center">
+            <Pencil2Icon /> Edit
+          </Flex>
+        </Button>
+        <Card shadow="xs" padding="xl" radius="lg" h="fit-content" w="100%">
+          <Stack gap={16}>
+            <Stack gap={4}>
+              <Title>{tip.title}</Title>
+              <Text size="xl">{tip.description}</Text>
+            </Stack>
+            {tip.tags && (
+              <Flex gap={8}>
+                {tip.tags.map((tag) => (
+                  <Badge key={tag}>{tag}</Badge>
+                ))}
+              </Flex>
+            )}
+            <Text>{tip.content}</Text>
           </Stack>
-          {tip.tags && (
-            <Flex gap={8}>
-              {tip.tags.map((tag) => (
-                <Badge key={tag}>{tag}</Badge>
-              ))}
-            </Flex>
-          )}
-          <Text>{tip.content}</Text>
-        </Stack>
-      </Card>
+        </Card>
+      </Stack>
       <Stack>
         <Flex gap={8}>
           <ActionIcon radius="xl" variant="outline" color="pink">
