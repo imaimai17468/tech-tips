@@ -13,7 +13,8 @@ export const TipDetailContent: React.FC = () => {
       <Stack>
         <Button w="fit-content" component="a" href={replaceIDinPath(CLIENT_PATHS.TIP_EDIT, tip.id)}>
           <Flex gap={4} align="center">
-            <Pencil2Icon /> Edit
+            <Pencil2Icon />
+            <Text>Edit</Text>
           </Flex>
         </Button>
         <Card shadow="xs" padding="xl" radius="lg" h="fit-content" w="100%">
