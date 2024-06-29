@@ -1,9 +1,10 @@
 import { AuthorCard } from "@/components/parts/authorCard";
 import { CLIENT_PATHS } from "@/constants/clientPaths";
-import { replaceIDinPath } from "@/utils/replaceIDinPath";
 import { createMockTip } from "@/repositories/tips/mock";
+import { replaceIDinPath } from "@/utils/replaceIDinPath";
 import { ActionIcon, Badge, Button, Card, Flex, Stack, Text, Title } from "@mantine/core";
 import { BookmarkIcon, Link1Icon, Pencil2Icon } from "@radix-ui/react-icons";
+import Link from "next/link";
 
 export const TipDetailContent: React.FC = () => {
   const tip = createMockTip();
@@ -11,7 +12,7 @@ export const TipDetailContent: React.FC = () => {
   return (
     <Flex gap={32} mt={64}>
       <Stack>
-        <Button w="fit-content" component="a" href={replaceIDinPath(CLIENT_PATHS.TIP_EDIT, tip.id)}>
+        <Button w="fit-content" component={Link} href={replaceIDinPath(CLIENT_PATHS.TIP_EDIT, tip.id)}>
           <Flex gap={4} align="center">
             <Pencil2Icon />
             <Text>Edit</Text>
