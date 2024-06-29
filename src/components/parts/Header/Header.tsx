@@ -10,7 +10,7 @@ export const Header: React.FC = () => {
   const user = createMockUser();
 
   return (
-    <Card shadow="md" radius="md" py={8} px={24} mx={16} mt={16}>
+    <Card shadow="sm" radius="md" py={8} px={24} mx={16} mt={16}>
       <Flex justify="space-between" align="center">
         <Anchor href={CLIENT_PATHS.TOP} underline="never">
           <Logo />
