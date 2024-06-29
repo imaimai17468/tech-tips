@@ -4,7 +4,7 @@ import { Editor } from "@/components/parts/Editor";
 import { createInitialTipForm } from "@/repositories/tips/mock";
 import { type Tip, type TipForm, TipFormValidator } from "@/repositories/tips/types";
 import type { User } from "@/repositories/user/types";
-import { Box, Button, Card, Flex, Stack, Switch, TagsInput, Text, TextInput, Textarea } from "@mantine/core";
+import { Box, Button, Card, Flex, Stack, Switch, TagsInput, Text, TextInput } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { PaperPlaneIcon } from "@radix-ui/react-icons";
 import { zodResolver } from "mantine-form-zod-resolver";
@@ -50,15 +50,7 @@ export const TipEditForm: React.FC<Props> = ({ user, initialValues }) => {
             </Flex>
             <Card shadow="xs" padding="xl" radius="lg" h="fit-content" w="100%">
               <Stack gap={16}>
-                <Stack gap={4}>
-                  <TextInput label="Title" key={form.key("title")} {...form.getInputProps("title")} />
-                  <Textarea
-                    label="Description"
-                    rows={3}
-                    key={form.key("description")}
-                    {...form.getInputProps("description")}
-                  />
-                </Stack>
+                <TextInput label="Title" key={form.key("title")} {...form.getInputProps("title")} />
                 <TagsInput
                   label="Tags"
                   description="Press Enter to submit a tag"

@@ -12,7 +12,6 @@ export const TipCard: React.FC<{ tip: Tip }> = ({ tip }) => {
           <Anchor href={replaceIDinPath(CLIENT_PATHS.TIP_DETAIL, tip.id)} lineClamp={2} size="lg" fw={700} c="black">
             {tip.title}
           </Anchor>
-          <Text lineClamp={3}>{tip.description}</Text>
           <Text size="xs">{dayjs(tip.createdAt).format("YYYY MM DD").toLocaleString()}</Text>
           {tip.tags && tip.tags.length > 0 && (
             <Flex gap={8} wrap="wrap">

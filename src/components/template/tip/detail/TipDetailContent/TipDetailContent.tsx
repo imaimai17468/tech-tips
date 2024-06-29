@@ -19,10 +19,7 @@ export const TipDetailContent: React.FC = () => {
         </Button>
         <Card shadow="xs" padding="xl" radius="lg" h="fit-content" w="100%">
           <Stack gap={16}>
-            <Stack gap={4}>
-              <Title>{tip.title}</Title>
-              <Text size="xl">{tip.description}</Text>
-            </Stack>
+            <Title>{tip.title}</Title>
             {tip.tags && (
               <Flex gap={8}>
                 {tip.tags.map((tag) => (

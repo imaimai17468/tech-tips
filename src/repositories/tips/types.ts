@@ -5,7 +5,6 @@ import { UserValidator } from "../user/types";
 export const TipValidator = z
   .object({
     title: z.string().min(1),
-    description: z.string().max(300).optional(),
     content: z.string().optional(),
     tags: z.array(z.string()).max(5).optional(),
     author: UserValidator,
@@ -17,7 +16,6 @@ export type Tip = z.infer<typeof TipValidator>;
 
 export const TipFormValidator = TipValidator.pick({
   title: true,
-  description: true,
   content: true,
   tags: true,
   isPublic: true,
