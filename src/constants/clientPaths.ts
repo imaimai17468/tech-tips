@@ -8,4 +8,4 @@ export const CLIENT_PATHS = {
   USER: "/user/[id]",
   SETTINGS_PROFILE: "/settings/profile",
   SETTINGS_TIPS: "/settings/tips",
-};
+} as const;
