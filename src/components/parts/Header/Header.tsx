@@ -17,7 +17,7 @@ export const Header: React.FC = () => {
         </Anchor>
         <Flex gap={16} align="center">
           <RouteButton href={CLIENT_PATHS.TOP}>YourTips</RouteButton>
-          <RouteButton href={CLIENT_PATHS.STACK}>Stack</RouteButton>
+          <RouteButton href={CLIENT_PATHS.STACK}>Stacks</RouteButton>
           <TipCreateButton />
           <UserButton href={user.userImageURL} userName={user.username} />
         </Flex>
