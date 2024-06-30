@@ -6,6 +6,6 @@ export const CLIENT_PATHS = {
   TIP_CREATE: "/tip/create",
   TIP_EDIT: "/tip/[id]/edit",
   USER: "/user/[id]",
-  SETTINGS_PROFILE: "/settings/profile",
-  SETTINGS_TIPS: "/settings/tips",
+  SETTINGS_PROFILE: "/setting/profile",
+  SETTINGS_TIPS: "/setting/tips",
 } as const;
