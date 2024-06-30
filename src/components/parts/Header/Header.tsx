@@ -1,10 +1,10 @@
 import { CLIENT_PATHS } from "@/constants/clientPaths";
+import { createMockUser } from "@/repositories/user/mock";
 import { Anchor, Card, Flex } from "@mantine/core";
 import { Logo } from "../Logo";
 import { RouteButton } from "./components/RouteButton";
 import { TipCreateButton } from "./components/TipCreateButton";
 import { UserButton } from "./components/UserButton";
-import { createMockUser } from "@/repositories/user/mock";
 
 export const Header: React.FC = () => {
   const user = createMockUser();
@@ -19,7 +19,7 @@ export const Header: React.FC = () => {
           <RouteButton href={CLIENT_PATHS.TOP}>YourTips</RouteButton>
           <RouteButton href={CLIENT_PATHS.STACK}>Stacks</RouteButton>
           <TipCreateButton />
-          <UserButton href={user.userImageURL} userName={user.username} />
+          <UserButton href={user.userImageURL} userName={user.username} userID={user.id} />
         </Flex>
       </Flex>
     </Card>
