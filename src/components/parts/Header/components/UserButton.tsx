@@ -6,7 +6,7 @@ import { Avatar, Menu, UnstyledButton } from "@mantine/core";
 import { ExitIcon, Pencil1Icon, PersonIcon } from "@radix-ui/react-icons";
 
 type Props = {
-  href: string;
+  href?: string;
   userName: string;
   userID: string;
 };
