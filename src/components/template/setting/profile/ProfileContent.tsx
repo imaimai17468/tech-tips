@@ -13,9 +13,9 @@ export const ProfileContent: React.FC = () => {
       <Text size="xl">Profile Setting</Text>
       <Divider />
       <ProfileImageCard userImageURL={user.userImageURL} />
-      <UserNameCard userName={user.username} />
-      <BioCard bio={user.bio} />
-      <SNSCard githubUsername={user.githubUsername} twitterUsername={user.twitterUsername} />
+      <UserNameCard user={user} />
+      <BioCard user={user} />
+      <SNSCard user={user} />
     </Stack>
   );
 };
