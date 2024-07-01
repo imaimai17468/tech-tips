@@ -3,11 +3,11 @@ import { BaseTypeValidator } from "../baseType";
 
 export const UserValidator = z
   .object({
-    username: z.string(),
-    bio: z.string(),
-    twitterUsername: z.string(),
-    githubUsername: z.string(),
-    userImageURL: z.string().url(),
+    username: z.string().min(1).max(20),
+    bio: z.string().min(1).max(200),
+    twitterUsername: z.string().optional(),
+    githubUsername: z.string().optional(),
+    userImageURL: z.string().url().optional(),
   })
   .merge(BaseTypeValidator);
 
