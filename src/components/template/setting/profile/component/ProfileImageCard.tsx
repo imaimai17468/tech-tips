@@ -1,7 +1,7 @@
 import { Card, Stack, Text, Image, Button, Flex } from "@mantine/core";
 
 type Props = {
-  userImageURL: string;
+  userImageURL?: string;
 };
 
 export const ProfileImageCard: React.FC<Props> = ({ userImageURL }) => {
