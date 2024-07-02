@@ -40,7 +40,7 @@ export const TipEditForm: React.FC<Props> = ({ user, initialValues }) => {
         <Stack gap={32}>
           <Stack>
             <Flex justify="end" align="center" gap={16}>
-              <Switch label="公開" key={form.key("isPublic")} {...form.getInputProps("isPublic")} />
+              <Switch label="isPublic" key={form.key("isPublic")} {...form.getInputProps("isPublic")} />
               <Button w="fit-content" type="submit">
                 <Flex align="center" gap={4}>
                   <Text>Post</Text>
