@@ -17,7 +17,10 @@ export const AuthorCard: React.FC<Props> = ({ user }) => {
           </Anchor>
         </Flex>
         <Text>{user.bio}</Text>
-        <SNSButtons githubUsername={user.githubUsername} twitterUsername={user.twitterUsername} />
+        {user.githubUsername ||
+          (user.twitterUsername && (
+            <SNSButtons githubUsername={user.githubUsername} twitterUsername={user.twitterUsername} />
+          ))}
       </Stack>
     </Card>
   );
