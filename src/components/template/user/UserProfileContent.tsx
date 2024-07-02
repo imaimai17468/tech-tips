@@ -1,11 +1,9 @@
 import { SNSButtons } from "@/components/parts/SNSButtons/SNSButtons";
 import { TipList } from "@/components/parts/TipList";
-import { createMockTips } from "@/repositories/tips/mock";
 import { createMockUser } from "@/repositories/user/mock";
-import { Card, Divider, Flex, Image, Stack, Text } from "@mantine/core";
+import { Card, Flex, Image, Stack, Text } from "@mantine/core";
 
 export const UserProfileContent: React.FC = () => {
-  const tips = createMockTips(10);
   const user = createMockUser();
 
   return (
@@ -20,8 +18,7 @@ export const UserProfileContent: React.FC = () => {
           </Stack>
         </Flex>
       </Card>
-      <Divider />
-      <TipList tips={tips} />
+      <TipList />
     </Stack>
   );
 };
