@@ -10,7 +10,9 @@ export const ProfileContent: React.FC = () => {
 
   return (
     <Stack>
-      <Text size="xl">Profile Setting</Text>
+      <Text size="xl" fw="bold">
+        Profile Setting
+      </Text>
       <ProfileImageCard userImageURL={user.userImageURL} />
       <UserNameCard user={user} />
       <BioCard user={user} />
