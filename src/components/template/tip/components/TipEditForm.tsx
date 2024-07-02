@@ -4,7 +4,7 @@ import { Editor } from "@/components/parts/Editor";
 import { createInitialTipForm } from "@/repositories/tips/mock";
 import { type Tip, type TipForm, TipFormValidator } from "@/repositories/tips/types";
 import type { User } from "@/repositories/user/types";
-import { Box, Button, Card, Divider, Flex, Stack, Switch, TagsInput, Text, TextInput } from "@mantine/core";
+import { Box, Button, Card, Divider, Flex, Stack, Switch, TagsInput, TextInput } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { PaperPlaneIcon } from "@radix-ui/react-icons";
 import { zodResolver } from "mantine-form-zod-resolver";
@@ -41,11 +41,8 @@ export const TipEditForm: React.FC<Props> = ({ user, initialValues }) => {
           <Stack>
             <Flex justify="end" align="center" gap={16}>
               <Switch label="isPublic" key={form.key("isPublic")} {...form.getInputProps("isPublic")} />
-              <Button w="fit-content" type="submit">
-                <Flex align="center" gap={4}>
-                  <Text>Post</Text>
-                  <PaperPlaneIcon />
-                </Flex>
+              <Button variant="light" w="fit-content" type="submit" rightSection={<PaperPlaneIcon />}>
+                Post
               </Button>
             </Flex>
             <Card shadow="xs" padding="xl" radius="lg" h="fit-content" w="100%">
