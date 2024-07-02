@@ -16,7 +16,9 @@ export const TipCard: React.FC<{ tip: Tip }> = ({ tip }) => {
           {tip.tags && tip.tags.length > 0 && (
             <Flex gap={8} wrap="wrap">
               {tip.tags.map((tag) => (
-                <Badge key={tag}>{tag}</Badge>
+                <Badge variant="light" key={tag}>
+                  {tag}
+                </Badge>
               ))}
             </Flex>
           )}

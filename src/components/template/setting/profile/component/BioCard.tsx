@@ -55,7 +55,7 @@ export const BioCard: React.FC<Props> = ({ user }) => {
         ) : (
           <Stack>
             <Text c="gray">{bio}</Text>
-            <Button w="fit-content" onClick={() => setIsEdit(true)}>
+            <Button variant="light" w="fit-content" onClick={() => setIsEdit(true)}>
               Edit Bio
             </Button>
           </Stack>

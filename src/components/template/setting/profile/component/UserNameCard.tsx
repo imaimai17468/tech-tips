@@ -55,7 +55,7 @@ export const UserNameCard: React.FC<Props> = ({ user }) => {
         ) : (
           <Stack>
             <Text c="gray">{userName}</Text>
-            <Button w="fit-content" onClick={() => setIsEdit(true)}>
+            <Button variant="light" w="fit-content" onClick={() => setIsEdit(true)}>
               Edit User Name
             </Button>
           </Stack>

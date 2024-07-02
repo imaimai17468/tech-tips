@@ -85,7 +85,7 @@ export const SNSCard: React.FC<Props> = ({ user }) => {
               </Box>
               <Text c="gray">@{twitterUsername}</Text>
             </Flex>
-            <Button w="fit-content" onClick={() => setIsEdit(true)}>
+            <Button variant="light" w="fit-content" onClick={() => setIsEdit(true)}>
               Edit SNS User Name
             </Button>
           </Stack>
