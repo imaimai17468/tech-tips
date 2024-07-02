@@ -16,7 +16,7 @@ export const UserButton: React.FC<Props> = ({ href, userName, userID }) => {
     <Menu offset={15} withArrow position="bottom-end" transitionProps={{ transition: "rotate-right", duration: 150 }}>
       <Menu.Target>
         <UnstyledButton>
-          <Avatar src={href} alt="profile-icon" />
+          <Avatar src={href} alt="profile-icon" style={{ border: "1px solid #cdcdcd" }} />
         </UnstyledButton>
       </Menu.Target>
       <Menu.Dropdown>
