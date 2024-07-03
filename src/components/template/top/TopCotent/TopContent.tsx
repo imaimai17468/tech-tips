@@ -11,7 +11,7 @@ export const TopContent: React.FC = () => {
           <Text size="xl" fw="bold">
             Your Tips
           </Text>
-          <ActionIcon variant="outline" radius="xl" component="a" href={CLIENT_PATHS.TIP_CREATE}>
+          <ActionIcon variant="light" radius="xl" component="a" href={CLIENT_PATHS.TIP_CREATE}>
             <PlusIcon />
           </ActionIcon>
         </Flex>
