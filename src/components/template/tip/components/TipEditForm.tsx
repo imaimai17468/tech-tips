@@ -1,14 +1,20 @@
 "use client";
 
-import { Editor } from "@/components/parts/Editor";
+// import { Editor } from "@/components/parts/Editor";
 import { createInitialTipForm } from "@/repositories/tips/mock";
 import { type Tip, type TipForm, TipFormValidator } from "@/repositories/tips/types";
 import type { User } from "@/repositories/user/types";
-import { Box, Button, Card, Divider, Flex, Stack, Switch, TagsInput, TextInput } from "@mantine/core";
+import { Box, Button, Card, Divider, Flex, LoadingOverlay, Stack, Switch, TagsInput, TextInput } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { PaperPlaneIcon } from "@radix-ui/react-icons";
 import { zodResolver } from "mantine-form-zod-resolver";
+import dynamic from "next/dynamic";
 import { typeid } from "typeid-js";
+
+const Editor = dynamic(() => import("@/components/parts/Editor").then((v) => v.Editor), {
+  loading: () => <LoadingOverlay visible />,
+  ssr: false,
+});
 
 type Props = {
   user: User;
