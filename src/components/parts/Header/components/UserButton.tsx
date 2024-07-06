@@ -28,7 +28,9 @@ export const UserButton: React.FC<Props> = ({ href, userName, userID }) => {
         <Menu.Item leftSection={<PersonIcon />} component="a" href={CLIENT_PATHS.SETTINGS_PROFILE}>
           Profile
         </Menu.Item>
-        <Menu.Item leftSection={<Pencil1Icon />}>Tips</Menu.Item>
+        <Menu.Item leftSection={<Pencil1Icon />} component="a" href={CLIENT_PATHS.SETTINGS_TIPS}>
+          Tips
+        </Menu.Item>
 
         <Menu.Label>Account</Menu.Label>
         <Menu.Item leftSection={<ExitIcon />}>Logout</Menu.Item>
