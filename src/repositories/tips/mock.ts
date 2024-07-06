@@ -1,6 +1,7 @@
 import { faker } from "@faker-js/faker";
 import { createMockBaseType } from "../baseType";
 import { createMockUser } from "../user/mock";
+import { MOCK_CONTENT } from "./data";
 import type { Tip, TipForm } from "./types";
 
 export const createInitialTipForm = (): TipForm => {
@@ -16,7 +17,7 @@ export const createMockTipForm = (): TipForm => {
   return {
     title: faker.lorem.sentence(),
     isPublic: faker.datatype.boolean({ probability: 0.5 }),
-    content: faker.lorem.paragraphs(),
+    content: MOCK_CONTENT,
     tags: Array.from({ length: faker.number.int({ min: 1, max: 5 }) }, () => faker.lorem.word()),
   };
 };
