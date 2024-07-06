@@ -1,5 +1,5 @@
 import { createMockUser } from "@/repositories/user/mock";
-import { Stack, Text } from "@mantine/core";
+import { Stack, Title } from "@mantine/core";
 import { BioCard } from "./component/BioCard";
 import { ProfileImageCard } from "./component/ProfileImageCard";
 import { SNSCard } from "./component/SNSCard";
@@ -10,9 +10,7 @@ export const ProfileContent: React.FC = () => {
 
   return (
     <Stack>
-      <Text size="xl" fw="bold">
-        Profile Setting
-      </Text>
+      <Title>Profile Setting</Title>
       <ProfileImageCard userImageURL={user.userImageURL} />
       <UserNameCard user={user} />
       <BioCard user={user} />

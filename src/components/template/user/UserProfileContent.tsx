@@ -12,7 +12,9 @@ export const UserProfileContent: React.FC = () => {
         <Flex gap={32}>
           <Image w={100} h={100} src={user.userImageURL} alt={user.username} style={{ borderRadius: "50%" }} />
           <Stack>
-            <Text size="xl">{user.username}</Text>
+            <Text size="xl" fw="bold">
+              {user.username}
+            </Text>
             <Text>{user.bio}</Text>
             <SNSButtons githubUsername={user.githubUsername} twitterUsername={user.twitterUsername} />
           </Stack>

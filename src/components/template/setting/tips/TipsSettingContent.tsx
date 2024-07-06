@@ -1,5 +1,5 @@
 import { createMockTips } from "@/repositories/tips/mock";
-import { Divider, Stack, Text } from "@mantine/core";
+import { Divider, Stack, Title } from "@mantine/core";
 import { TipItem } from "./component/TipItem";
 
 export const TipsSettingContent: React.FC = () => {
@@ -7,9 +7,7 @@ export const TipsSettingContent: React.FC = () => {
 
   return (
     <Stack>
-      <Text size="xl" fw="bold">
-        Tips Setting
-      </Text>
+      <Title>Tips Setting</Title>
       <Stack>
         {tips.map((tip) => (
           <Stack key={tip.id}>
