@@ -15,7 +15,7 @@ export const createInitialTipForm = (): TipForm => {
 export const createMockTipForm = (): TipForm => {
   return {
     title: faker.lorem.sentence(),
-    isPublic: faker.datatype.boolean(),
+    isPublic: faker.datatype.boolean({ probability: 0.5 }),
     content: faker.lorem.paragraphs(),
     tags: Array.from({ length: faker.number.int({ min: 1, max: 5 }) }, () => faker.lorem.word()),
   };
