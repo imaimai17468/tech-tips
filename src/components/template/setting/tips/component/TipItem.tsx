@@ -3,7 +3,8 @@ import type { Tip } from "@/repositories/tips/types";
 import { dayFormat } from "@/utils/dayFormat";
 import { replaceIDinPath } from "@/utils/replaceIDinPath";
 import { ActionIcon, Badge, Flex, Stack, Text } from "@mantine/core";
-import { DoubleArrowDownIcon, EyeOpenIcon, Pencil1Icon } from "@radix-ui/react-icons";
+import { EyeOpenIcon, Pencil1Icon } from "@radix-ui/react-icons";
+import { TipDetailMenu } from "./TipDetailMenu";
 
 type Props = {
   tip: Tip;
@@ -33,9 +34,7 @@ export const TipItem: React.FC<Props> = ({ tip }) => {
           >
             <Pencil1Icon />
           </ActionIcon>
-          <ActionIcon radius="xl" size="lg" variant="transparent">
-            <DoubleArrowDownIcon />
-          </ActionIcon>
+          <TipDetailMenu />
         </Flex>
       </Flex>
       <Flex align="center" gap={8}>
