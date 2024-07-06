@@ -3,7 +3,7 @@
 import { ActionIcon, Menu } from "@mantine/core";
 import { DoubleArrowDownIcon, DownloadIcon, TrashIcon } from "@radix-ui/react-icons";
 
-export const TipDetailMenu: React.FC = () => {
+export const TipSettingMenu: React.FC = () => {
   return (
     <Menu position="bottom-end">
       <Menu.Target>

@@ -4,7 +4,7 @@ import { dayFormat } from "@/utils/dayFormat";
 import { replaceIDinPath } from "@/utils/replaceIDinPath";
 import { ActionIcon, Badge, Flex, Stack, Text } from "@mantine/core";
 import { EyeOpenIcon, Pencil1Icon } from "@radix-ui/react-icons";
-import { TipDetailMenu } from "./TipDetailMenu";
+import { TipSettingMenu } from "./TipSettingMenu";
 
 type Props = {
   tip: Tip;
@@ -34,7 +34,7 @@ export const TipItem: React.FC<Props> = ({ tip }) => {
           >
             <Pencil1Icon />
           </ActionIcon>
-          <TipDetailMenu />
+          <TipSettingMenu />
         </Flex>
       </Flex>
       <Flex align="center" gap={8}>
