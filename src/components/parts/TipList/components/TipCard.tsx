@@ -1,8 +1,8 @@
 import { CLIENT_PATHS } from "@/constants/clientPaths";
-import { replaceIDinPath } from "@/utils/replaceIDinPath";
 import type { Tip } from "@/repositories/tips/types";
+import { dayFormat } from "@/utils/dayFormat";
+import { replaceIDinPath } from "@/utils/replaceIDinPath";
 import { Anchor, Avatar, Badge, Card, Flex, Stack, Text } from "@mantine/core";
-import dayjs from "dayjs";
 
 export const TipCard: React.FC<{ tip: Tip }> = ({ tip }) => {
   return (
@@ -12,7 +12,7 @@ export const TipCard: React.FC<{ tip: Tip }> = ({ tip }) => {
           <Anchor href={replaceIDinPath(CLIENT_PATHS.TIP_DETAIL, tip.id)} lineClamp={2} size="lg" fw={700} c="black">
             {tip.title}
           </Anchor>
-          <Text size="xs">{dayjs(tip.createdAt).format("YYYY MM DD").toLocaleString()}</Text>
+          <Text size="xs">{dayFormat(tip.createdAt)}</Text>
           {tip.tags && tip.tags.length > 0 && (
             <Flex gap={8} wrap="wrap">
               {tip.tags.map((tag) => (
