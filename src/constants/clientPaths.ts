@@ -1,6 +1,6 @@
 export const CLIENT_PATHS = {
   TOP: "/",
-  STACK: "/stack",
+  STOCK: "/stock",
   EXPLORE: "/explore",
   TIP_DETAIL: "/tip/[id]",
   TIP_CREATE: "/tip/create",

@@ -3,12 +3,12 @@ import { CLIENT_PATHS } from "@/constants/clientPaths";
 import { Button, Flex, Stack, Title } from "@mantine/core";
 import { ArrowRightIcon } from "@radix-ui/react-icons";
 
-export const StackContent: React.FC = () => {
+export const StockContent: React.FC = () => {
   return (
     <Stack>
       <Flex justify="space-between">
-        <Title>Your Stacks</Title>
-        <Button variant="subtle" rightSection={<ArrowRightIcon />} component="a" href={CLIENT_PATHS.STACK}>
+        <Title>Your Stocked Tips</Title>
+        <Button variant="subtle" rightSection={<ArrowRightIcon />} component="a" href={CLIENT_PATHS.STOCK}>
           Your Tips
         </Button>
       </Flex>

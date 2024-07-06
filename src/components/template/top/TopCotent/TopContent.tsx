@@ -13,8 +13,8 @@ export const TopContent: React.FC = () => {
             <PlusIcon />
           </ActionIcon>
         </Flex>
-        <Button variant="subtle" rightSection={<ArrowRightIcon />} component="a" href={CLIENT_PATHS.STACK}>
-          Stack Tips
+        <Button variant="subtle" rightSection={<ArrowRightIcon />} component="a" href={CLIENT_PATHS.STOCK}>
+          Stocked Tips
         </Button>
       </Flex>
       <TipList />
