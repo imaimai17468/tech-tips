@@ -46,7 +46,11 @@ export const TipEditForm: React.FC<Props> = ({ user, initialValues }) => {
         <Stack gap={32}>
           <Stack>
             <Flex justify="end" align="center" gap={16}>
-              <Switch label="isPublic" key={form.key("isPublic")} {...form.getInputProps("isPublic")} />
+              <Switch
+                label="Public"
+                key={form.key("isPublic")}
+                {...form.getInputProps("isPublic", { type: "checkbox" })}
+              />
               <Button variant="light" w="fit-content" type="submit" rightSection={<PaperPlaneIcon />}>
                 Post
               </Button>
