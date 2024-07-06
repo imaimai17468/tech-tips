@@ -5,7 +5,7 @@ import "@blocknote/mantine/style.css";
 import { useCreateBlockNote } from "@blocknote/react";
 
 type props = {
-  onChange: (value: string) => void;
+  onChange?: (value: string) => void;
   defaultValue?: string;
   editable?: boolean;
 };
@@ -20,7 +20,7 @@ export const Editor: React.FC<props> = ({ onChange, defaultValue, editable = tru
       editor={editor}
       onChange={() => {
         const blocksJSON = JSON.stringify(editor.document, null, 2);
-        onChange(blocksJSON);
+        if (onChange) onChange(blocksJSON);
       }}
       editable={editable}
     />
