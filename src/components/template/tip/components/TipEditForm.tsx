@@ -12,7 +12,7 @@ import dynamic from "next/dynamic";
 import { typeid } from "typeid-js";
 
 const Editor = dynamic(() => import("@/components/parts/Editor").then((v) => v.Editor), {
-  loading: () => <LoadingOverlay visible />,
+  loading: () => <LoadingOverlay visible loaderProps={{ type: "bars" }} />,
   ssr: false,
 });
 
