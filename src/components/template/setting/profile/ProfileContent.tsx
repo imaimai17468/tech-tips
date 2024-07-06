@@ -9,12 +9,14 @@ export const ProfileContent: React.FC = () => {
   const user = createMockUser();
 
   return (
-    <Stack>
+    <Stack gap={32}>
       <Title>Profile Setting</Title>
-      <ProfileImageCard userImageURL={user.userImageURL} />
-      <UserNameCard user={user} />
-      <BioCard user={user} />
-      <SNSCard user={user} />
+      <Stack>
+        <ProfileImageCard userImageURL={user.userImageURL} />
+        <UserNameCard user={user} />
+        <BioCard user={user} />
+        <SNSCard user={user} />
+      </Stack>
     </Stack>
   );
 };

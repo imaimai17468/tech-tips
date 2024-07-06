@@ -5,7 +5,7 @@ import { ArrowRightIcon, PlusIcon } from "@radix-ui/react-icons";
 
 export const TopContent: React.FC = () => {
   return (
-    <Stack>
+    <Stack gap={32}>
       <Flex justify="space-between">
         <Flex align="center" gap={16}>
           <Title>Your Tips</Title>

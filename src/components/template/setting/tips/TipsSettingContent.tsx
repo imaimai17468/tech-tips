@@ -6,7 +6,7 @@ export const TipsSettingContent: React.FC = () => {
   const tips = createMockTips(10);
 
   return (
-    <Stack>
+    <Stack gap={32}>
       <Title>Tips Setting</Title>
       <Stack>
         {tips.map((tip) => (
