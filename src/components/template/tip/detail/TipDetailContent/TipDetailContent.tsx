@@ -18,7 +18,7 @@ export const TipDetailContent: React.FC = () => {
   const tip = createMockTip();
 
   return (
-    <Flex gap={32} mt={64}>
+    <Flex gap={32}>
       <Stack>
         <Button
           ml="auto"
