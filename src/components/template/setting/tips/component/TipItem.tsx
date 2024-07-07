@@ -34,7 +34,7 @@ export const TipItem: React.FC<Props> = ({ tip }) => {
           >
             <Pencil1Icon />
           </ActionIcon>
-          <TipSettingMenu />
+          <TipSettingMenu tipID={tip.id} tipContent={tip.content} />
         </Flex>
       </Flex>
       <Flex align="center" gap={8}>
