@@ -6,7 +6,7 @@ import { ArrowRightIcon, PlusIcon } from "@radix-ui/react-icons";
 export const TopContent: React.FC = () => {
   return (
     <Stack gap={32}>
-      <Flex justify="space-between">
+      <Flex justify="space-between" align="end">
         <Flex align="center" gap={16}>
           <Title>Your Tips</Title>
           <ActionIcon variant="light" radius="xl" component="a" href={CLIENT_PATHS.TIP_CREATE}>

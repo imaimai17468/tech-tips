@@ -6,7 +6,7 @@ import { ArrowRightIcon } from "@radix-ui/react-icons";
 export const StockContent: React.FC = () => {
   return (
     <Stack gap={32}>
-      <Flex justify="space-between">
+      <Flex justify="space-between" align="end">
         <Title>Your Stocked Tips</Title>
         <Button variant="subtle" rightSection={<ArrowRightIcon />} component="a" href={CLIENT_PATHS.STOCK}>
           Your Tips
