@@ -1,4 +1,5 @@
 import { MainLayout } from "@/components/layout/MainLayout";
+import { AuthProvider } from "@/context/auth";
 import "@/styles/global.css";
 import { ColorSchemeScript, MantineProvider, createTheme } from "@mantine/core";
 import "@mantine/core/styles.css";
@@ -25,9 +26,11 @@ export default function RootLayout({
         <link rel="shortcut icon" href="/favicon.svg" />
       </head>
       <body>
-        <MantineProvider theme={theme} withGlobalClasses>
-          <MainLayout>{children}</MainLayout>
-        </MantineProvider>
+        <AuthProvider>
+          <MantineProvider theme={theme} withGlobalClasses>
+            <MainLayout>{children}</MainLayout>
+          </MantineProvider>
+        </AuthProvider>
       </body>
     </html>
   );

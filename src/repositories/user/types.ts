@@ -3,8 +3,8 @@ import { BaseTypeValidator } from "../baseType";
 
 export const UserValidator = z
   .object({
-    username: z.string().min(1).max(20),
-    bio: z.string().min(1).max(200),
+    username: z.string().min(1).max(30),
+    bio: z.string().min(1).max(200).optional(),
     twitterUsername: z.string().optional(),
     githubUsername: z.string().optional(),
     userImageURL: z.string().url().optional(),
