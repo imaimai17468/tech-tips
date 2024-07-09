@@ -1,6 +1,7 @@
 "use client";
 
 import { CLIENT_PATHS } from "@/constants/clientPaths";
+import { logout } from "@/lib/auth";
 import { replaceIDinPath } from "@/utils/replaceIDinPath";
 import { Avatar, Menu, UnstyledButton } from "@mantine/core";
 import { ExitIcon, Pencil1Icon, PersonIcon } from "@radix-ui/react-icons";
@@ -33,7 +34,9 @@ export const UserButton: React.FC<Props> = ({ href, userName, userID }) => {
         </Menu.Item>
 
         <Menu.Label>Account</Menu.Label>
-        <Menu.Item leftSection={<ExitIcon />}>Logout</Menu.Item>
+        <Menu.Item leftSection={<ExitIcon />} onClick={logout} component="a" href={CLIENT_PATHS.AUTH}>
+          Logout
+        </Menu.Item>
       </Menu.Dropdown>
     </Menu>
   );

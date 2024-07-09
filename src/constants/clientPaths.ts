@@ -8,4 +8,5 @@ export const CLIENT_PATHS = {
   USER: "/user/[id]",
   SETTINGS_PROFILE: "/setting/profile",
   SETTINGS_TIPS: "/setting/tips",
+  AUTH: "/auth",
 } as const;
