@@ -1,50 +1,19 @@
 "use client";
 
-import GoogleIcon from "@/assets/icons/googleIcon.svg";
-import { CLIENT_PATHS } from "@/constants/clientPaths";
-import { useAuth } from "@/context/auth";
-import { login } from "@/lib/auth";
-import { Button, Card, Flex, Stack, Text } from "@mantine/core";
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { Title, Stack, Button } from "@mantine/core";
+import { useDisclosure } from "@mantine/hooks";
+import { AuthModal } from "./component/AuthModal";
 
 export const TopContent: React.FC = () => {
-  const user = useAuth();
-  const [waiting, setWaiting] = useState<boolean>(false);
-  const router = useRouter();
-
-  const signIn = () => {
-    setWaiting(true);
-
-    login()
-      .catch((error) => {
-        console.error(error?.code);
-      })
-      .finally(() => {
-        setWaiting(false);
-        router.push(CLIENT_PATHS.TIP);
-      });
-  };
+  const [opened, { open, close }] = useDisclosure(false);
 
   return (
-    <Flex justify="center" align="center" h="100%">
-      <Card maw="500px" p="xl" radius="lg" shadow="xs">
-        <Stack>
-          <Stack gap={4}>
-            <Text>TechTipsはあなたのための知見の書き置きサービスです。</Text>
-            <Text>誰の目も気にせず、気軽に技術に触れましょう。</Text>
-          </Stack>
-          {user === null ? (
-            <Button variant="light" onClick={signIn} leftSection={<GoogleIcon />} loading={waiting}>
-              Login with Google
-            </Button>
-          ) : (
-            <Button variant="light" component="a" href={CLIENT_PATHS.TIP} loading={user === undefined}>
-              はじめる
-            </Button>
-          )}
-        </Stack>
-      </Card>
-    </Flex>
+    <Stack align="center">
+      <Title>Where Technologies Rest.</Title>
+      <Button onClick={open} variant="light">
+        はじめる
+      </Button>
+      <AuthModal opened={opened} onClose={close} />
+    </Stack>
   );
 };
