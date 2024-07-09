@@ -3,7 +3,7 @@ import { CLIENT_PATHS } from "@/constants/clientPaths";
 import { ActionIcon, Button, Flex, Stack, Title } from "@mantine/core";
 import { ArrowRightIcon, PlusIcon } from "@radix-ui/react-icons";
 
-export const TopContent: React.FC = () => {
+export const TipContent: React.FC = () => {
   return (
     <Stack gap={32}>
       <Flex justify="space-between" align="end">

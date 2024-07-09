@@ -1,14 +1,17 @@
 "use client";
 
 import GoogleIcon from "@/assets/icons/googleIcon.svg";
+import { CLIENT_PATHS } from "@/constants/clientPaths";
 import { useAuth } from "@/context/auth";
 import { login } from "@/lib/auth";
 import { Button, Card, Flex, Stack, Text } from "@mantine/core";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
-export const AuthContent: React.FC = () => {
+export const TopContent: React.FC = () => {
   const user = useAuth();
   const [waiting, setWaiting] = useState<boolean>(false);
+  const router = useRouter();
 
   const signIn = () => {
     setWaiting(true);
@@ -19,6 +22,7 @@ export const AuthContent: React.FC = () => {
       })
       .finally(() => {
         setWaiting(false);
+        router.push(CLIENT_PATHS.TIP);
       });
   };
 
@@ -35,7 +39,7 @@ export const AuthContent: React.FC = () => {
               Login with Google
             </Button>
           ) : (
-            <Button variant="light" component="a" href="/" loading={user === undefined}>
+            <Button variant="light" component="a" href={CLIENT_PATHS.TIP} loading={user === undefined}>
               はじめる
             </Button>
           )}

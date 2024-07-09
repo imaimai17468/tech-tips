@@ -34,7 +34,7 @@ export const UserButton: React.FC<Props> = ({ href, userName, userID }) => {
         </Menu.Item>
 
         <Menu.Label>Account</Menu.Label>
-        <Menu.Item leftSection={<ExitIcon />} onClick={logout} component="a" href={CLIENT_PATHS.AUTH}>
+        <Menu.Item leftSection={<ExitIcon />} onClick={logout} component="a" href={CLIENT_PATHS.TOP}>
           Logout
         </Menu.Item>
       </Menu.Dropdown>
