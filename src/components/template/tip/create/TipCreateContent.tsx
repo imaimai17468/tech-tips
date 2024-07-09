@@ -1,7 +1,7 @@
 import { AuthorCard } from "@/components/parts/authorCard";
 import { createMockUser } from "@/repositories/user/mock";
 import { Flex } from "@mantine/core";
-import { TipEditForm } from "../../components/TipEditForm";
+import { TipEditForm } from "../components/TipEditForm";
 
 export const TipCreateContent: React.FC = () => {
   const user = createMockUser();

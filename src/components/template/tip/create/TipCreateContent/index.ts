@@ -1,1 +1,0 @@
-export { TipCreateContent } from "./TipCreateContent";
