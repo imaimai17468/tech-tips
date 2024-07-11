@@ -19,7 +19,7 @@ export const TipDetailContent: React.FC = () => {
 
   return (
     <Flex gap={32}>
-      <Stack>
+      <Stack w="100%">
         <Button
           ml="auto"
           variant="light"
