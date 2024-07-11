@@ -4,7 +4,7 @@ import { CLIENT_PATHS } from "@/constants/clientPaths";
 import { useAuth } from "@/context/auth";
 import { logout } from "@/lib/auth";
 import { replaceIDinPath } from "@/utils/replaceIDinPath";
-import { Avatar, Menu, UnstyledButton } from "@mantine/core";
+import { Avatar, Menu, UnstyledButton, useMantineTheme } from "@mantine/core";
 import { ExitIcon, Pencil1Icon, PersonIcon } from "@radix-ui/react-icons";
 
 type Props = {
@@ -15,13 +15,14 @@ type Props = {
 
 export const UserButton: React.FC<Props> = ({ href, userName, userID }) => {
   const user = useAuth();
+  const theme = useMantineTheme();
 
   return (
     user && (
       <Menu offset={15} withArrow position="bottom-end" transitionProps={{ transition: "rotate-right", duration: 150 }}>
         <Menu.Target>
           <UnstyledButton>
-            <Avatar src={href} alt="profile-icon" style={{ border: "1px solid #cdcdcd" }} />
+            <Avatar src={href} alt="profile-icon" style={{ border: "1px solid", borderColor: theme.colors.gray[3] }} />
           </UnstyledButton>
         </Menu.Target>
         <Menu.Dropdown>

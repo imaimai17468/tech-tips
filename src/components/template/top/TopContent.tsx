@@ -1,11 +1,12 @@
 "use client";
 
-import { Button, Card, Image, Stack, Text, Title } from "@mantine/core";
+import { Button, Card, Image, Stack, Text, Title, useMantineTheme } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { AuthModal } from "./component/AuthModal";
 
 export const TopContent: React.FC = () => {
   const [opened, { open, close }] = useDisclosure(false);
+  const theme = useMantineTheme();
 
   return (
     <Stack align="center" gap={48}>
@@ -28,7 +29,7 @@ export const TopContent: React.FC = () => {
           技術的な発見や考えを自由に記録し、整理するためのツールとして、あなたの成長と創造性をサポートします。
         </Text>
       </Stack>
-      <Card padding="xl" radius="lg" style={{ border: "1px solid #cdcdcd" }}>
+      <Card padding="xl" radius="lg" style={{ border: "1px solid", borderColor: theme.colors.gray[3] }}>
         <Stack align="center" gap={32}>
           <Text>あなたの静かな技術の場所を作りましょう。</Text>
           <Image src="/image/coder.svg" alt="Coder" maw={150} />
