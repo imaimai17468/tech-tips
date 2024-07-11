@@ -2,6 +2,7 @@ import { CLIENT_PATHS } from "@/constants/clientPaths";
 import { createMockUser } from "@/repositories/user/mock";
 import { Anchor, Flex } from "@mantine/core";
 import { Logo } from "../Logo";
+import { ThemeSwitch } from "./components/ThemeSwitch";
 import { UserButton } from "./components/UserButton";
 
 export const Header: React.FC = () => {
@@ -12,7 +13,10 @@ export const Header: React.FC = () => {
       <Anchor href={CLIENT_PATHS.TOP} underline="never">
         <Logo />
       </Anchor>
-      <UserButton href={user.userImageURL} userName={user.username} userID={user.id} />
+      <Flex gap={16} align="center">
+        <UserButton href={user.userImageURL} userName={user.username} userID={user.id} />
+        <ThemeSwitch />
+      </Flex>
     </Flex>
   );
 };
