@@ -1,3 +1,5 @@
+"use client";
+
 import { CLIENT_PATHS } from "@/constants/clientPaths";
 import type { Tip } from "@/repositories/tips/types";
 import { dayFormat } from "@/utils/dayFormat";
@@ -6,7 +8,7 @@ import { Anchor, Avatar, Badge, Card, Flex, Stack, Text } from "@mantine/core";
 
 export const TipCard: React.FC<{ tip: Tip }> = ({ tip }) => {
   return (
-    <Card shadow="xs" radius="md" padding="md">
+    <Card radius="md" padding="md" style={{ border: "1px solid var(--mantine-color-gray-3)" }}>
       <Stack gap={16} justify="space-between" h="100%">
         <Stack gap={4}>
           <Anchor href={replaceIDinPath(CLIENT_PATHS.TIP_DETAIL, tip.id)} lineClamp={2} size="lg" fw={700} c="black">
