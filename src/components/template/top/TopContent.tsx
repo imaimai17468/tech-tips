@@ -28,7 +28,7 @@ export const TopContent: React.FC = () => {
           技術的な発見や考えを自由に記録し、整理するためのツールとして、あなたの成長と創造性をサポートします。
         </Text>
       </Stack>
-      <Card bg="gray.1" padding="xl" radius="lg" style={{ border: "1px solid #cdcdcd" }}>
+      <Card padding="xl" radius="lg" style={{ border: "1px solid #cdcdcd" }}>
         <Stack align="center" gap={32}>
           <Text>あなたの静かな技術の場所を作りましょう。</Text>
           <Image src="/image/coder.svg" alt="Coder" maw={150} />
