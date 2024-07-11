@@ -1,18 +1,19 @@
 "use client";
 
-import { Button, Card, Image, Stack, Text, Title } from "@mantine/core";
+import { useAuth } from "@/context/auth";
+import { Card, Image, Stack, Text, Title } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { AuthModal } from "./component/AuthModal";
+import { StartButton } from "./component/StartButton";
 
 export const TopContent: React.FC = () => {
   const [opened, { open, close }] = useDisclosure(false);
+  const user = useAuth();
 
   return (
     <Stack align="center" gap={48}>
       <Title>Where Technologies Rest.</Title>
-      <Button onClick={open} variant="light">
-        はじめる
-      </Button>
+      <StartButton isLogin={user !== null} isLoading={user === undefined} open={open} />
       <AuthModal opened={opened} onClose={close} />
       <Stack gap={16} maw="600px">
         <Text>TechTipsは、技術的なメモやアイデアを簡単に書き留めるためのサービスです。</Text>
@@ -32,9 +33,7 @@ export const TopContent: React.FC = () => {
         <Stack align="center" gap={32}>
           <Text>あなたの静かな技術の場所を作りましょう。</Text>
           <Image src="/image/coder.svg" alt="Coder" maw={150} />
-          <Button onClick={open} variant="light">
-            はじめる
-          </Button>
+          <StartButton isLogin={user !== null} isLoading={user === undefined} open={open} />
         </Stack>
       </Card>
     </Stack>
