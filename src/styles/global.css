@@ -6,3 +6,7 @@
   --mantine-color-body: #FCFCFD !important;
   --mantine-color-white: #FCFCFD !important;
 }
+
+.mantine-Anchor-root {
+  color: var(--text-color) !important;
+}
