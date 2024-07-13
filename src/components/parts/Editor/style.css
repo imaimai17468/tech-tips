@@ -13,4 +13,5 @@ h3.bn-inline-content {
 .bn-editor {
   background: inherit;
   color: inherit;
+  padding-inline: 0;
 }

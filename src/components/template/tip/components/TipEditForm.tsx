@@ -73,7 +73,7 @@ export const TipEditForm: React.FC<Props> = ({ user, initialValues }) => {
                   {...form.getInputProps("tags")}
                 />
                 <Divider />
-                <Box mih="50vh">
+                <Box mih="50vh" pl={54}>
                   <Editor key={form.key("content")} {...form.getInputProps("content")} />
                 </Box>
               </Stack>
