@@ -9,3 +9,8 @@ h2.bn-inline-content {
 h3.bn-inline-content {
   font-size: 18px;
 }
+
+.bn-editor {
+  background: inherit;
+  color: inherit;
+}
