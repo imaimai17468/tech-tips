@@ -14,6 +14,7 @@ export const SNSButtons: React.FC<Props> = ({ githubUsername, twitterUsername })
         <ActionIcon
           radius="xl"
           variant="outline"
+          bg="white"
           color="black"
           component={Link}
           target="_blank"
