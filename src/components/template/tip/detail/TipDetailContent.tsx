@@ -48,10 +48,10 @@ export const TipDetailContent: React.FC = () => {
       </Stack>
       <Stack>
         <Flex gap={8}>
-          <ActionIcon radius="xl" variant="outline" color="pink">
+          <ActionIcon radius="xl" variant="light" color="pink">
             <BookmarkIcon />
           </ActionIcon>
-          <ActionIcon radius="xl" variant="outline">
+          <ActionIcon radius="xl" variant="light">
             <Link1Icon />
           </ActionIcon>
         </Flex>
