@@ -2,12 +2,13 @@ import { AuthorCard } from "@/components/parts/authorCard";
 import { CLIENT_PATHS } from "@/constants/clientPaths";
 import { createMockTip } from "@/repositories/tips/mock";
 import { replaceIDinPath } from "@/utils/replaceIDinPath";
-import { ActionIcon, Badge, Button, Card, Flex, Stack, Title, Box } from "@mantine/core";
-import { BookmarkIcon, Link1Icon } from "@radix-ui/react-icons";
-import { Pencil1Icon } from "@radix-ui/react-icons";
-import Link from "next/link";
-import dynamic from "next/dynamic";
+import { ActionIcon, Badge, Box, Button, Card, Flex, Stack, Title } from "@mantine/core";
 import { LoadingOverlay } from "@mantine/core";
+import { BookmarkIcon } from "@radix-ui/react-icons";
+import { Pencil1Icon } from "@radix-ui/react-icons";
+import dynamic from "next/dynamic";
+import Link from "next/link";
+import { ClipButton } from "./component/ClipButton";
 
 const Editor = dynamic(() => import("@/components/parts/Editor").then((v) => v.Editor), {
   loading: () => <LoadingOverlay visible loaderProps={{ type: "bars" }} />,
@@ -51,9 +52,7 @@ export const TipDetailContent: React.FC = () => {
           <ActionIcon radius="xl" variant="light" color="pink">
             <BookmarkIcon />
           </ActionIcon>
-          <ActionIcon radius="xl" variant="light">
-            <Link1Icon />
-          </ActionIcon>
+          <ClipButton />
         </Flex>
         <AuthorCard user={tip.author} />
       </Stack>
