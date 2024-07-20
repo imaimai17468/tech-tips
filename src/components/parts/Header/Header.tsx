@@ -12,7 +12,7 @@ export const Header: React.FC = () => {
 
   return (
     <Flex justify="space-between" align="center" py={8} px={24} mx={16} mt={16}>
-      <Anchor href={CLIENT_PATHS.TOP} underline="never">
+      <Anchor href={user ? CLIENT_PATHS.TIP : CLIENT_PATHS.TOP} underline="never">
         <Logo />
       </Anchor>
       <Flex gap={16} align="center">
