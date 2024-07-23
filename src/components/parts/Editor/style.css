@@ -15,3 +15,7 @@ h3.bn-inline-content {
   color: inherit;
   padding-inline: 0;
 }
+
+.bn-inline-content:has(>.ProseMirror-trailingBreak):before {
+  color: var(--mantine-color-dimmed);
+}
