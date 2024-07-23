@@ -13,9 +13,9 @@ type Props = {
 export const TipItem: React.FC<Props> = ({ tip }) => {
   return (
     <Stack gap={8}>
-      <Flex justify="space-between">
+      <Flex justify="space-between" gap={{ base: 16, xs: 32 }} direction={{ base: "column-reverse", xs: "row" }}>
         <Text size="lg">{tip.title}</Text>
-        <Flex gap={8}>
+        <Flex gap={8} ml="auto">
           <ActionIcon
             radius="xl"
             size="lg"

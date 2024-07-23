@@ -9,7 +9,7 @@ export const UserProfileContent: React.FC = () => {
   return (
     <Stack gap={32}>
       <Card radius="md" shadow="sm" p={32}>
-        <Flex gap={32}>
+        <Flex gap={32} wrap={{ base: "wrap", sm: "nowrap" }}>
           <Image w={100} h={100} src={user.userImageURL} alt={user.username} style={{ borderRadius: "50%" }} />
           <Stack>
             <Text size="xl" fw="bold">

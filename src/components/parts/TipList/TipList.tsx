@@ -6,7 +6,7 @@ export const TipList: React.FC = () => {
   const tips = createMockTips(10);
 
   return (
-    <SimpleGrid cols={3} spacing="lg" verticalSpacing="lg">
+    <SimpleGrid cols={{ base: 1, sm: 2, md: 3 }} spacing="lg" verticalSpacing="lg">
       {tips.map((tip) => (
         <TipCard key={tip.id} tip={tip} />
       ))}
