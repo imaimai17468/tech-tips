@@ -13,7 +13,7 @@ export const TopContent: React.FC = () => {
   return (
     <Stack align="center" gap={48}>
       <Title>Where Technologies Rest.</Title>
-      <StartButton isLogin={user !== null} isLoading={user === undefined} open={open} />
+      <StartButton isLogin={!!user} isLoading={user === undefined} open={open} />
       <AuthModal opened={opened} onClose={close} />
       <Stack gap={16} maw="600px">
         <Text>TechTipsは、技術的なメモやアイデアを簡単に書き留めるためのサービスです。</Text>
