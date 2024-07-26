@@ -1,5 +1,6 @@
 import { MainLayout } from "@/components/layout/MainLayout";
 import { AuthProvider } from "@/context/auth";
+import { UseAuthRouter } from "@/hooks/useAuthRouter";
 import "@/styles/global.css";
 import { ColorSchemeScript, MantineProvider, createTheme } from "@mantine/core";
 import "@mantine/core/styles.css";
@@ -29,6 +30,7 @@ export default function RootLayout({
         <AuthProvider>
           <MantineProvider theme={theme} withGlobalClasses>
             <MainLayout>{children}</MainLayout>
+            <UseAuthRouter />
           </MantineProvider>
         </AuthProvider>
       </body>
