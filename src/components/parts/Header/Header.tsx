@@ -1,14 +1,14 @@
 "use client";
 
 import { CLIENT_PATHS } from "@/constants/clientPaths";
-import { useAuth } from "@/context/auth";
+import { createMockUser } from "@/repositories/user/mock";
 import { Anchor, Flex } from "@mantine/core";
 import { Logo } from "../Logo";
 import { ThemeSwitch } from "./components/ThemeSwitch";
 import { UserButton } from "./components/UserButton";
 
 export const Header: React.FC = () => {
-  const user = useAuth();
+  const user = createMockUser();
 
   return (
     <Flex justify="space-between" align="center" py={8} px={24} mx={16} mt={16}>

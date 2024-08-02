@@ -1,6 +1,6 @@
 "use client";
 
-import { useAuth } from "@/context/auth";
+import { createMockUser } from "@/repositories/user/mock";
 import { Card, Image, Stack, Text, Title } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { AuthModal } from "./component/AuthModal";
@@ -8,7 +8,7 @@ import { StartButton } from "./component/StartButton";
 
 export const TopContent: React.FC = () => {
   const [opened, { open, close }] = useDisclosure(false);
-  const user = useAuth();
+  const user = createMockUser();
 
   return (
     <Stack align="center" gap={48}>
