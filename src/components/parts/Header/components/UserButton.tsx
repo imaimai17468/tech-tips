@@ -12,7 +12,7 @@ type Props = {
 
 export const UserButton: React.FC<Props> = ({ href, userName, userID }) => {
   return (
-    <Menu offset={15} withArrow position="bottom-start" transitionProps={{ transition: "rotate-right", duration: 150 }}>
+    <Menu offset={15} withArrow position="bottom-end" transitionProps={{ transition: "rotate-left", duration: 150 }}>
       <Menu.Target>
         <UnstyledButton>
           <Avatar src={href} alt="profile-icon" style={{ border: "1px solid var(--mantine-color-gray-3)" }} />
