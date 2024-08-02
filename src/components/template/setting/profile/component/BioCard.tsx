@@ -2,7 +2,7 @@
 
 import type { User } from "@/repositories/user/types";
 import { UserValidator } from "@/repositories/user/types";
-import { Button, Card, Stack, Text, Textarea, Flex } from "@mantine/core";
+import { Button, Card, Flex, Stack, Text, Textarea } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { zodResolver } from "@mantine/form";
 import { useState } from "react";
