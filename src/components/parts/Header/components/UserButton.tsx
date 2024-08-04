@@ -1,5 +1,5 @@
 import { CLIENT_PATHS } from "@/constants/clientPaths";
-import { logout } from "@/lib/auth";
+import { logout } from "@/libs/auth";
 import { replaceIDinPath } from "@/utils/replaceIDinPath";
 import { Avatar, Menu, UnstyledButton } from "@mantine/core";
 import { ExitIcon, Pencil1Icon, PersonIcon } from "@radix-ui/react-icons";

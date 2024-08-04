@@ -1,7 +1,7 @@
 import GoogleIcon from "@/assets/icons/googleIcon.svg";
 import { Logo } from "@/components/parts/Logo";
 import { CLIENT_PATHS } from "@/constants/clientPaths";
-import { login } from "@/lib/auth";
+import { login } from "@/libs/auth";
 import { Anchor, Button, Modal, Stack, Text } from "@mantine/core";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
