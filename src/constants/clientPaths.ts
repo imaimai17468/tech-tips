@@ -11,8 +11,11 @@ export const CLIENT_PATHS = {
   SETTINGS_TIPS: "/setting/tips",
 } as const;
 
-export type ClientPathValues = (typeof CLIENT_PATHS)[keyof typeof CLIENT_PATHS];
-export const AUTH_REQUIRED_PATHS: readonly ClientPathValues[] = [
+const createRegexPaths = (paths: readonly string[]) => {
+  return paths.map((path) => new RegExp(`^${path.replace(/\[id\]/g, "[^/]+")}(.*)$`));
+};
+
+export const AUTH_REQUIRED_PATHS_REGEX = createRegexPaths([
   CLIENT_PATHS.STOCK,
   CLIENT_PATHS.EXPLORE,
   CLIENT_PATHS.TIP,
@@ -22,4 +25,4 @@ export const AUTH_REQUIRED_PATHS: readonly ClientPathValues[] = [
   CLIENT_PATHS.USER,
   CLIENT_PATHS.SETTINGS_PROFILE,
   CLIENT_PATHS.SETTINGS_TIPS,
-] as const;
+]);

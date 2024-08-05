@@ -1,20 +1,12 @@
 "use client";
-
-import { createMockUser } from "@/repositories/user/mock";
 import { Card, Image, Stack, Text, Title } from "@mantine/core";
-import { useDisclosure } from "@mantine/hooks";
-import { AuthModal } from "./component/AuthModal";
 import { StartButton } from "./component/StartButton";
 
 export const TopContent: React.FC = () => {
-  const [opened, { open, close }] = useDisclosure(false);
-  const user = createMockUser();
-
   return (
     <Stack align="center" gap={48}>
       <Title>Where Technologies Rest.</Title>
-      <StartButton isLogin={!!user} isLoading={user === undefined} open={open} />
-      <AuthModal opened={opened} onClose={close} />
+      <StartButton />
       <Stack gap={16} maw="600px">
         <Text>TechTipsは、技術的なメモやアイデアを簡単に書き留めるためのサービスです。</Text>
         <Text>
@@ -33,7 +25,7 @@ export const TopContent: React.FC = () => {
         <Stack align="center" gap={32}>
           <Text>あなたの静かな技術の場所を作りましょう。</Text>
           <Image src="/image/coder.svg" alt="Coder" maw={150} />
-          <StartButton isLogin={user !== null} isLoading={user === undefined} open={open} />
+          <StartButton />
         </Stack>
       </Card>
     </Stack>
