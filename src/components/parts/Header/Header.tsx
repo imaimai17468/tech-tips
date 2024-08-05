@@ -2,7 +2,7 @@
 
 import { CLIENT_PATHS } from "@/constants/clientPaths";
 import { createMockUser } from "@/repositories/user/mock";
-import { Anchor, Flex } from "@mantine/core";
+import { Anchor, Flex, Button } from "@mantine/core";
 import { Logo } from "../Logo";
 import { ThemeSwitch } from "./components/ThemeSwitch";
 import { SettingsButton } from "./components/SettingsButton";
@@ -22,7 +22,9 @@ export const Header: React.FC = () => {
           <SettingsButton href={user.userImageURL} userName={user.username} userID={user.id} />
         </SignedIn>
         <SignedOut>
-          <SignInButton />
+          <SignInButton>
+            <Button variant="light">はじめる</Button>
+          </SignInButton>
         </SignedOut>
         <ThemeSwitch />
       </Flex>

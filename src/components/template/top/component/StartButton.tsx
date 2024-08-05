@@ -16,7 +16,9 @@ export const StartButton: React.FC = () => {
         </Button>
       </SignedIn>
       <SignedOut>
-        <SignInButton />
+        <SignInButton>
+          <Button variant="light">はじめる</Button>
+        </SignInButton>
       </SignedOut>
     </>
   );
