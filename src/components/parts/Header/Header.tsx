@@ -5,7 +5,8 @@ import { createMockUser } from "@/repositories/user/mock";
 import { Anchor, Flex } from "@mantine/core";
 import { Logo } from "../Logo";
 import { ThemeSwitch } from "./components/ThemeSwitch";
-import { UserButton } from "./components/UserButton";
+import { SettingsButton } from "./components/SettingsButton";
+import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
 
 export const Header: React.FC = () => {
   const user = createMockUser();
@@ -16,7 +17,13 @@ export const Header: React.FC = () => {
         <Logo />
       </Anchor>
       <Flex gap={16} align="center">
-        {user && <UserButton href={user.userImageURL} userName={user.username} userID={user.id} />}
+        <SignedIn>
+          <UserButton />
+          <SettingsButton href={user.userImageURL} userName={user.username} userID={user.id} />
+        </SignedIn>
+        <SignedOut>
+          <SignInButton />
+        </SignedOut>
         <ThemeSwitch />
       </Flex>
     </Flex>
