@@ -1,8 +1,7 @@
 import { CLIENT_PATHS } from "@/constants/clientPaths";
-import { logout } from "@/libs/auth";
 import { replaceIDinPath } from "@/utils/replaceIDinPath";
-import { Avatar, Menu, UnstyledButton } from "@mantine/core";
-import { ExitIcon, Pencil1Icon, PersonIcon } from "@radix-ui/react-icons";
+import { ActionIcon, Menu } from "@mantine/core";
+import { ExitIcon, GearIcon, Pencil1Icon, PersonIcon } from "@radix-ui/react-icons";
 
 type Props = {
   href?: string;
@@ -10,13 +9,13 @@ type Props = {
   userID: string;
 };
 
-export const UserButton: React.FC<Props> = ({ href, userName, userID }) => {
+export const SettingsButton: React.FC<Props> = ({ userName, userID }) => {
   return (
     <Menu offset={15} withArrow position="bottom-end" transitionProps={{ transition: "rotate-left", duration: 150 }}>
       <Menu.Target>
-        <UnstyledButton>
-          <Avatar src={href} alt="profile-icon" style={{ border: "1px solid var(--mantine-color-gray-3)" }} />
-        </UnstyledButton>
+        <ActionIcon variant="light">
+          <GearIcon />
+        </ActionIcon>
       </Menu.Target>
       <Menu.Dropdown>
         <Menu.Item component="a" href={replaceIDinPath(CLIENT_PATHS.USER, userID)}>
@@ -32,7 +31,7 @@ export const UserButton: React.FC<Props> = ({ href, userName, userID }) => {
         </Menu.Item>
 
         <Menu.Label>Account</Menu.Label>
-        <Menu.Item leftSection={<ExitIcon />} onClick={logout} component="a" href={CLIENT_PATHS.TOP}>
+        <Menu.Item leftSection={<ExitIcon />} component="a" href={CLIENT_PATHS.TOP}>
           Logout
         </Menu.Item>
       </Menu.Dropdown>
