@@ -22,11 +22,12 @@ export const createMockTipForm = (): TipForm => {
   };
 };
 
-export const createMockTip = (): Tip => {
+export const createMockTip = (defaultTip?: Partial<Tip>): Tip => {
   return {
     ...createMockTipForm(),
     author: createMockUser(),
     ...createMockBaseType(),
+    ...defaultTip,
   };
 };
 
