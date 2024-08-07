@@ -2,7 +2,7 @@ import { TipsSettingContent } from "@/components/template/setting/tips/TipsSetti
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Tips Setting | Tech Tips",
+  title: "Tips Setting | TechTips",
   description: "あなたの技術Tipsを管理をしましょう",
 };
 

@@ -2,7 +2,7 @@ import { ProfileContent } from "@/components/template/setting/profile/ProfileCon
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Profile Setting | Tech Tips",
+  title: "Profile Setting | TechTips",
   description: "あなたのプロフィールを設定しましょう",
 };
 

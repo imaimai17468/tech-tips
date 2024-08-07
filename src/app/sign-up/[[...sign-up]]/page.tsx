@@ -3,7 +3,7 @@ import { Center } from "@mantine/core";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Sign Up | Tech Tips",
+  title: "Sign Up | TechTips",
   description: "ログインしてあなたの技術Tipsを作成しましょう",
 };
 

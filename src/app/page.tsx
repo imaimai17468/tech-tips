@@ -2,7 +2,7 @@ import { TopContent } from "@/components/template/top/TopContent";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Tech Tips",
+  title: "TechTips",
   description: "ためになる技術置き場",
 };
 
