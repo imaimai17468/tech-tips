@@ -13,6 +13,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `${tip.title} | TechTips`,
     description: `${tip.author.username}さんの技術tips`,
+    openGraph: {
+      title: `${tip.title} | TechTips`,
+      description: `${tip.author.username}さんの技術tips`,
+    },
   };
 }
 

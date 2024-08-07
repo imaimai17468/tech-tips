@@ -2,7 +2,7 @@ import { faker } from "@faker-js/faker";
 import { createMockBaseType } from "../baseType";
 import type { User } from "./types";
 
-export const createMockUser = (): User => {
+export const createMockUser = (user?: Partial<User>): User => {
   return {
     username: faker.internet.userName(),
     bio: faker.lorem.paragraph(),
@@ -10,6 +10,7 @@ export const createMockUser = (): User => {
     githubUsername: faker.internet.userName(),
     userImageURL: faker.image.avatar(),
     ...createMockBaseType(),
+    ...user,
   };
 };
 
