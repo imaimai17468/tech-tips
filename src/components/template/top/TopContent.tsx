@@ -23,7 +23,7 @@ export const TopContent: React.FC = () => {
       </Stack>
       <Card padding="xl" radius="lg" style={{ border: "1px solid var(--mantine-color-gray-3)" }}>
         <Stack align="center" gap={32}>
-          <Text>あなたの静かな技術の場所を作りましょう。</Text>
+          <Text>技術のための静かな場所を作りましょう。</Text>
           <Image src="/image/coder.svg" alt="Coder" maw={150} />
           <StartButton />
         </Stack>
