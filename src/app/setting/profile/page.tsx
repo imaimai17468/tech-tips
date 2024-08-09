@@ -7,6 +7,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Profile Setting | TechTips",
     description: "あなたのプロフィールを設定しましょう",
+    images: "image/default_ogp.png",
   },
 };
 

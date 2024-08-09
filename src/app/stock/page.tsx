@@ -7,6 +7,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Your Stock | TechTips",
     description: "保存した技術Tipsを確認しましょう",
+    images: "image/default_ogp.png",
   },
 };
 

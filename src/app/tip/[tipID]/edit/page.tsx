@@ -16,6 +16,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       title: `編集中 | ${tip.title} | TechTips`,
       description: "あなたの技術tipsを編集します",
+      images: "image/default_ogp.png",
     },
     robots: {
       index: true,
