@@ -1,3 +1,4 @@
+import SeoComponent from "@/components/layout/SeoComponent";
 import { TipEditContent } from "@/components/template/tip/edit/TipEditContent";
 import { createMockTip } from "@/repositories/tips/mock";
 import type { Metadata } from "next";
@@ -10,18 +11,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const id = params.tipID;
   const tip = createMockTip({ id });
 
-  return {
+  return SeoComponent({
     title: `編集中 | ${tip.title} | TechTips`,
     description: "あなたの技術tipsを編集します",
-    openGraph: {
-      title: `編集中 | ${tip.title} | TechTips`,
-      description: "あなたの技術tipsを編集します",
-      images: "image/default_ogp.png",
-    },
-    robots: {
-      index: true,
-    },
-  };
+    url: `${process.env.NEXT_PUBLIC_URL}/tip/${id}/edit`,
+    imageUrl: "image/default_ogp.png",
+    noindex: true,
+  });
 }
 
 export default function Home() {

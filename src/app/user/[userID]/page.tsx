@@ -1,3 +1,4 @@
+import SeoComponent from "@/components/layout/SeoComponent";
 import { UserProfileContent } from "@/components/template/user/UserProfileContent";
 import { createMockUser } from "@/repositories/user/mock";
 import type { Metadata } from "next";
@@ -10,14 +11,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const id = params.userID;
   const user = createMockUser({ id });
 
-  return {
+  return SeoComponent({
     title: `${user.username}'s Tips | TechTips`,
     description: `${user.username}さんの技術tips`,
-    openGraph: {
-      title: `${user.username}'s Tips | TechTips`,
-      description: `${user.username}さんの技術tips`,
-    },
-  };
+    url: `${process.env.NEXT_PUBLIC_URL}/user/${user.id}`,
+    imageUrl: "/image/default_ogp.png",
+    noindex: false,
+  });
 }
 
 export default function Home() {
