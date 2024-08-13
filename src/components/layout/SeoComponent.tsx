@@ -1,5 +1,11 @@
 import type { Metadata } from "next";
-export type SEOProps = Record<"title" | "description" | "url" | "imageUrl", string> & Record<"noindex", boolean>;
+export type SEOProps = {
+  title: string;
+  description: string;
+  url: string;
+  imageUrl?: string;
+  noindex: boolean;
+};
 
 export default function SeoComponent(Info: SEOProps): Metadata {
   const { title, description, url, imageUrl, noindex } = Info;
@@ -16,14 +22,14 @@ export default function SeoComponent(Info: SEOProps): Metadata {
     },
     twitter: {
       card: "summary_large_image",
-      images: [imageUrl],
+      ...(imageUrl ? { images: [imageUrl] } : {}),
     },
     openGraph: {
       title: title,
       description: description,
       url: url,
       siteName: "TechTips",
-      images: [imageUrl],
+      ...(imageUrl ? { images: [imageUrl] } : {}),
     },
     robots: {
       index: !noindex,
