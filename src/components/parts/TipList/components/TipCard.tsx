@@ -8,7 +8,7 @@ import { Anchor, Avatar, Badge, Card, Flex, Stack, Text } from "@mantine/core";
 
 export const TipCard: React.FC<{ tip: Tip }> = ({ tip }) => {
   return (
-    <Card radius="md" padding="md" style={{ border: "1px solid var(--mantine-color-gray-3)" }}>
+    <Card radius="md" padding="md" shadow="sm">
       <Stack gap={16} justify="space-between" h="100%">
         <Stack gap={4}>
           <Anchor href={replaceIDinPath(CLIENT_PATHS.TIP_DETAIL, tip.id)} lineClamp={2} size="lg" fw={700} c="black">
