@@ -14,6 +14,7 @@ const nextConfig = {
   images: {
     disableStaticImages: true,
   },
+  reactStrictMode: false,
 };
 
 export default nextConfig;
