@@ -55,7 +55,7 @@ export const TipEditForm: React.FC<Props> = ({ user, initialValues }) => {
                 Post
               </Button>
             </Flex>
-            <Card shadow="xs" padding="xl" radius="lg" h="fit-content" w="100%">
+            <Card shadow="lg" padding="xl" radius="lg" h="fit-content" w="100%">
               <Stack gap={16}>
                 <TextInput
                   variant="unstyled"

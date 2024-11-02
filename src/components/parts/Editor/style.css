@@ -11,11 +11,5 @@ h3.bn-inline-content {
 }
 
 .bn-editor {
-  background: inherit;
-  color: inherit;
   padding-inline: 0;
-}
-
-.bn-inline-content:has(>.ProseMirror-trailingBreak):before {
-  color: var(--mantine-color-dimmed);
 }
