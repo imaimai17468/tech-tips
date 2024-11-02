@@ -10,6 +10,9 @@
     "format": "biome format --write src",
     "init:lefthook": "lefthook install"
   },
+  "volta": {
+    "node": "20.11.0"
+  },
   "dependencies": {
     "@blocknote/core": "^0.13.0",
     "@blocknote/mantine": "^0.13.1",
