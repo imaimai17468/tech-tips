@@ -5,8 +5,8 @@ export const runtime = "edge";
 
 export const alt = "TechTips";
 export const size = {
-  width: 960,
-  height: 504,
+  width: 800,
+  height: 420,
 };
 
 export const contentType = "image/png";
