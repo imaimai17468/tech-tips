@@ -9,7 +9,7 @@ export const size = {
   height: 420,
 };
 
-export const contentType = "image/png";
+export const contentType = "image/jpeg";
 
 export default async function Image() {
   const user = createMockUser();
