@@ -46,9 +46,6 @@ export default async function Image() {
         >
           {user.username}さんの技術tips
         </h1>
-        <div style={{ display: "flex", alignSelf: "flex-end" }}>
-          <img src={user.userImageURL} alt={user.username} style={{ width: 64, height: 64, borderRadius: "50%" }} />
-        </div>
       </div>
     </div>,
     {
