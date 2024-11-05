@@ -5,8 +5,8 @@ export const runtime = "edge";
 
 export const alt = "TechTips";
 export const size = {
-  width: 1200,
-  height: 630,
+  width: 960,
+  height: 504,
 };
 
 export const contentType = "image/png";
@@ -22,13 +22,13 @@ export default async function Image() {
         background: "linear-gradient(to right, #7AF78D, #73BDFC)",
         width: "100%",
         height: "100%",
-        padding: 32,
+        padding: 24,
       }}
     >
       <div
         style={{
           background: "#f5f5f5",
-          padding: 48,
+          padding: 32,
           borderRadius: 16,
           boxShadow: "0 0 10px rgba(0, 0, 0, 0.5)",
           display: "flex",
@@ -48,7 +48,7 @@ export default async function Image() {
         >
           <h1
             style={{
-              fontSize: 56,
+              fontSize: 32,
               fontWeight: 700,
             }}
           >
@@ -63,7 +63,7 @@ export default async function Image() {
                     background: "#73BDFC",
                     padding: "4px 8px",
                     borderRadius: "4px",
-                    fontSize: 32,
+                    fontSize: 24,
                     fontWeight: 700,
                     color: "white",
                   }}
@@ -80,7 +80,7 @@ export default async function Image() {
             alt={tip.author.username}
             style={{ width: 64, height: 64, borderRadius: "50%" }}
           />
-          <p style={{ fontSize: 32, fontWeight: 700, alignSelf: "flex-end" }}>{tip.author.username}</p>
+          <p style={{ fontSize: 24, fontWeight: 700, alignSelf: "flex-end" }}>{tip.author.username}</p>
         </div>
       </div>
     </div>,
