@@ -3,6 +3,14 @@ import "@/styles/global.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import { ColorSchemeScript, MantineProvider, createTheme } from "@mantine/core";
 import "@mantine/core/styles.css";
+import type { Viewport } from "next";
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+};
 
 const theme = createTheme({
   fontFamily: "Roboto, Raleway, Sawarabi Gothic, sans-serif",
