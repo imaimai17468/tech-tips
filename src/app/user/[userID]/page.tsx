@@ -15,6 +15,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: `${user.username}'s Tips | TechTips`,
     description: `${user.username}さんの技術tips`,
     url: `${process.env.NEXT_PUBLIC_URL}/user/${user.id}`,
+    imageUrl: "image/default_ogp.png",
     noindex: false,
   });
 }
