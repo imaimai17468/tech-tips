@@ -9,7 +9,8 @@
     "check": "biome check --apply src",
     "format": "biome format --write src",
     "init:lefthook": "lefthook install",
-    "migrate": "dotenv -e .env.development.local -- bunx prisma migrate dev --name"
+    "migrate": "dotenv -e .env.development.local -- bunx prisma migrate dev --name",
+    "postinstall": "prisma generate"
   },
   "dependencies": {
     "@blocknote/core": "^0.18.0",
