@@ -8,7 +8,8 @@
     "start": "next start",
     "check": "biome check --apply src",
     "format": "biome format --write src",
-    "init:lefthook": "lefthook install"
+    "init:lefthook": "lefthook install",
+    "migrate": "dotenv -e .env.development.local -- bunx prisma migrate dev --name"
   },
   "dependencies": {
     "@blocknote/core": "^0.18.0",
@@ -37,10 +38,11 @@
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "dotenv-cli": "^7.4.2",
+    "lefthook": "^1.7.9",
     "postcss": "^8.4.38",
     "postcss-preset-mantine": "^1.14.4",
     "postcss-simple-vars": "^7.0.1",
-    "typescript": "^5",
-    "lefthook": "^1.7.9"
+    "typescript": "^5"
   }
 }
