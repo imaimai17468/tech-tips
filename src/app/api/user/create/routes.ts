@@ -1,5 +1,4 @@
 import type { WebhookEvent } from "@clerk/nextjs/server";
-import type { UserJSON } from "@clerk/nextjs/server";
 import { PrismaClient } from "@prisma/client";
 import { headers } from "next/headers";
 import { Webhook } from "svix";
@@ -44,10 +43,9 @@ export async function POST(req: Request) {
     });
   }
 
-  const { id, first_name, last_name, image_url, username } = evt.data as UserJSON;
-  const eventType = evt.type;
+  if (evt.type === "user.created") {
+    const { id, first_name, last_name, image_url, username } = evt.data;
 
-  if (eventType === "user.created") {
     try {
       await prisma.user.create({
         data: {
@@ -66,7 +64,7 @@ export async function POST(req: Request) {
       return new Response("Failed to create user in database.", { status: 500 });
     }
   } else {
-    console.log(`Unhandled event type: ${eventType}`);
+    console.log(`Unhandled event type: ${evt.type}`);
   }
 
   return new Response("", { status: 200 });
