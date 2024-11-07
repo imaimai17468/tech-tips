@@ -10,7 +10,7 @@ export const MarkdownDownloader: React.FC<Props> = ({ onDownload }) => {
 
   useEffect(() => {
     onDownload(markdownDownload);
-  }, [onDownload]);
+  }, [onDownload, markdownDownload]);
 
   return null;
 };

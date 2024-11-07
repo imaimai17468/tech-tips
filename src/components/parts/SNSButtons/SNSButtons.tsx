@@ -3,8 +3,8 @@ import { ActionIcon, Flex, Image } from "@mantine/core";
 import Link from "next/link";
 
 type Props = {
-  githubUsername?: string;
-  twitterUsername?: string;
+  githubUsername: string | null;
+  twitterUsername: string | null;
 };
 
 export const SNSButtons: React.FC<Props> = ({ githubUsername, twitterUsername }) => {

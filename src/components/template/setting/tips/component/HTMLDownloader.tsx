@@ -10,7 +10,7 @@ export const HTMLDownloader: React.FC<Props> = ({ onDownload }) => {
 
   useEffect(() => {
     onDownload(HTMLDownload);
-  }, [onDownload]);
+  }, [onDownload, HTMLDownload]);
 
   return null;
 };
