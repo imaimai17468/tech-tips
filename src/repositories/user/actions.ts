@@ -1,26 +1,20 @@
 "use server";
 
 import { CLIENT_PATHS } from "@/constants/clientPaths";
-import { parseWithZod } from "@conform-to/zod";
 import { PrismaClient } from "@prisma/client";
 import { revalidatePath } from "next/cache";
-import { UserValidator } from "./types";
+import { type User, UserValidator } from "./types";
 
 const prisma = new PrismaClient();
 
-// biome-ignore lint/correctness/noUnusedVariables: prevStateは使わないのでignoreする
-export const updateUser = async (prevState: unknown, formData: FormData) => {
-  const submission = parseWithZod(formData, {
-    schema: UserValidator,
-  });
+export const updateUser = async (values: User) => {
+  const parsed = UserValidator.safeParse(values);
 
-  if (submission.status !== "success") {
-    return submission.reply();
+  if (!parsed.success) {
+    throw new Error(`Invalid user data: ${parsed.error.message}`);
   }
 
-  console.log(submission.value);
-
-  await prisma.user.update({ where: { id: submission.value.id }, data: submission.value });
+  await prisma.user.update({ where: { id: parsed.data.id }, data: parsed.data });
 
   revalidatePath(CLIENT_PATHS.SETTINGS_PROFILE);
 };

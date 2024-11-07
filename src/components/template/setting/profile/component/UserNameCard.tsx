@@ -3,42 +3,44 @@
 import { updateUser } from "@/repositories/user/actions";
 import type { User } from "@/repositories/user/types";
 import { UserValidator } from "@/repositories/user/types";
-import { useForm } from "@conform-to/react";
-import { parseWithZod } from "@conform-to/zod";
 import { Button, Card, Flex, Stack, Text, TextInput } from "@mantine/core";
-import { useActionState, useState } from "react";
+import { useForm } from "@mantine/form";
+import { zodResolver } from "@mantine/form";
+import { useState, useTransition } from "react";
 
 type Props = {
   user: User;
 };
 
 export const UserNameCard: React.FC<Props> = ({ user }) => {
+  const [isPending, startTransition] = useTransition();
   const [isEdit, setIsEdit] = useState(false);
 
-  const [lastResult, action, isPending] = useActionState(updateUser, undefined);
-  const [form, fields] = useForm({
-    lastResult,
-    onValidate({ formData }) {
-      return parseWithZod(formData, { schema: UserValidator });
-    },
-    defaultValue: user,
-    shouldValidate: "onBlur",
-    shouldRevalidate: "onInput",
+  const form = useForm<User>({
+    mode: "uncontrolled",
+    initialValues: user,
+    validate: zodResolver(UserValidator),
   });
+
+  const handleFormSubmit = (values: User) => {
+    startTransition(async () => {
+      try {
+        await updateUser(values);
+        setIsEdit(false);
+      } catch (error) {
+        console.error(error);
+      }
+    });
+  };
 
   return (
     <Card shadow="xs" padding="xl" radius="lg">
       <Stack>
         <Text size="lg">User Name</Text>
         {isEdit ? (
-          <form id={form.id} onSubmit={form.onSubmit} action={action} noValidate>
+          <form onSubmit={form.onSubmit(handleFormSubmit)}>
             <Stack>
-              <TextInput
-                key={fields.username.key}
-                name={fields.username.name}
-                defaultValue={fields.username.initialValue}
-                error={fields.username.errors?.join("\n")}
-              />
+              <TextInput placeholder="your name" key={form.key("username")} {...form.getInputProps("username")} />
               <Flex gap={16}>
                 <Button
                   onClick={() => {
