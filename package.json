@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "next start",
     "check": "biome check --apply src",
+    "check:type": "tsc --noEmit",
     "format": "biome format --write src",
     "init:lefthook": "lefthook install",
     "migrate": "dotenv -e .env.development.local -- bunx prisma migrate dev --name",
