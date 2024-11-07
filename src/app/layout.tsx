@@ -1,7 +1,7 @@
 import { MainLayout } from "@/components/layout/MainLayout";
 import "@/styles/global.css";
 import { ClerkProvider } from "@clerk/nextjs";
-import { ColorSchemeScript, MantineProvider, createTheme } from "@mantine/core";
+import { MantineProvider, createTheme } from "@mantine/core";
 import "@mantine/core/styles.css";
 import type { Viewport } from "next";
 
@@ -24,7 +24,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <ColorSchemeScript />
         <link rel="shortcut icon" href="/favicon.svg" />
       </head>
       <body>
