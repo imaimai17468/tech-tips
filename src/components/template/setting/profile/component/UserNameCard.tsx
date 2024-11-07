@@ -1,11 +1,12 @@
 "use client";
 
+import { updateUser } from "@/repositories/user/actions";
 import type { User } from "@/repositories/user/types";
 import { UserValidator } from "@/repositories/user/types";
+import { useForm } from "@conform-to/react";
+import { parseWithZod } from "@conform-to/zod";
 import { Button, Card, Flex, Stack, Text, TextInput } from "@mantine/core";
-import { useForm } from "@mantine/form";
-import { zodResolver } from "@mantine/form";
-import { useState } from "react";
+import { useActionState, useState } from "react";
 
 type Props = {
   user: User;
@@ -13,28 +14,31 @@ type Props = {
 
 export const UserNameCard: React.FC<Props> = ({ user }) => {
   const [isEdit, setIsEdit] = useState(false);
-  const [userName, setUserName] = useState(user.username);
 
-  const form = useForm<User>({
-    mode: "uncontrolled",
-    initialValues: user,
-    validate: zodResolver(UserValidator),
+  const [lastResult, action, isPending] = useActionState(updateUser, undefined);
+  const [form, fields] = useForm({
+    lastResult,
+    onValidate({ formData }) {
+      return parseWithZod(formData, { schema: UserValidator });
+    },
+    defaultValue: user,
+    shouldValidate: "onBlur",
+    shouldRevalidate: "onInput",
   });
-
-  const handleFormSubmit = (values: User) => {
-    console.log(values);
-    setIsEdit(false);
-    setUserName(values.username);
-  };
 
   return (
     <Card shadow="xs" padding="xl" radius="lg">
       <Stack>
         <Text size="lg">User Name</Text>
         {isEdit ? (
-          <form onSubmit={form.onSubmit(handleFormSubmit)}>
+          <form id={form.id} onSubmit={form.onSubmit} action={action} noValidate>
             <Stack>
-              <TextInput placeholder="your name" key={form.key("username")} {...form.getInputProps("username")} />
+              <TextInput
+                key={fields.username.key}
+                name={fields.username.name}
+                defaultValue={fields.username.initialValue}
+                error={fields.username.errors?.join("\n")}
+              />
               <Flex gap={16}>
                 <Button
                   onClick={() => {
@@ -46,7 +50,7 @@ export const UserNameCard: React.FC<Props> = ({ user }) => {
                 >
                   Cancel
                 </Button>
-                <Button variant="outline" w="fit-content" type="submit">
+                <Button variant="outline" w="fit-content" type="submit" loading={isPending}>
                   Save UserName
                 </Button>
               </Flex>
@@ -54,7 +58,7 @@ export const UserNameCard: React.FC<Props> = ({ user }) => {
           </form>
         ) : (
           <Stack>
-            <Text c="gray">{userName}</Text>
+            <Text c="gray">{user.username}</Text>
             <Button variant="light" w="fit-content" onClick={() => setIsEdit(true)}>
               Edit User Name
             </Button>
