@@ -22,7 +22,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         <ColorSchemeScript defaultColorScheme="light" />
-        <link rel="shortcut icon" href="/favicon.svg" />
+        <link rel="icon" href="/icon.png" type="image/png" sizes="128x128" />
       </head>
       <body>
         <MantineProvider theme={theme} withGlobalClasses>
