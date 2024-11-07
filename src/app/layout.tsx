@@ -1,7 +1,7 @@
 import { MainLayout } from "@/components/layout/MainLayout";
 import "@/styles/global.css";
 import { ClerkProvider } from "@clerk/nextjs";
-import { MantineProvider, createTheme } from "@mantine/core";
+import { ColorSchemeScript, MantineProvider, createTheme } from "@mantine/core";
 import "@mantine/core/styles.css";
 import type { Viewport } from "next";
 
@@ -22,8 +22,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
+        <ColorSchemeScript defaultColorScheme="dark" />
         <link rel="shortcut icon" href="/favicon.svg" />
       </head>
       <body>
