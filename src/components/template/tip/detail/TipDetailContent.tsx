@@ -1,3 +1,5 @@
+"use client";
+
 import { AuthorCard } from "@/components/parts/authorCard";
 import { CLIENT_PATHS } from "@/constants/clientPaths";
 import { createMockTip } from "@/repositories/tips/mock";

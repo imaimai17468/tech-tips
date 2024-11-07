@@ -1,6 +1,5 @@
 "use client";
 
-// import { Editor } from "@/components/parts/Editor";
 import { createInitialTipForm } from "@/repositories/tips/mock";
 import { type Tip, type TipForm, TipFormValidator } from "@/repositories/tips/types";
 import type { User } from "@/repositories/user/types";
@@ -32,8 +31,8 @@ export const TipEditForm: React.FC<Props> = ({ user, initialValues }) => {
     const submitData: Tip = {
       ...values,
       id: typeid().toString(),
-      createdAt: Date.now(),
-      updatedAt: Date.now(),
+      createdAt: new Date(),
+      updatedAt: new Date(),
       author: user,
     };
 
