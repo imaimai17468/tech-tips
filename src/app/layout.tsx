@@ -6,7 +6,7 @@ import "@mantine/core/styles.css";
 import type { Viewport } from "next";
 
 export const viewport: Viewport = {
-  themeColor: "dark",
+  themeColor: "light",
 };
 
 const theme = createTheme({
@@ -21,7 +21,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <ColorSchemeScript defaultColorScheme="dark" />
+        <ColorSchemeScript defaultColorScheme="light" />
         <link rel="shortcut icon" href="/favicon.svg" />
       </head>
       <body>
