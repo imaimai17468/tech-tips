@@ -4,10 +4,11 @@ import { createMockTip } from "@/repositories/tips/mock";
 import type { Metadata } from "next";
 
 type Props = {
-  params: { tipID: string };
+  params: Promise<{ tipID: string }>;
 };
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata(props: Props): Promise<Metadata> {
+  const params = await props.params;
   const id = params.tipID;
   const tip = createMockTip({ id });
 

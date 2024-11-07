@@ -4,10 +4,11 @@ import { createMockUser } from "@/repositories/user/mock";
 import type { Metadata } from "next";
 
 type Props = {
-  params: { userID: string };
+  params: Promise<{ userID: string }>;
 };
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata(props: Props): Promise<Metadata> {
+  const params = await props.params;
   const id = params.userID;
   const user = createMockUser({ id });
 
