@@ -21,11 +21,16 @@ export async function updateUser(...[_prev, formData]: Parameters<ConformAction>
   await prisma.user.update({ where: { id: userId }, data: { username: submission.value.username } });
 
   redirect(CLIENT_PATHS.SETTINGS_PROFILE);
-  return submission.reply();
 }
 
-export const getUser = async (id: string) => {
-  const userResponse = await prisma.user.findUnique({ where: { id } });
+export const getUser = async () => {
+  const { userId } = auth();
+
+  if (!userId) {
+    return null;
+  }
+
+  const userResponse = await prisma.user.findUnique({ where: { id: userId } });
   const parsed = UserValidator.safeParse(userResponse);
 
   if (!userResponse || !parsed.success) {

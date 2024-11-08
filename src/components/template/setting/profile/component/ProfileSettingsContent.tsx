@@ -5,12 +5,8 @@ import { BioCard } from "./BioCard";
 import { SNSCard } from "./SNSCard";
 import { UserNameCard } from "./UserNameCard";
 
-type Props = {
-  userId: string;
-};
-
-export const ProfileSettingsContent: React.FC<Props> = async ({ userId }) => {
-  const userData = await getUser(userId);
+export const ProfileSettingsContent: React.FC = async () => {
+  const userData = await getUser();
 
   if (!userData)
     return (
