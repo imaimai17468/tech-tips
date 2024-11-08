@@ -10,7 +10,7 @@ import { UserValidator } from "./types";
 
 const prisma = new PrismaClient();
 
-export async function updateUserName(...[_prev, formData]: Parameters<ConformAction>): ReturnType<ConformAction> {
+export const updateUserName = async (...[_prev, formData]: Parameters<ConformAction>): ReturnType<ConformAction> => {
   const { userId } = auth();
   const submission = parseWithZod(formData, { schema: UserValidator.pick({ username: true }) });
 
@@ -18,10 +18,41 @@ export async function updateUserName(...[_prev, formData]: Parameters<ConformAct
     return submission.reply();
   }
 
-  await prisma.user.update({ where: { id: userId }, data: { username: submission.value.username } });
+  await prisma.user.update({ where: { id: userId }, data: submission.value });
 
   redirect(CLIENT_PATHS.SETTINGS_PROFILE);
-}
+};
+
+export const updateUserBio = async (...[_prev, formData]: Parameters<ConformAction>): ReturnType<ConformAction> => {
+  const { userId } = auth();
+  const submission = parseWithZod(formData, { schema: UserValidator.pick({ bio: true }) });
+
+  if (submission.status !== "success" || !userId) {
+    return submission.reply();
+  }
+
+  await prisma.user.update({ where: { id: userId }, data: submission.value });
+
+  redirect(CLIENT_PATHS.SETTINGS_PROFILE);
+};
+
+export const updateUserSNS = async (...[_prev, formData]: Parameters<ConformAction>): ReturnType<ConformAction> => {
+  const { userId } = auth();
+  const submission = parseWithZod(formData, {
+    schema: UserValidator.pick({ twitterUsername: true, githubUsername: true }),
+  });
+
+  if (submission.status !== "success" || !userId) {
+    return submission.reply();
+  }
+
+  await prisma.user.update({
+    where: { id: userId },
+    data: submission.value,
+  });
+
+  redirect(CLIENT_PATHS.SETTINGS_PROFILE);
+};
 
 export const getUser = async () => {
   const { userId } = auth();
