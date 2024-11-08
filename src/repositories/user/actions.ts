@@ -18,3 +18,14 @@ export const updateUser = async (values: User) => {
 
   revalidatePath(CLIENT_PATHS.SETTINGS_PROFILE);
 };
+
+export const getUser = async (id: string) => {
+  const userResponse = await prisma.user.findUnique({ where: { id } });
+  const parsed = UserValidator.safeParse(userResponse);
+
+  if (!userResponse || !parsed.success) {
+    return null;
+  }
+
+  return parsed.data;
+};
