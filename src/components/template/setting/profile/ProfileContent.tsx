@@ -14,7 +14,7 @@ export const ProfileContent: React.FC = async () => {
       <Stack>
         <ProfileImageAlert />
         {userId ? (
-          <Suspense fallback={<Skeleton height={100} />}>
+          <Suspense fallback={<Skeleton height={300} />}>
             <ProfileSettingsContent userId={userId} />
           </Suspense>
         ) : (
