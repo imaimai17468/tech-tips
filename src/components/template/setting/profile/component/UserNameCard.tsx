@@ -3,44 +3,49 @@
 import { updateUser } from "@/repositories/user/actions";
 import type { User } from "@/repositories/user/types";
 import { UserValidator } from "@/repositories/user/types";
+import { useForm } from "@conform-to/react";
+import { parseWithZod } from "@conform-to/zod";
 import { Button, Card, Flex, Stack, Text, TextInput } from "@mantine/core";
-import { useForm } from "@mantine/form";
-import { zodResolver } from "@mantine/form";
-import { useState, useTransition } from "react";
+import { useActionState, useEffect, useState } from "react";
 
 type Props = {
   user: User;
 };
 
 export const UserNameCard: React.FC<Props> = ({ user }) => {
-  const [isPending, startTransition] = useTransition();
   const [isEdit, setIsEdit] = useState(false);
-
-  const form = useForm<User>({
-    mode: "uncontrolled",
-    initialValues: user,
-    validate: zodResolver(UserValidator),
+  const [lastResult, action, isPending] = useActionState(updateUser, undefined);
+  const [form, fields] = useForm({
+    lastResult,
+    onValidate({ formData }) {
+      const result = parseWithZod(formData, { schema: UserValidator.pick({ username: true }) });
+      return result;
+    },
+    defaultValue: user,
+    shouldValidate: "onBlur",
+    shouldRevalidate: "onInput",
   });
 
-  const handleFormSubmit = (values: User) => {
-    startTransition(async () => {
-      try {
-        await updateUser(values);
-        setIsEdit(false);
-      } catch (error) {
-        console.error(error);
-      }
-    });
-  };
+  useEffect(() => {
+    if (lastResult?.status === "success") {
+      setIsEdit(false);
+    }
+  }, [lastResult]);
 
   return (
     <Card shadow="xs" padding="xl" radius="lg">
       <Stack>
         <Text size="lg">User Name</Text>
         {isEdit ? (
-          <form onSubmit={form.onSubmit(handleFormSubmit)}>
+          <form id={form.id} onSubmit={form.onSubmit} action={action} noValidate>
             <Stack>
-              <TextInput placeholder="your name" key={form.key("username")} {...form.getInputProps("username")} />
+              <TextInput
+                type="text"
+                key={fields.username.key}
+                name={fields.username.name}
+                defaultValue={fields.username.initialValue}
+                error={fields.username.errors?.join(", ")}
+              />
               <Flex gap={16}>
                 <Button
                   onClick={() => {
@@ -52,7 +57,13 @@ export const UserNameCard: React.FC<Props> = ({ user }) => {
                 >
                   Cancel
                 </Button>
-                <Button variant="outline" w="fit-content" type="submit" loading={isPending}>
+                <Button
+                  variant="outline"
+                  w="fit-content"
+                  type="submit"
+                  loading={isPending}
+                  disabled={!form.valid || !form.dirty}
+                >
                   Save UserName
                 </Button>
               </Flex>

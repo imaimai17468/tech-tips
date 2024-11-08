@@ -1,23 +1,28 @@
 "use server";
 
 import { CLIENT_PATHS } from "@/constants/clientPaths";
+import type { ConformAction } from "@/types/conform";
+import { auth } from "@clerk/nextjs/server";
+import { parseWithZod } from "@conform-to/zod";
 import { PrismaClient } from "@prisma/client";
-import { revalidatePath } from "next/cache";
-import { type User, UserValidator } from "./types";
+import { redirect } from "next/navigation";
+import { UserValidator } from "./types";
 
 const prisma = new PrismaClient();
 
-export const updateUser = async (values: User) => {
-  const parsed = UserValidator.safeParse(values);
+export async function updateUser(...[_prev, formData]: Parameters<ConformAction>): ReturnType<ConformAction> {
+  const { userId } = auth();
+  const submission = parseWithZod(formData, { schema: UserValidator.pick({ username: true }) });
 
-  if (!parsed.success) {
-    throw new Error(`Invalid user data: ${parsed.error.message}`);
+  if (submission.status !== "success" || !userId) {
+    return submission.reply();
   }
 
-  await prisma.user.update({ where: { id: parsed.data.id }, data: parsed.data });
+  await prisma.user.update({ where: { id: userId }, data: { username: submission.value.username } });
 
-  revalidatePath(CLIENT_PATHS.SETTINGS_PROFILE);
-};
+  redirect(CLIENT_PATHS.SETTINGS_PROFILE);
+  return submission.reply();
+}
 
 export const getUser = async (id: string) => {
   const userResponse = await prisma.user.findUnique({ where: { id } });
