@@ -1,6 +1,6 @@
 "use client";
 
-import { updateUser } from "@/repositories/user/actions";
+import { updateUserName } from "@/repositories/user/actions";
 import type { User } from "@/repositories/user/types";
 import { UserValidator } from "@/repositories/user/types";
 import { useForm } from "@conform-to/react";
@@ -14,7 +14,7 @@ type Props = {
 
 export const UserNameCard: React.FC<Props> = ({ user }) => {
   const [isEdit, setIsEdit] = useState(false);
-  const [lastResult, action, isPending] = useActionState(updateUser, undefined);
+  const [lastResult, action, isPending] = useActionState(updateUserName, undefined);
   const [form, fields] = useForm({
     lastResult,
     onValidate({ formData }) {

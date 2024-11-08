@@ -10,7 +10,7 @@ import { UserValidator } from "./types";
 
 const prisma = new PrismaClient();
 
-export async function updateUser(...[_prev, formData]: Parameters<ConformAction>): ReturnType<ConformAction> {
+export async function updateUserName(...[_prev, formData]: Parameters<ConformAction>): ReturnType<ConformAction> {
   const { userId } = auth();
   const submission = parseWithZod(formData, { schema: UserValidator.pick({ username: true }) });
 
