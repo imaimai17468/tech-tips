@@ -1,11 +1,14 @@
 "use client";
 
+import { CLIENT_PATHS } from "@/constants/clientPaths";
 import { updateUserName } from "@/repositories/user/actions";
 import type { User } from "@/repositories/user/types";
 import { UserValidator } from "@/repositories/user/types";
 import { useForm } from "@conform-to/react";
 import { parseWithZod } from "@conform-to/zod";
 import { Button, Card, Flex, Stack, Text, TextInput } from "@mantine/core";
+import { notifications } from "@mantine/notifications";
+import { redirect } from "next/navigation";
 import { useActionState, useEffect, useState } from "react";
 
 type Props = {
@@ -27,8 +30,21 @@ export const UserNameCard: React.FC<Props> = ({ user }) => {
   });
 
   useEffect(() => {
+    console.log("lastResult", lastResult);
     if (lastResult?.status === "success") {
       setIsEdit(false);
+      notifications.show({
+        color: "green",
+        title: "Success",
+        message: "User Name updated",
+      });
+      redirect(CLIENT_PATHS.SETTINGS_PROFILE);
+    } else if (lastResult?.status === "error") {
+      notifications.show({
+        color: "red",
+        title: "Error",
+        message: "Failed to update User Name",
+      });
     }
   }, [lastResult]);
 

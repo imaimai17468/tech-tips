@@ -3,6 +3,8 @@ import "@/styles/global.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import { ColorSchemeScript, MantineProvider, createTheme } from "@mantine/core";
 import "@mantine/core/styles.css";
+import { Notifications } from "@mantine/notifications";
+import "@mantine/notifications/styles.css";
 import type { Viewport } from "next";
 
 export const viewport: Viewport = {
@@ -26,6 +28,7 @@ export default function RootLayout({
       </head>
       <body>
         <MantineProvider theme={theme} withGlobalClasses>
+          <Notifications />
           <ClerkProvider>
             <MainLayout>{children}</MainLayout>
           </ClerkProvider>
