@@ -1,6 +1,6 @@
 import { createMockTips } from "@/repositories/tips/mock";
 import { Divider, Stack, Title } from "@mantine/core";
-import { TipItem } from "./components/TipItem";
+import { TipItem } from "./TipItem";
 
 export const TipsSettingContent: React.FC = () => {
   const tips = createMockTips(10);
