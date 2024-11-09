@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useHTMLDownload } from "../../hooks/useHTMLDownload";
+import { useHTMLDownload } from "../../../hooks/useHTMLDownload";
 
 type Props = {
   content: string;

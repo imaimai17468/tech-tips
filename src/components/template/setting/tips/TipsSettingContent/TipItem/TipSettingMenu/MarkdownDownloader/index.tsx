@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useMarkdownDownload } from "../../hooks/useMarkdownDownload";
+import { useMarkdownDownload } from "../../../hooks/useMarkdownDownload";
 
 type Props = {
   content: string;
