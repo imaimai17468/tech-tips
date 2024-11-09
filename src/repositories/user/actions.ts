@@ -29,7 +29,13 @@ export const updateUserBio = async (...[_prev, formData]: Parameters<ConformActi
     return submission.reply();
   }
 
-  await prisma.user.update({ where: { id: userId }, data: submission.value });
+  await prisma.user.update({
+    where: { id: userId },
+    data: {
+      ...submission.value,
+      bio: submission.value.bio ?? "",
+    },
+  });
 
   return submission.reply();
 };
@@ -46,7 +52,11 @@ export const updateUserSNS = async (...[_prev, formData]: Parameters<ConformActi
 
   await prisma.user.update({
     where: { id: userId },
-    data: submission.value,
+    data: {
+      ...submission.value,
+      twitterUsername: submission.value.twitterUsername ?? "",
+      githubUsername: submission.value.githubUsername ?? "",
+    },
   });
 
   return submission.reply();
