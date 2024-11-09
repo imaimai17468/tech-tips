@@ -1,11 +1,15 @@
 "use client";
 
+import { CLIENT_PATHS } from "@/constants/clientPaths";
+import { updateUserBio } from "@/repositories/user/actions";
 import type { User } from "@/repositories/user/types";
 import { UserValidator } from "@/repositories/user/types";
+import { useForm } from "@conform-to/react";
+import { parseWithZod } from "@conform-to/zod";
 import { Button, Card, Flex, Stack, Text, Textarea } from "@mantine/core";
-import { useForm } from "@mantine/form";
-import { zodResolver } from "@mantine/form";
-import { useState } from "react";
+import { notifications } from "@mantine/notifications";
+import { redirect } from "next/navigation";
+import { useActionState, useEffect, useState } from "react";
 
 type Props = {
   user: User;
@@ -13,28 +17,51 @@ type Props = {
 
 export const BioCard: React.FC<Props> = ({ user }) => {
   const [isEdit, setIsEdit] = useState(false);
-  const [bio, setBio] = useState(user.bio);
-
-  const form = useForm<User>({
-    mode: "uncontrolled",
-    initialValues: user,
-    validate: zodResolver(UserValidator),
+  const [lastResult, action, isPending] = useActionState(updateUserBio, undefined);
+  const [form, fields] = useForm({
+    lastResult,
+    onValidate({ formData }) {
+      const result = parseWithZod(formData, { schema: UserValidator.pick({ bio: true }) });
+      return result;
+    },
+    defaultValue: user,
+    shouldValidate: "onBlur",
+    shouldRevalidate: "onInput",
   });
 
-  const handleFormSubmit = (values: User) => {
-    console.log(values);
-    setIsEdit(false);
-    setBio(values.bio);
-  };
+  useEffect(() => {
+    console.log("lastResult", lastResult);
+    if (lastResult?.status === "success") {
+      setIsEdit(false);
+      notifications.show({
+        color: "green",
+        title: "Success",
+        message: "Bio updated",
+      });
+      redirect(CLIENT_PATHS.SETTINGS_PROFILE);
+    } else if (lastResult?.status === "error") {
+      notifications.show({
+        color: "red",
+        title: "Error",
+        message: "Failed to update Bio",
+      });
+    }
+  }, [lastResult]);
 
   return (
     <Card shadow="xs" padding="xl" radius="lg">
       <Stack>
         <Text size="lg">Bio</Text>
         {isEdit ? (
-          <form onSubmit={form.onSubmit(handleFormSubmit)}>
+          <form id={form.id} onSubmit={form.onSubmit} action={action} noValidate>
             <Stack>
-              <Textarea placeholder="your bio" key={form.key("bio")} {...form.getInputProps("bio")} />
+              <Textarea
+                placeholder="your bio"
+                key={fields.bio.key}
+                name={fields.bio.name}
+                defaultValue={fields.bio.initialValue}
+                error={fields.bio.errors?.join(", ")}
+              />
               <Flex gap={16}>
                 <Button
                   onClick={() => {
@@ -46,7 +73,13 @@ export const BioCard: React.FC<Props> = ({ user }) => {
                 >
                   Cancel
                 </Button>
-                <Button variant="outline" w="fit-content" type="submit">
+                <Button
+                  variant="outline"
+                  w="fit-content"
+                  type="submit"
+                  loading={isPending}
+                  disabled={!form.valid || !form.dirty}
+                >
                   Save Bio
                 </Button>
               </Flex>
@@ -54,7 +87,7 @@ export const BioCard: React.FC<Props> = ({ user }) => {
           </form>
         ) : (
           <Stack>
-            <Text c="gray">{bio}</Text>
+            <Text c="gray">{user.bio}</Text>
             <Button variant="light" w="fit-content" onClick={() => setIsEdit(true)}>
               Edit Bio
             </Button>
