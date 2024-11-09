@@ -30,7 +30,6 @@ export const UserNameCard: React.FC<Props> = ({ user }) => {
   });
 
   useEffect(() => {
-    console.log("lastResult", lastResult);
     if (lastResult?.status === "success") {
       setIsEdit(false);
       notifications.show({
@@ -66,7 +65,6 @@ export const UserNameCard: React.FC<Props> = ({ user }) => {
                 <Button
                   onClick={() => {
                     setIsEdit(false);
-                    form.reset();
                   }}
                   variant="subtle"
                   color="red"
