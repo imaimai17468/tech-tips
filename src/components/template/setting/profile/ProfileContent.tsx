@@ -1,7 +1,7 @@
 import { Skeleton, Stack, Title } from "@mantine/core";
 import { Suspense } from "react";
-import { ProfileImageAlert } from "./component/ProfileImageAlert";
-import { ProfileSettingsContent } from "./component/ProfileSettingsContent";
+import { ProfileImageAlert } from "./components/ProfileImageAlert";
+import { ProfileSettingsContent } from "./components/ProfileSettingsContent";
 
 export const ProfileContent: React.FC = async () => {
   return (
