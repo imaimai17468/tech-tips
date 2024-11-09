@@ -1,9 +1,10 @@
 import { useCreateBlockNote } from "@blocknote/react";
+import { useCallback } from "react";
 
-export const useHTMLDownload = () => {
+export const useHTMLDownload = (content: string) => {
   const editor = useCreateBlockNote();
 
-  const HTMLDownload = async (content: string) => {
+  const HTMLDownload = useCallback(async () => {
     const contentObject = JSON.parse(content);
     await editor.blocksToHTMLLossy(contentObject).then((HTML: string) => {
       const blob = new Blob([HTML], { type: "text/html" });
@@ -14,7 +15,7 @@ export const useHTMLDownload = () => {
       a.click();
       URL.revokeObjectURL(url);
     });
-  };
+  }, [editor, content]);
 
   return HTMLDownload;
 };

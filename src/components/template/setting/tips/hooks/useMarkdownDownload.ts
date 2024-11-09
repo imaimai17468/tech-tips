@@ -1,9 +1,10 @@
 import { useCreateBlockNote } from "@blocknote/react";
+import { useCallback } from "react";
 
-export const useMarkdownDownload = () => {
+export const useMarkdownDownload = (content: string) => {
   const editor = useCreateBlockNote();
 
-  const markdownDownload = async (content: string) => {
+  const markdownDownload = useCallback(async () => {
     const contentObject = JSON.parse(content);
     await editor.blocksToMarkdownLossy(contentObject).then((markdown: string) => {
       const blob = new Blob([markdown], { type: "text/markdown" });
@@ -14,7 +15,7 @@ export const useMarkdownDownload = () => {
       a.click();
       URL.revokeObjectURL(url);
     });
-  };
+  }, [editor, content]);
 
   return markdownDownload;
 };
