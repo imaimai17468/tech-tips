@@ -1,9 +1,9 @@
 import { getUser } from "@/repositories/user/actions";
 import { Alert } from "@mantine/core";
 import { ExclamationTriangleIcon } from "@radix-ui/react-icons";
-import { BioCard } from "./components/BioCard";
-import { SNSCard } from "./components/SNSCard";
-import { UserNameCard } from "./components/UserNameCard";
+import { BioCard } from "./BioCard";
+import { SNSCard } from "./SNSCard";
+import { UserNameCard } from "./UserNameCard";
 
 export const ProfileSettingsContent: React.FC = async () => {
   const userData = await getUser();
