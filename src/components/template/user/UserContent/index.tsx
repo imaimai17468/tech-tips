@@ -4,7 +4,7 @@ import { createMockTips } from "@/repositories/tips/mock";
 import { createMockUser } from "@/repositories/user/mock";
 import { Card, Flex, Image, Stack, Text } from "@mantine/core";
 
-export const UserProfileContent: React.FC = () => {
+export const UserContent: React.FC = () => {
   const user = createMockUser();
   const tips = createMockTips(10);
 

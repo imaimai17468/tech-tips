@@ -1,5 +1,5 @@
 import SeoComponent from "@/components/layout/SeoComponent";
-import { UserProfileContent } from "@/components/template/user/UserProfileContent";
+import { UserContent } from "@/components/template/user/UserContent";
 import { createMockUser } from "@/repositories/user/mock";
 import type { Metadata } from "next";
 
@@ -22,5 +22,5 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
 }
 
 export default function Home() {
-  return <UserProfileContent />;
+  return <UserContent />;
 }
