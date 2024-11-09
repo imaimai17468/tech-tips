@@ -1,6 +1,6 @@
 "use client";
 import { Card, Image, Stack, Text, Title } from "@mantine/core";
-import { StartButton } from "./component/StartButton";
+import { StartButton } from "./components/StartButton";
 
 export const TopContent: React.FC = () => {
   return (

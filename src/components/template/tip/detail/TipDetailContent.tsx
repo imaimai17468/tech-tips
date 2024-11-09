@@ -10,7 +10,7 @@ import { BookmarkIcon } from "@radix-ui/react-icons";
 import { Pencil1Icon } from "@radix-ui/react-icons";
 import dynamic from "next/dynamic";
 import Link from "next/link";
-import { ClipButton } from "./component/ClipButton";
+import { ClipButton } from "./components/ClipButton";
 
 const Editor = dynamic(() => import("@/components/parts/Editor").then((v) => v.Editor), {
   loading: () => <LoadingOverlay visible loaderProps={{ type: "bars" }} />,
