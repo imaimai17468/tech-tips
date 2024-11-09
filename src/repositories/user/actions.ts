@@ -1,11 +1,9 @@
 "use server";
 
-import { CLIENT_PATHS } from "@/constants/clientPaths";
 import type { ConformAction } from "@/types/conform";
 import { auth } from "@clerk/nextjs/server";
 import { parseWithZod } from "@conform-to/zod";
 import { PrismaClient } from "@prisma/client";
-import { redirect } from "next/navigation";
 import { UserValidator } from "./types";
 
 const prisma = new PrismaClient();
@@ -20,7 +18,7 @@ export const updateUserName = async (...[_prev, formData]: Parameters<ConformAct
 
   await prisma.user.update({ where: { id: userId }, data: submission.value });
 
-  redirect(CLIENT_PATHS.SETTINGS_PROFILE);
+  return submission.reply();
 };
 
 export const updateUserBio = async (...[_prev, formData]: Parameters<ConformAction>): ReturnType<ConformAction> => {
@@ -33,7 +31,7 @@ export const updateUserBio = async (...[_prev, formData]: Parameters<ConformActi
 
   await prisma.user.update({ where: { id: userId }, data: submission.value });
 
-  redirect(CLIENT_PATHS.SETTINGS_PROFILE);
+  return submission.reply();
 };
 
 export const updateUserSNS = async (...[_prev, formData]: Parameters<ConformAction>): ReturnType<ConformAction> => {
@@ -51,7 +49,7 @@ export const updateUserSNS = async (...[_prev, formData]: Parameters<ConformActi
     data: submission.value,
   });
 
-  redirect(CLIENT_PATHS.SETTINGS_PROFILE);
+  return submission.reply();
 };
 
 export const getUser = async () => {
