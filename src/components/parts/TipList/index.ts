@@ -1,1 +1,0 @@
-export { TipList } from "./TipList";

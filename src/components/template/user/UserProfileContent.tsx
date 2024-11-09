@@ -1,4 +1,4 @@
-import { SNSButtons } from "@/components/parts/SNSButtons/SNSButtons";
+import { SNSButtons } from "@/components/parts/SNSButtons";
 import { TipList } from "@/components/parts/TipList";
 import { createMockTips } from "@/repositories/tips/mock";
 import { createMockUser } from "@/repositories/user/mock";

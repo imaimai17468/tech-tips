@@ -1,6 +1,6 @@
 "use client";
 
-import { AuthorCard } from "@/components/parts/authorCard";
+import { AuthorCard } from "@/components/parts/AuthorCard";
 import { CLIENT_PATHS } from "@/constants/clientPaths";
 import { createMockTip } from "@/repositories/tips/mock";
 import { replaceIDinPath } from "@/utils/replaceIDinPath";

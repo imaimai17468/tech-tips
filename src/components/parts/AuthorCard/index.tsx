@@ -1,6 +1,6 @@
 import type { User } from "@/repositories/user/types";
 import { Anchor, Avatar, Card, Flex, Stack, Text } from "@mantine/core";
-import { SNSButtons } from "../SNSButtons/SNSButtons";
+import { SNSButtons } from "../SNSButtons";
 
 type Props = {
   user: User;
