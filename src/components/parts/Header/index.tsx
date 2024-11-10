@@ -12,7 +12,17 @@ export const Header: React.FC = () => {
   const { user, isSignedIn } = useUser();
 
   return (
-    <Flex justify="space-between" align="center" py={8} px={24} mx={16} mt={16}>
+    <Flex
+      justify="space-between"
+      align="center"
+      py={8}
+      px={24}
+      mx={16}
+      mt={16}
+      pos="sticky"
+      top={0}
+      style={{ zIndex: 1000 }}
+    >
       <Anchor href={isSignedIn ? CLIENT_PATHS.TIP : CLIENT_PATHS.TOP} underline="never">
         <Logo />
       </Anchor>
