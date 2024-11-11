@@ -15,13 +15,17 @@ export const Header: React.FC = () => {
     <Flex
       justify="space-between"
       align="center"
-      py={8}
+      py={16}
       px={24}
-      mx={16}
-      mt={16}
       pos="sticky"
       top={0}
-      style={{ zIndex: 1000 }}
+      style={{
+        zIndex: 1000,
+        backdropFilter: "blur(4px)",
+        "@supports (backdrop-filter: blur(4px))": {
+          backgroundColor: "rgba(var(--background-color, 255, 255, 255), 0.6)",
+        },
+      }}
     >
       <Anchor href={isSignedIn ? CLIENT_PATHS.TIP : CLIENT_PATHS.TOP} underline="never">
         <Logo />
