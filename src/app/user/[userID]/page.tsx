@@ -11,16 +11,6 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   const params = await props.params;
   const user = await getUserByID(params.userID);
 
-  if (!user) {
-    return SeoComponent({
-      title: "User Tips | TechTips",
-      description: "ユーザーが投稿したtips一覧",
-      url: `${process.env.NEXT_PUBLIC_URL}/user/${params.userID}`,
-      imageUrl: "image/default_ogp.png",
-      noindex: true,
-    });
-  }
-
   return SeoComponent({
     title: `${user.username}'s Tips | TechTips`,
     description: `${user.username}さんの技術tips`,

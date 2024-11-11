@@ -1,7 +1,7 @@
 import { getTipsByAuthorID, getTipsByLoggedInUser } from "@/repositories/tips/actions";
 import { SimpleGrid } from "@mantine/core";
 import { Alert } from "@mantine/core";
-import { ExclamationTriangleIcon, InfoCircledIcon } from "@radix-ui/react-icons";
+import { InfoCircledIcon } from "@radix-ui/react-icons";
 import { TipCard } from "./components/TipCard";
 
 type Props = {
@@ -17,14 +17,6 @@ type Props = {
 
 export const TipList: React.FC<Props> = async ({ type }) => {
   const tips = type.user === "logged-in" ? await getTipsByLoggedInUser() : await getTipsByAuthorID(type.authorId);
-
-  if (!tips) {
-    return (
-      <Alert color="red" icon={<ExclamationTriangleIcon />} title="Failed to retrieve tips">
-        Failed to retrieve tips.
-      </Alert>
-    );
-  }
 
   if (tips.length === 0) {
     return (

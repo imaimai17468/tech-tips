@@ -1,18 +1,10 @@
 import { getTipsByLoggedInUser } from "@/repositories/tips/actions";
 import { Alert, Divider, Stack } from "@mantine/core";
-import { ExclamationTriangleIcon, InfoCircledIcon } from "@radix-ui/react-icons";
+import { InfoCircledIcon } from "@radix-ui/react-icons";
 import { TipItem } from "../TipItem";
 
 export const TipSettingsList: React.FC = async () => {
   const tips = await getTipsByLoggedInUser();
-
-  if (!tips) {
-    return (
-      <Alert color="red" icon={<ExclamationTriangleIcon />} title="Failed to retrieve tips">
-        Failed to retrieve tips.
-      </Alert>
-    );
-  }
 
   if (tips.length === 0) {
     return (
