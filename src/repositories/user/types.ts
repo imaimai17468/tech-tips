@@ -12,3 +12,6 @@ export const UserValidator = z
   .merge(BaseTypeValidator);
 
 export type User = z.infer<typeof UserValidator>;
+
+export const UserIDValidator = z.string().regex(/^user_[a-zA-Z0-9]{8,}$/);
+export type UserID = z.infer<typeof UserIDValidator>;
