@@ -1,7 +1,6 @@
 import { SNSButtons } from "@/components/parts/SNSButtons";
 import { getUserByID } from "@/repositories/user/actions";
-import { Alert, Card, Flex, Image, Stack, Text } from "@mantine/core";
-import { ExclamationTriangleIcon } from "@radix-ui/react-icons";
+import { Card, Flex, Image, Stack, Text } from "@mantine/core";
 
 type Props = {
   userID: string;
@@ -9,14 +8,6 @@ type Props = {
 
 export const UserProfileCard: React.FC<Props> = async ({ userID }) => {
   const user = await getUserByID(userID);
-
-  if (!user) {
-    return (
-      <Alert color="red" icon={<ExclamationTriangleIcon />} title="Failed to retrieve user information">
-        Failed to retrieve your user information.
-      </Alert>
-    );
-  }
 
   return (
     <Card radius="md" shadow="sm" p={32}>
