@@ -19,7 +19,7 @@ export const createInitialBaseType = (): BaseType => {
 
 export const createMockBaseType = (): BaseType => {
   return {
-    id: faker.string.uuid(),
+    id: faker.string.ulid(),
     createdAt: new Date(),
     updatedAt: new Date(),
   };

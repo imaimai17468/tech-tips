@@ -20,7 +20,7 @@
     "@clerk/nextjs": "^5.2.12",
     "@conform-to/react": "^1.2.2",
     "@conform-to/zod": "^1.2.2",
-    "@faker-js/faker": "^8.4.1",
+    "@faker-js/faker": "^9.2.0",
     "@mantine/core": "^7.8.0",
     "@mantine/form": "^7.13.4",
     "@mantine/hooks": "^7.8.0",
