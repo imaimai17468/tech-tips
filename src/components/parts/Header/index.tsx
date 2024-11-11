@@ -22,7 +22,7 @@ export const Header: React.FC = () => {
       style={{
         zIndex: 1000,
         backdropFilter: "blur(4px)",
-        "@supports (backdrop-filter: blur(4px))": {
+        "@supports (backdropFilter: blur(4px))": {
           backgroundColor: "rgba(var(--background-color, 255, 255, 255), 0.6)",
         },
       }}
