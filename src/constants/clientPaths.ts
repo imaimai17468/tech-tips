@@ -9,6 +9,7 @@ export const CLIENT_PATHS = {
   USER: "/user/[id]",
   SETTINGS_PROFILE: "/setting/profile",
   SETTINGS_TIPS: "/setting/tips",
+  NOT_FOUND: "/not-found",
 } as const;
 
 const createRegexPaths = (paths: readonly string[]) => {
