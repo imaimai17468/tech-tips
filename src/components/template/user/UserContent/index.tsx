@@ -13,7 +13,9 @@ export const UserContent: React.FC<Props> = async ({ userID }) => {
       <Suspense fallback={<Skeleton w="100%" h={200} />}>
         <UserProfileCard userID={userID} />
       </Suspense>
-      <TipList type={{ user: "public", authorId: userID }} />
+      <Suspense fallback={<Skeleton height={300} />}>
+        <TipList type={{ user: "public", authorId: userID }} />
+      </Suspense>
     </Stack>
   );
 };

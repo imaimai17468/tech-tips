@@ -1,7 +1,8 @@
 import { TipList } from "@/components/parts/TipList";
 import { CLIENT_PATHS } from "@/constants/clientPaths";
-import { Button, Flex, Stack, Title } from "@mantine/core";
+import { Button, Flex, Skeleton, Stack, Title } from "@mantine/core";
 import { ArrowRightIcon, PlusCircledIcon } from "@radix-ui/react-icons";
+import { Suspense } from "react";
 
 export const TipContent: React.FC = async () => {
   return (
@@ -23,7 +24,9 @@ export const TipContent: React.FC = async () => {
           Stocked Tips
         </Button>
       </Flex>
-      <TipList type={{ user: "logged-in" }} />
+      <Suspense fallback={<Skeleton height={300} />}>
+        <TipList type={{ user: "logged-in" }} />
+      </Suspense>
     </Stack>
   );
 };

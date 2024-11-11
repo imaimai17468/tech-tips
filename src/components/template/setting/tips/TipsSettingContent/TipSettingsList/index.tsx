@@ -3,7 +3,7 @@ import { Alert, Divider, Stack } from "@mantine/core";
 import { ExclamationTriangleIcon, InfoCircledIcon } from "@radix-ui/react-icons";
 import { TipItem } from "../TipItem";
 
-export const UserTipList: React.FC = async () => {
+export const TipSettingsList: React.FC = async () => {
   const tips = await getTipsByLoggedInUser();
 
   if (!tips) {
