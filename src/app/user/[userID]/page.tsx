@@ -1,6 +1,6 @@
 import SeoComponent from "@/components/layout/SeoComponent";
 import { UserContent } from "@/components/template/user/UserContent";
-import { createMockUser } from "@/repositories/user/mock";
+import { getUser } from "@/repositories/user/actions";
 import type { Metadata } from "next";
 
 type Props = {
@@ -9,8 +9,17 @@ type Props = {
 
 export async function generateMetadata(props: Props): Promise<Metadata> {
   const params = await props.params;
-  const id = params.userID;
-  const user = createMockUser({ id });
+  const user = await getUser();
+
+  if (!user) {
+    return SeoComponent({
+      title: "User Tips | TechTips",
+      description: "ユーザーが投稿したtips一覧",
+      url: `${process.env.NEXT_PUBLIC_URL}/user/${params.userID}`,
+      imageUrl: "image/default_ogp.png",
+      noindex: true,
+    });
+  }
 
   return SeoComponent({
     title: `${user.username}'s Tips | TechTips`,
