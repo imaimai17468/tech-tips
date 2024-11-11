@@ -22,3 +22,6 @@ export const TipFormValidator = TipValidator.pick({
 });
 
 export type TipForm = z.infer<typeof TipFormValidator>;
+
+export const TipIDValidator = z.string().ulid();
+export type TipID = z.infer<typeof TipIDValidator>;
