@@ -1,6 +1,6 @@
 import SeoComponent from "@/components/layout/SeoComponent";
 import { UserContent } from "@/components/template/user/UserContent";
-import { getUser } from "@/repositories/user/actions";
+import { getUserByID } from "@/repositories/user/actions";
 import type { Metadata } from "next";
 
 type Props = {
@@ -9,7 +9,7 @@ type Props = {
 
 export async function generateMetadata(props: Props): Promise<Metadata> {
   const params = await props.params;
-  const user = await getUser();
+  const user = await getUserByID(params.userID);
 
   if (!user) {
     return SeoComponent({
@@ -30,6 +30,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   });
 }
 
-export default function Home() {
-  return <UserContent />;
+export default async function Home(props: Props) {
+  const params = await props.params;
+  return <UserContent userID={params.userID} />;
 }

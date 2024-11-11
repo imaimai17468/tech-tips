@@ -1,10 +1,14 @@
 import { SNSButtons } from "@/components/parts/SNSButtons";
-import { getUser } from "@/repositories/user/actions";
+import { getUserByID } from "@/repositories/user/actions";
 import { Alert, Card, Flex, Image, Stack, Text } from "@mantine/core";
 import { ExclamationTriangleIcon } from "@radix-ui/react-icons";
 
-export const UserProfileCard: React.FC = async () => {
-  const user = await getUser();
+type Props = {
+  userID: string;
+};
+
+export const UserProfileCard: React.FC<Props> = async ({ userID }) => {
+  const user = await getUserByID(userID);
 
   if (!user) {
     return (
