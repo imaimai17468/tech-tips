@@ -1,4 +1,4 @@
-import { getTipsByLoggedInUser } from "@/repositories/tips/actions";
+import { getTipsByLoggedInUser } from "@/repositories/tips/actions/get";
 import { Alert, Divider, Stack } from "@mantine/core";
 import { InfoCircledIcon } from "@radix-ui/react-icons";
 import { TipItem } from "../TipItem";

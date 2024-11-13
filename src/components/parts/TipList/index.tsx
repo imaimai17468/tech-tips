@@ -1,4 +1,4 @@
-import { getTipsByAuthorID, getTipsByLoggedInUser } from "@/repositories/tips/actions";
+import { getTipsByAuthorID, getTipsByLoggedInUser } from "@/repositories/tips/actions/get";
 import { SimpleGrid } from "@mantine/core";
 import { Alert } from "@mantine/core";
 import { InfoCircledIcon } from "@radix-ui/react-icons";
