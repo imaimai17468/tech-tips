@@ -14,7 +14,10 @@ export const getTipByID = async (tipID: string) => {
     return redirect(CLIENT_PATHS.BAD_REQUEST);
   }
 
-  const tipResponse = await prisma.tip.findUnique({ where: { id: parsedId.data } });
+  const tipResponse = await prisma.tip.findUnique({
+    where: { id: parsedId.data },
+    include: { author: true },
+  });
 
   if (!tipResponse) {
     return redirect(CLIENT_PATHS.NOT_FOUND);
@@ -36,11 +39,10 @@ export const getTipsByAuthorID = async (authorID: string) => {
     return redirect(CLIENT_PATHS.BAD_REQUEST);
   }
 
-  const tipsResponse = await prisma.tip.findMany({ where: { authorId: parsedId.data } });
-
-  if (!tipsResponse) {
-    return redirect(CLIENT_PATHS.NOT_FOUND);
-  }
+  const tipsResponse = await prisma.tip.findMany({
+    where: { authorId: parsedId.data },
+    include: { author: true },
+  });
 
   const parsed = TipValidator.array().safeParse(tipsResponse);
 
