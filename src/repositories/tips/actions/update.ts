@@ -9,7 +9,7 @@ import { redirect } from "next/navigation";
 import { TipIDValidator, TipValidator } from "../types";
 
 export const updateTip = async (...[_prev, formData]: Parameters<ConformAction>): ReturnType<ConformAction> => {
-  const { userId } = auth();
+  const { userId } = await auth();
 
   if (!userId) {
     return redirect(CLIENT_PATHS.UNAUTHORIZED);

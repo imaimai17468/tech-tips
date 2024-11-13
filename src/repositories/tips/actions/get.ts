@@ -54,7 +54,7 @@ export const getTipsByAuthorID = async (authorID: string) => {
 };
 
 export const getTipsByLoggedInUser = async () => {
-  const { userId } = auth();
+  const { userId } = await auth();
 
   if (!userId) {
     return redirect(CLIENT_PATHS.UNAUTHORIZED);
