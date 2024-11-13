@@ -1,32 +1,18 @@
 import { faker } from "@faker-js/faker";
-import { createMockBaseType } from "../baseType";
 import { createMockUser } from "../user/mock";
 import { MOCK_CONTENT } from "./data";
-import type { Tip, TipForm } from "./types";
+import type { Tip } from "./types";
 
-export const createInitialTipForm = (): TipForm => {
+export const createMockTip = (defaultTip?: Partial<Tip>): Tip => {
   return {
-    title: "",
-    isPublic: false,
-    content: undefined,
-    tags: undefined,
-  };
-};
-
-export const createMockTipForm = (): TipForm => {
-  return {
+    id: faker.string.ulid(),
+    createdAt: new Date(),
+    updatedAt: new Date(),
     title: faker.lorem.sentence(),
     isPublic: faker.datatype.boolean({ probability: 0.5 }),
     content: MOCK_CONTENT,
     tags: Array.from({ length: faker.number.int({ min: 1, max: 5 }) }, () => faker.lorem.word()),
-  };
-};
-
-export const createMockTip = (defaultTip?: Partial<Tip>): Tip => {
-  return {
-    ...createMockTipForm(),
     author: createMockUser(),
-    ...createMockBaseType(),
     ...defaultTip,
   };
 };
