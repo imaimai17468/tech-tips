@@ -16,7 +16,7 @@ export const updateTip = async (...[_prev, formData]: Parameters<ConformAction>)
   }
 
   const submission = parseWithZod(formData, {
-    schema: TipValidator.pick({ id: true, title: true, content: true, isPublic: true }),
+    schema: TipValidator.pick({ id: true, title: true, content: true, tags: true, isPublic: true }),
   });
 
   if (submission.status !== "success") {
