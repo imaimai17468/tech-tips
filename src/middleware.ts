@@ -4,8 +4,12 @@ import { AUTH_REQUIRED_PATHS_REGEX } from "./constants/clientPaths";
 
 const isProtectedRoute = createRouteMatcher(AUTH_REQUIRED_PATHS_REGEX);
 
-export default clerkMiddleware((auth, req) => {
-  if (isProtectedRoute(req)) auth().protect();
+export default clerkMiddleware(async (auth, req) => {
+  const { userId, redirectToSignIn } = await auth();
+
+  if (!userId && isProtectedRoute(req)) {
+    return redirectToSignIn();
+  }
 });
 
 export const config = {
