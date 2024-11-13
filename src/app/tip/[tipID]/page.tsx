@@ -21,6 +21,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   });
 }
 
-export default function Home() {
-  return <TipDetailContent />;
+export default async function Home(props: Props) {
+  const params = await props.params;
+  return <TipDetailContent tipID={params.tipID} />;
 }
