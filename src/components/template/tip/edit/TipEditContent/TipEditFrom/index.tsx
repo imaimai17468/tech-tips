@@ -47,14 +47,14 @@ export const TipEditForm: React.FC<Props> = ({ initialValues }) => {
       notifications.show({
         color: "green",
         title: "Success",
-        message: "Bio updated",
+        message: "Tip updated",
       });
       router.push(CLIENT_PATHS.TIP);
     } else if (lastResult?.status === "error") {
       notifications.show({
         color: "red",
         title: "Error",
-        message: "Failed to update Bio",
+        message: "Failed to update Tip",
       });
     }
   }, [lastResult, router.push]);
