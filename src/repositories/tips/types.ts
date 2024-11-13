@@ -14,14 +14,5 @@ export const TipValidator = z
 
 export type Tip = z.infer<typeof TipValidator>;
 
-export const TipFormValidator = TipValidator.pick({
-  title: true,
-  content: true,
-  tags: true,
-  isPublic: true,
-});
-
-export type TipForm = z.infer<typeof TipFormValidator>;
-
 export const TipIDValidator = z.string().ulid();
 export type TipID = z.infer<typeof TipIDValidator>;
