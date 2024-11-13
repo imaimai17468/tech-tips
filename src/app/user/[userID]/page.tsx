@@ -1,6 +1,6 @@
 import SeoComponent from "@/components/layout/SeoComponent";
 import { UserContent } from "@/components/template/user/UserContent";
-import { getUserByID } from "@/repositories/user/actions";
+import { getUserByID } from "@/repositories/user/actions/get";
 import type { Metadata } from "next";
 
 type Props = {

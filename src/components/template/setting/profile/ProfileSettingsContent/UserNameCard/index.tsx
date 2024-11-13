@@ -1,7 +1,7 @@
 "use client";
 
 import { CLIENT_PATHS } from "@/constants/clientPaths";
-import { updateUserName } from "@/repositories/user/actions";
+import { updateUserName } from "@/repositories/user/actions/update";
 import type { User } from "@/repositories/user/types";
 import { UserValidator } from "@/repositories/user/types";
 import { useForm } from "@conform-to/react";

@@ -1,4 +1,4 @@
-import { getUserByLoggedIn } from "@/repositories/user/actions";
+import { getUserByLoggedIn } from "@/repositories/user/actions/get";
 import { BioCard } from "./BioCard";
 import { SNSCard } from "./SNSCard";
 import { UserNameCard } from "./UserNameCard";

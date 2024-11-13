@@ -1,5 +1,5 @@
 import { SNSButtons } from "@/components/parts/SNSButtons";
-import { getUserByID } from "@/repositories/user/actions";
+import { getUserByID } from "@/repositories/user/actions/get";
 import { Card, Flex, Image, Stack, Text } from "@mantine/core";
 
 type Props = {

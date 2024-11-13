@@ -6,7 +6,7 @@ import type { ConformAction } from "@/types/conform";
 import { auth } from "@clerk/nextjs/server";
 import { parseWithZod } from "@conform-to/zod";
 import { redirect } from "next/navigation";
-import { UserIDValidator, UserValidator } from "./types";
+import { UserValidator } from "../types";
 
 export const updateUserName = async (...[_prev, formData]: Parameters<ConformAction>): ReturnType<ConformAction> => {
   const { userId } = await auth();
@@ -75,48 +75,4 @@ export const updateUserSNS = async (...[_prev, formData]: Parameters<ConformActi
   });
 
   return submission.reply();
-};
-
-export const getUserByLoggedIn = async () => {
-  const { userId } = await auth();
-
-  if (!userId) {
-    return redirect(CLIENT_PATHS.UNAUTHORIZED);
-  }
-
-  const userResponse = await prisma.user.findUnique({ where: { id: userId } });
-
-  if (!userResponse) {
-    return redirect(CLIENT_PATHS.NOT_FOUND);
-  }
-
-  const parsed = UserValidator.safeParse(userResponse);
-
-  if (!parsed.success) {
-    return redirect(CLIENT_PATHS.BAD_REQUEST);
-  }
-
-  return parsed.data;
-};
-
-export const getUserByID = async (userID: string) => {
-  const parsedId = UserIDValidator.safeParse(userID);
-
-  if (!parsedId.success) {
-    return redirect(CLIENT_PATHS.BAD_REQUEST);
-  }
-
-  const userResponse = await prisma.user.findUnique({ where: { id: parsedId.data } });
-
-  if (!userResponse) {
-    return redirect(CLIENT_PATHS.NOT_FOUND);
-  }
-
-  const parsed = UserValidator.safeParse(userResponse);
-
-  if (!parsed.success) {
-    return redirect(CLIENT_PATHS.BAD_REQUEST);
-  }
-
-  return parsed.data;
 };
