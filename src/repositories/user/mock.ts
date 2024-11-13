@@ -4,10 +4,10 @@ import type { User } from "./types";
 
 export const createMockUser = (user?: Partial<User>): User => {
   return {
-    username: faker.internet.userName(),
+    username: faker.internet.username(),
     bio: faker.lorem.paragraph(),
-    twitterUsername: faker.internet.userName(),
-    githubUsername: faker.internet.userName(),
+    twitterUsername: faker.internet.username(),
+    githubUsername: faker.internet.username(),
     userImageURL: faker.image.avatar(),
     ...createMockBaseType(),
     ...user,
