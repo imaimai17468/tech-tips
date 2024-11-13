@@ -17,7 +17,7 @@
     "@blocknote/core": "^0.18.0",
     "@blocknote/mantine": "^0.18.1",
     "@blocknote/react": "^0.18.1",
-    "@clerk/nextjs": "^5.2.12",
+    "@clerk/nextjs": "^6.3.2",
     "@conform-to/react": "^1.2.2",
     "@conform-to/zod": "^1.2.2",
     "@faker-js/faker": "^9.2.0",
