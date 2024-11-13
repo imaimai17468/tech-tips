@@ -2,9 +2,9 @@
 
 import { CLIENT_PATHS } from "@/constants/clientPaths";
 import { prisma } from "@/libs/prisma";
+import { UserValidator } from "@/repositories/user/types";
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
-import { UserIDValidator } from "../../user/types";
 import { TipIDValidator, TipValidator } from "../types";
 
 export const getTipByID = async (tipID: string) => {
@@ -33,7 +33,7 @@ export const getTipByID = async (tipID: string) => {
 };
 
 export const getTipsByAuthorID = async (authorID: string) => {
-  const parsedId = UserIDValidator.safeParse(authorID);
+  const parsedId = UserValidator.shape.id.safeParse(authorID);
 
   if (!parsedId.success) {
     return redirect(CLIENT_PATHS.BAD_REQUEST);

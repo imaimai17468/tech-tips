@@ -4,7 +4,7 @@ import { CLIENT_PATHS } from "@/constants/clientPaths";
 import { prisma } from "@/libs/prisma";
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
-import { UserIDValidator, UserValidator } from "../types";
+import { UserValidator } from "../types";
 
 export const getUserByLoggedIn = async () => {
   const { userId } = await auth();
@@ -29,7 +29,7 @@ export const getUserByLoggedIn = async () => {
 };
 
 export const getUserByID = async (userID: string) => {
-  const parsedId = UserIDValidator.safeParse(userID);
+  const parsedId = UserValidator.shape.id.safeParse(userID);
 
   if (!parsedId.success) {
     return redirect(CLIENT_PATHS.BAD_REQUEST);
