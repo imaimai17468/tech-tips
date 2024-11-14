@@ -4,6 +4,7 @@ import { CLIENT_PATHS } from "@/constants/clientPaths";
 import { createTip } from "@/repositories/tips/actions/create";
 import { updateTip } from "@/repositories/tips/actions/update";
 import { TipValidator } from "@/repositories/tips/types";
+import type { Tip } from "@/repositories/tips/types";
 import { useForm, useInputControl } from "@conform-to/react";
 import { parseWithZod } from "@conform-to/zod";
 import { Box, Button, Card, Divider, Flex, LoadingOverlay, Stack, Switch, TagsInput, TextInput } from "@mantine/core";
@@ -13,7 +14,6 @@ import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
 import { useActionState, useEffect } from "react";
 import { ulid } from "ulidx";
-import type { Tip } from "../../../../../../repositories/tips/types";
 
 const Editor = dynamic(() => import("@/components/parts/Editor").then((v) => v.Editor), {
   loading: () => <LoadingOverlay visible loaderProps={{ type: "bars" }} />,
@@ -30,19 +30,18 @@ export const TipEditForm: React.FC<Props> = ({ initialValues }) => {
   const [form, fields] = useForm({
     lastResult,
     onValidate({ formData }) {
-      const result = parseWithZod(formData, {
+      return parseWithZod(formData, {
         schema: TipValidator.pick({ id: true, title: true, tags: true, content: true, isPublic: true }),
       });
-      return result;
     },
     defaultValue: initialValues ?? {
       id: ulid(),
-      isPublic: false,
     },
     shouldValidate: "onBlur",
     shouldRevalidate: "onInput",
   });
   const contentControl = useInputControl(fields.content);
+  const tagsControl = useInputControl(fields.tags);
 
   useEffect(() => {
     if (lastResult?.status === "success") {
@@ -64,7 +63,7 @@ export const TipEditForm: React.FC<Props> = ({ initialValues }) => {
   return (
     <Box w="100%">
       <form id={form.id} onSubmit={form.onSubmit} action={action} noValidate>
-        <input type="hidden" name={fields.id.name} value={fields.id.initialValue} />
+        <input type="hidden" key={fields.id.key} name={fields.id.name} defaultValue={fields.id.initialValue} />
         <Stack gap={32}>
           <Stack>
             <Flex justify="end" align="center" gap={16}>
@@ -72,7 +71,7 @@ export const TipEditForm: React.FC<Props> = ({ initialValues }) => {
                 label="Public"
                 key={fields.isPublic.key}
                 name={fields.isPublic.name}
-                defaultValue={fields.isPublic.initialValue}
+                defaultChecked={fields.isPublic.initialValue === "on"}
                 error={fields.isPublic.errors?.join(", ")}
               />
               <Button
@@ -99,14 +98,18 @@ export const TipEditForm: React.FC<Props> = ({ initialValues }) => {
                   variant="default"
                   label="Tags"
                   description="Press Enter to submit a tag"
-                  key={fields.tags.key}
-                  name={fields.tags.name}
-                  defaultValue={fields.tags.initialValue as string[]}
+                  onChange={tagsControl.change}
+                  defaultValue={tagsControl.value as string[]}
                   error={fields.tags.errors?.join(", ")}
                 />
                 <Divider />
                 <Box mih="50vh" pl={54}>
-                  <Editor onChange={contentControl.change} defaultValue={contentControl.value} editable={!isPending} />
+                  <Editor
+                    onChange={contentControl.change}
+                    key={fields.content.key}
+                    defaultValue={contentControl.value}
+                    editable={!isPending}
+                  />
                 </Box>
               </Stack>
             </Card>
