@@ -6,10 +6,10 @@ export const TipValidator = z.object({
   createdAt: z.date(),
   updatedAt: z.date(),
   title: z.string().min(1),
-  content: z.string().optional(),
+  content: z.string().optional().nullable(),
   tags: z.array(z.string()).max(5).optional(),
   author: UserValidator,
-  isPublic: z.boolean(),
+  isPublic: z.boolean().optional(),
 });
 
 export type Tip = z.infer<typeof TipValidator>;
