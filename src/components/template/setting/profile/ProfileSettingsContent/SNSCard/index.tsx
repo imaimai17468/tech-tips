@@ -21,10 +21,9 @@ export const SNSCard: React.FC<Props> = ({ user }) => {
   const [form, fields] = useForm({
     lastResult,
     onValidate({ formData }) {
-      const result = parseWithZod(formData, {
+      return parseWithZod(formData, {
         schema: UserValidator.pick({ twitterUsername: true, githubUsername: true }),
       });
-      return result;
     },
     defaultValue: user,
     shouldValidate: "onBlur",

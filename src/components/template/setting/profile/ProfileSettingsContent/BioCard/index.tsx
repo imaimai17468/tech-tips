@@ -21,8 +21,7 @@ export const BioCard: React.FC<Props> = ({ user }) => {
   const [form, fields] = useForm({
     lastResult,
     onValidate({ formData }) {
-      const result = parseWithZod(formData, { schema: UserValidator.pick({ bio: true }) });
-      return result;
+      return parseWithZod(formData, { schema: UserValidator.pick({ bio: true }) });
     },
     defaultValue: user,
     shouldValidate: "onBlur",

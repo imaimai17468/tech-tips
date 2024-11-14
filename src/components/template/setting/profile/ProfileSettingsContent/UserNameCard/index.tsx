@@ -21,8 +21,7 @@ export const UserNameCard: React.FC<Props> = ({ user }) => {
   const [form, fields] = useForm({
     lastResult,
     onValidate({ formData }) {
-      const result = parseWithZod(formData, { schema: UserValidator.pick({ username: true }) });
-      return result;
+      return parseWithZod(formData, { schema: UserValidator.pick({ username: true }) });
     },
     defaultValue: user,
     shouldValidate: "onBlur",

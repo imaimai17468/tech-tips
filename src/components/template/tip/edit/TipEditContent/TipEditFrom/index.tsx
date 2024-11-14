@@ -12,6 +12,7 @@ import { PaperPlaneIcon } from "@radix-ui/react-icons";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
 import { useActionState, useEffect } from "react";
+import { ulid } from "ulidx";
 import type { Tip } from "../../../../../../repositories/tips/types";
 
 const Editor = dynamic(() => import("@/components/parts/Editor").then((v) => v.Editor), {
@@ -30,11 +31,12 @@ export const TipEditForm: React.FC<Props> = ({ initialValues }) => {
     lastResult,
     onValidate({ formData }) {
       const result = parseWithZod(formData, {
-        schema: TipValidator.pick({ title: true, tags: true, content: true, isPublic: true }),
+        schema: TipValidator.pick({ id: true, title: true, tags: true, content: true, isPublic: true }),
       });
       return result;
     },
     defaultValue: initialValues ?? {
+      id: ulid(),
       isPublic: false,
     },
     shouldValidate: "onBlur",
@@ -62,6 +64,7 @@ export const TipEditForm: React.FC<Props> = ({ initialValues }) => {
   return (
     <Box w="100%">
       <form id={form.id} onSubmit={form.onSubmit} action={action} noValidate>
+        <input type="hidden" name={fields.id.name} value={fields.id.initialValue} />
         <Stack gap={32}>
           <Stack>
             <Flex justify="end" align="center" gap={16}>
