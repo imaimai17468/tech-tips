@@ -29,7 +29,13 @@ export const updateTip = async (...[_prev, formData]: Parameters<ConformAction>)
     return submission.reply();
   }
 
-  await prisma.tip.update({ where: { id: parsedId.data }, data: submission.value });
+  await prisma.tip.update({
+    where: { id: parsedId.data },
+    data: {
+      ...submission.value,
+      isPublic: submission.value.isPublic ?? false,
+    },
+  });
 
   return submission.reply();
 };
