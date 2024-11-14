@@ -16,14 +16,16 @@ export const createTip = async (...[_prev, formData]: Parameters<ConformAction>)
   }
 
   const submission = parseWithZod(formData, {
-    schema: TipValidator.pick({ title: true, content: true, tags: true, isPublic: true }),
+    schema: TipValidator.pick({ id: true, title: true, content: true, tags: true, isPublic: true }),
   });
 
   if (submission.status !== "success") {
     return submission.reply();
   }
 
-  await prisma.tip.create({ data: { ...submission.value, authorId: userId } });
+  await prisma.tip.create({
+    data: { ...submission.value, authorId: userId, isPublic: submission.value.isPublic ?? false },
+  });
 
   return submission.reply();
 };
