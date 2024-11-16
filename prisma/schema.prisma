@@ -18,6 +18,7 @@ model User {
   githubUsername  String?  @db.VarChar(255)
   userImageURL    String?  @db.VarChar(255)
   tips            Tip[]
+  stocks          Stock[]
 }
 
 model Tip {
@@ -30,4 +31,16 @@ model Tip {
   isPublic  Boolean
   authorId  String
   author    User     @relation(fields: [authorId], references: [id])
+  stocks    Stock[]
+}
+
+model Stock {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  userId    String
+  tipId     String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tip       Tip      @relation(fields: [tipId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, tipId])
 }
