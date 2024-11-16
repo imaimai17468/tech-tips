@@ -1,6 +1,6 @@
 import SeoComponent from "@/components/layout/SeoComponent";
 import { TipEditContent } from "@/components/template/tip/edit/TipEditContent";
-import { createMockTip } from "@/repositories/tips/mock";
+import { getTipByID } from "@/repositories/tips/actions/get";
 import type { Metadata } from "next";
 
 type Props = {
@@ -10,7 +10,7 @@ type Props = {
 export async function generateMetadata(props: Props): Promise<Metadata> {
   const params = await props.params;
   const id = params.tipID;
-  const tip = createMockTip({ id });
+  const tip = await getTipByID(id);
 
   return SeoComponent({
     title: `編集中 | ${tip.title} | TechTips`,
