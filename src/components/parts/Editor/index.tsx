@@ -25,7 +25,7 @@ const darkTheme = {
 
 type props = {
   onChange?: (value: string) => void;
-  defaultValue?: string;
+  defaultValue: string | undefined | null;
   editable?: boolean;
 };
 

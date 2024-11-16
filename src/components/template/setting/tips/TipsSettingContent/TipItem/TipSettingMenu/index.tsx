@@ -17,7 +17,7 @@ const HTMLDownloader = dynamic(() => import("./HTMLDownloader").then((mod) => mo
 
 type Props = {
   tipID: string;
-  tipContent?: string;
+  tipContent: string | undefined | null;
 };
 
 export const TipSettingMenu: React.FC<Props> = ({ tipID, tipContent }) => {
