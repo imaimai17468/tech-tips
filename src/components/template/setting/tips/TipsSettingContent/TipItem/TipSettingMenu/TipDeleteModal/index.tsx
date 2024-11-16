@@ -1,3 +1,4 @@
+import { deleteTipByID } from "@/repositories/tips/actions/delete";
 import { Alert, Button, Modal, Stack, Text } from "@mantine/core";
 import { ExclamationTriangleIcon, TrashIcon } from "@radix-ui/react-icons";
 
@@ -8,8 +9,8 @@ type Props = {
 };
 
 export const TipDeleteModal: React.FC<Props> = ({ opened, close, tipID }) => {
-  const handleDelete = () => {
-    console.log("Delete tip with ID:", tipID);
+  const handleDelete = async () => {
+    await deleteTipByID(tipID);
     close();
   };
 
