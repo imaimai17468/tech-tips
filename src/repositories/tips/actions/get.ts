@@ -42,6 +42,7 @@ export const getTipsByAuthorID = async (authorID: string) => {
   const tipsResponse = await prisma.tip.findMany({
     where: { authorId: parsedId.data },
     include: { author: true },
+    orderBy: { createdAt: "desc" },
   });
 
   const parsed = TipValidator.array().safeParse(tipsResponse);
