@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { StockValidator } from "../stock/types";
 import { UserValidator } from "../user/types";
 
 export const TipValidator = z.object({
@@ -10,6 +11,7 @@ export const TipValidator = z.object({
   tags: z.array(z.string()).max(5).optional(),
   author: UserValidator,
   isPublic: z.boolean().optional(),
+  stocks: z.array(StockValidator).optional(),
 });
 
 export type Tip = z.infer<typeof TipValidator>;
