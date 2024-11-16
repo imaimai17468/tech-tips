@@ -3,11 +3,11 @@ import { CLIENT_PATHS } from "@/constants/clientPaths";
 import { getTipByID } from "@/repositories/tips/actions/get";
 import { replaceIDinPath } from "@/utils/replaceIDinPath";
 import { auth } from "@clerk/nextjs/server";
-import { ActionIcon, Button, Flex, Stack } from "@mantine/core";
-import { BookmarkIcon } from "@radix-ui/react-icons";
+import { Button, Flex, Stack } from "@mantine/core";
 import { Pencil1Icon } from "@radix-ui/react-icons";
 import Link from "next/link";
 import { ClipButton } from "./ClipButton";
+import { StockButton } from "./StockButton";
 import { TipArticleContent } from "./TipArticleContent";
 
 type Props = {
@@ -17,6 +17,7 @@ type Props = {
 export const TipDetailContent: React.FC<Props> = async ({ tipID }) => {
   const tip = await getTipByID(tipID);
   const { userId } = await auth();
+  const isStocked = tip.stocks?.some((stock) => stock.userId === userId) ?? false;
 
   return (
     <Flex gap={32} direction={{ base: "column", md: "row" }}>
@@ -37,9 +38,7 @@ export const TipDetailContent: React.FC<Props> = async ({ tipID }) => {
       </Stack>
       <Stack>
         <Flex gap={8}>
-          <ActionIcon radius="xl" variant="light" color="pink">
-            <BookmarkIcon />
-          </ActionIcon>
+          <StockButton tipId={tip.id} isStocked={isStocked} />
           <ClipButton />
         </Flex>
         <AuthorCard user={tip.author} />
