@@ -16,7 +16,7 @@ export const AuthorCard: React.FC<Props> = ({ user }) => {
             {user.username}
           </Anchor>
         </Flex>
-        <Text>{user.bio}</Text>
+        <Text style={{ whiteSpace: "pre-line" }}>{user.bio}</Text>
         {(user.githubUsername || user.twitterUsername) && (
           <SNSButtons githubUsername={user.githubUsername} twitterUsername={user.twitterUsername} />
         )}

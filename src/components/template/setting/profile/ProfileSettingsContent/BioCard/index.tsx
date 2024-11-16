@@ -84,7 +84,9 @@ export const BioCard: React.FC<Props> = ({ user }) => {
           </form>
         ) : (
           <Stack>
-            <Text c="gray">{user.bio}</Text>
+            <Text c="gray" style={{ whiteSpace: "pre-line" }}>
+              {user.bio}
+            </Text>
             <Button variant="light" w="fit-content" onClick={() => setIsEdit(true)}>
               Edit Bio
             </Button>

@@ -17,7 +17,7 @@ export const UserProfileCard: React.FC<Props> = async ({ userID }) => {
           <Text size="xl" fw="bold">
             {user.username}
           </Text>
-          <Text>{user.bio}</Text>
+          <Text style={{ whiteSpace: "pre-line" }}>{user.bio}</Text>
           <SNSButtons githubUsername={user.githubUsername} twitterUsername={user.twitterUsername} />
         </Stack>
       </Flex>
