@@ -5,10 +5,10 @@ import { prisma } from "@/libs/prisma";
 import { UserValidator } from "@/repositories/user/types";
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
-import { TipIDValidator, TipValidator } from "../types";
+import { TipValidator } from "../types";
 
 export const getTipByID = async (tipID: string) => {
-  const parsedId = TipIDValidator.safeParse(tipID);
+  const parsedId = TipValidator.shape.id.safeParse(tipID);
 
   if (!parsedId.success) {
     return redirect(CLIENT_PATHS.BAD_REQUEST);

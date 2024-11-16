@@ -6,7 +6,7 @@ import type { ConformAction } from "@/types/conform";
 import { auth } from "@clerk/nextjs/server";
 import { parseWithZod } from "@conform-to/zod";
 import { redirect } from "next/navigation";
-import { TipIDValidator, TipValidator } from "../types";
+import { TipValidator } from "../types";
 
 export const updateTip = async (...[_prev, formData]: Parameters<ConformAction>): ReturnType<ConformAction> => {
   const { userId } = await auth();
@@ -23,14 +23,8 @@ export const updateTip = async (...[_prev, formData]: Parameters<ConformAction>)
     return submission.reply();
   }
 
-  const parsedId = TipIDValidator.safeParse(submission.value.id);
-
-  if (!parsedId.success) {
-    return submission.reply();
-  }
-
   await prisma.tip.update({
-    where: { id: parsedId.data },
+    where: { id: submission.value.id },
     data: {
       ...submission.value,
       isPublic: submission.value.isPublic ?? false,

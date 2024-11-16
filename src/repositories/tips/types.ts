@@ -13,6 +13,3 @@ export const TipValidator = z.object({
 });
 
 export type Tip = z.infer<typeof TipValidator>;
-
-export const TipIDValidator = z.string().ulid();
-export type TipID = z.infer<typeof TipIDValidator>;
