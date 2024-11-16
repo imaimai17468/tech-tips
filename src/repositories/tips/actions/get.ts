@@ -16,7 +16,7 @@ export const getTipByID = async (tipID: string) => {
 
   const tipResponse = await prisma.tip.findUnique({
     where: { id: parsedId.data },
-    include: { author: true },
+    include: { author: true, stocks: true },
   });
 
   if (!tipResponse) {
