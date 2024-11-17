@@ -5,6 +5,7 @@ import { createTip } from "@/repositories/tips/actions/create";
 import { updateTip } from "@/repositories/tips/actions/update";
 import { TipValidator } from "@/repositories/tips/types";
 import type { Tip } from "@/repositories/tips/types";
+import { replaceIDinPath } from "@/utils/replaceIDinPath";
 import { useForm, useInputControl } from "@conform-to/react";
 import { parseWithZod } from "@conform-to/zod";
 import { Box, Button, Card, Divider, Flex, LoadingOverlay, Stack, Switch, TagsInput, TextInput } from "@mantine/core";
@@ -50,7 +51,12 @@ export const TipEditForm: React.FC<Props> = ({ initialValues }) => {
         title: "Success",
         message: "Tip updated",
       });
-      router.push(CLIENT_PATHS.TIP);
+
+      if (initialValues) {
+        router.push(replaceIDinPath(CLIENT_PATHS.TIP_DETAIL, initialValues.id));
+      } else {
+        router.push(CLIENT_PATHS.TIP);
+      }
     } else if (lastResult?.status === "error") {
       notifications.show({
         color: "red",
