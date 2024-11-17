@@ -1,7 +1,6 @@
 export const CLIENT_PATHS = {
   TOP: "/",
   STOCK: "/stock",
-  EXPLORE: "/explore",
   TIP: "/tip",
   TIP_DETAIL: "/tip/[id]",
   TIP_CREATE: "/tip/create",
@@ -20,7 +19,6 @@ const createRegexPaths = (paths: readonly string[]) => {
 
 export const AUTH_REQUIRED_PATHS_REGEX = createRegexPaths([
   CLIENT_PATHS.STOCK,
-  CLIENT_PATHS.EXPLORE,
   CLIENT_PATHS.TIP,
   CLIENT_PATHS.TIP_CREATE,
   CLIENT_PATHS.TIP_EDIT,
