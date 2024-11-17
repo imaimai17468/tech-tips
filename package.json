@@ -10,7 +10,8 @@
     "check:type": "tsc --noEmit",
     "format": "biome format --write src",
     "init:lefthook": "lefthook install",
-    "migrate": "dotenv -e .env.development.local -- bunx prisma migrate dev --name",
+    "migrate": "dotenv -e .env.development.local -- bunx prisma migrate dev",
+    "migrate:name": "dotenv -e .env.development.local -- bunx prisma migrate dev --name",
     "postinstall": "prisma generate"
   },
   "dependencies": {
