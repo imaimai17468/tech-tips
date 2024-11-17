@@ -1,3 +1,4 @@
+import { getStocksByLoggedInUser } from "@/repositories/stock/actions/get";
 import { getTipsByAuthorID, getTipsByLoggedInUser } from "@/repositories/tips/actions/get";
 import { SimpleGrid } from "@mantine/core";
 import { Alert } from "@mantine/core";
@@ -12,16 +13,24 @@ type Props = {
     | {
         user: "public";
         authorId: string;
+      }
+    | {
+        user: "stocked";
       };
 };
 
 export const TipList: React.FC<Props> = async ({ type }) => {
-  const tips = type.user === "logged-in" ? await getTipsByLoggedInUser() : await getTipsByAuthorID(type.authorId);
+  const tips =
+    type.user === "logged-in"
+      ? await getTipsByLoggedInUser()
+      : type.user === "public"
+        ? await getTipsByAuthorID(type.authorId)
+        : await getStocksByLoggedInUser();
 
   if (tips.length === 0) {
     return (
-      <Alert color="gray" icon={<InfoCircledIcon />} title="No tips found">
-        Try writing some tips!
+      <Alert color="gray" icon={<InfoCircledIcon />} title={type.user === "stocked" ? "No stocked tips" : "No tips"}>
+        {type.user === "stocked" ? "Try stocking some interesting articles!" : "Try writing some tips!"}
       </Alert>
     );
   }
