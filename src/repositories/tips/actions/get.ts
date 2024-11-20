@@ -7,7 +7,7 @@ import { UserValidator } from "@/repositories/user/types";
 import { auth } from "@clerk/nextjs/server";
 import { desc, eq } from "drizzle-orm";
 import { redirect } from "next/navigation";
-import { TipValidator } from "../types";
+import { type Tip, TipValidator } from "../types";
 
 export const getTipByID = async (tipID: string) => {
   const parsedId = TipValidator.shape.id.safeParse(tipID);
@@ -20,13 +20,26 @@ export const getTipByID = async (tipID: string) => {
     .select()
     .from(tips)
     .where(eq(tips.id, parsedId.data))
-    .innerJoin(users, eq(tips.authorId, users.id));
+    .innerJoin(users, eq(tips.authorId, users.id))
+    .then((res) => res[0]);
 
   if (!tipResponse) {
     return redirect(CLIENT_PATHS.NOT_FOUND);
   }
 
-  const parsed = TipValidator.safeParse(tipResponse);
+  const { authorId, ...tipWithoutAuthorId } = tipResponse.tips;
+  const mappedTipResponse: Tip = {
+    ...tipWithoutAuthorId,
+    author: {
+      ...tipResponse.users,
+      bio: tipResponse.users.bio ?? undefined,
+      twitterUsername: tipResponse.users.twitterUsername ?? undefined,
+      githubUsername: tipResponse.users.githubUsername ?? undefined,
+      userImageURL: tipResponse.users.userImageURL ?? undefined,
+    },
+  };
+
+  const parsed = TipValidator.safeParse(mappedTipResponse);
 
   if (!parsed.success) {
     return redirect(CLIENT_PATHS.BAD_REQUEST);
@@ -46,7 +59,9 @@ export const getTipsByAuthorID = async (authorID: string) => {
     .select({
       tips: {
         ...tips,
-        author: users,
+      },
+      users: {
+        ...users,
       },
     })
     .from(tips)
@@ -54,7 +69,21 @@ export const getTipsByAuthorID = async (authorID: string) => {
     .where(eq(tips.authorId, parsedId.data))
     .orderBy(desc(tips.createdAt));
 
-  const parsed = TipValidator.array().safeParse(tipsResponse);
+  const mappedTipsResponse: Tip[] = tipsResponse.map((tip) => {
+    const { authorId, ...tipWithoutAuthorId } = tip.tips;
+    return {
+      ...tipWithoutAuthorId,
+      author: {
+        ...tip.users,
+        bio: tip.users.bio ?? undefined,
+        twitterUsername: tip.users.twitterUsername ?? undefined,
+        githubUsername: tip.users.githubUsername ?? undefined,
+        userImageURL: tip.users.userImageURL ?? undefined,
+      },
+    };
+  });
+
+  const parsed = TipValidator.array().safeParse(mappedTipsResponse);
 
   if (!parsed.success) {
     return redirect(CLIENT_PATHS.BAD_REQUEST);
