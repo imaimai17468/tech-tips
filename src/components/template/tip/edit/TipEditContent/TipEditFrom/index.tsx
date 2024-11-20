@@ -64,7 +64,7 @@ export const TipEditForm: React.FC<Props> = ({ initialValues }) => {
         message: "Failed to update Tip",
       });
     }
-  }, [lastResult, router.push]);
+  }, [lastResult, router.push, initialValues]);
 
   return (
     <Box w="100%">
