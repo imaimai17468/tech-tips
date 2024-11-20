@@ -1,10 +1,12 @@
 "use server";
 
 import { CLIENT_PATHS } from "@/constants/clientPaths";
-import { prisma } from "@/libs/prisma";
+import { db } from "@/db";
+import { stocks } from "@/db/schema";
 import { TipValidator } from "@/repositories/tips/types";
 import { replaceIDinPath } from "@/utils/replaceIDinPath";
 import { auth } from "@clerk/nextjs/server";
+import { and, eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
@@ -21,9 +23,7 @@ export const deleteStock = async (tipId: string) => {
     return redirect(CLIENT_PATHS.UNAUTHORIZED);
   }
 
-  await prisma.stock.delete({
-    where: { userId_tipId: { userId, tipId } },
-  });
+  await db.delete(stocks).where(and(eq(stocks.userId, userId), eq(stocks.tipId, tipId)));
 
   revalidatePath(replaceIDinPath(CLIENT_PATHS.TIP_DETAIL, tipId));
 };

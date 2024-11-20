@@ -1,4 +1,5 @@
-import { prisma } from "@/libs/prisma";
+import { db } from "@/db";
+import { users } from "@/db/schema";
 import type { WebhookEvent } from "@clerk/nextjs/server";
 import { headers } from "next/headers";
 import { Webhook } from "svix";
@@ -24,7 +25,6 @@ export async function POST(req: Request) {
   const payload = await req.json();
   const body = JSON.stringify(payload);
 
-  // Svixインスタンスを使用して署名を検証
   const wh = new Webhook(WEBHOOK_SECRET);
   let evt: WebhookEvent;
 
@@ -45,15 +45,13 @@ export async function POST(req: Request) {
     const { id, first_name, last_name, image_url, username } = evt.data;
 
     try {
-      await prisma.user.create({
-        data: {
-          id,
-          username: username ?? `${first_name}_${last_name}`,
-          bio: "",
-          twitterUsername: "",
-          githubUsername: "",
-          userImageURL: image_url,
-        },
+      await db.insert(users).values({
+        username: username ?? `${first_name}_${last_name}`,
+        bio: "",
+        twitterUsername: "",
+        githubUsername: "",
+        userImageURL: image_url,
+        clerkUserId: id,
       });
 
       console.log(`User with ID ${id} created in database.`);

@@ -1,8 +1,10 @@
 "use server";
 
 import { CLIENT_PATHS } from "@/constants/clientPaths";
-import { prisma } from "@/libs/prisma";
+import { db } from "@/db";
+import { users } from "@/db/schema";
 import { auth } from "@clerk/nextjs/server";
+import { eq } from "drizzle-orm";
 import { redirect } from "next/navigation";
 import { UserValidator } from "../types";
 
@@ -13,7 +15,7 @@ export const getUserByLoggedIn = async () => {
     return redirect(CLIENT_PATHS.UNAUTHORIZED);
   }
 
-  const userResponse = await prisma.user.findUnique({ where: { id: userId } });
+  const userResponse = await db.select().from(users).where(eq(users.id, userId));
 
   if (!userResponse) {
     return redirect(CLIENT_PATHS.NOT_FOUND);
@@ -35,7 +37,7 @@ export const getUserByID = async (userID: string) => {
     return redirect(CLIENT_PATHS.BAD_REQUEST);
   }
 
-  const userResponse = await prisma.user.findUnique({ where: { id: parsedId.data } });
+  const userResponse = await db.select().from(users).where(eq(users.id, parsedId.data));
 
   if (!userResponse) {
     return redirect(CLIENT_PATHS.NOT_FOUND);

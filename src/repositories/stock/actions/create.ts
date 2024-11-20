@@ -1,7 +1,8 @@
 "use server";
 
 import { CLIENT_PATHS } from "@/constants/clientPaths";
-import { prisma } from "@/libs/prisma";
+import { db } from "@/db";
+import { stocks } from "@/db/schema";
 import { TipValidator } from "@/repositories/tips/types";
 import { replaceIDinPath } from "@/utils/replaceIDinPath";
 import { auth } from "@clerk/nextjs/server";
@@ -21,8 +22,10 @@ export const createStock = async (tipId: string) => {
     return redirect(CLIENT_PATHS.UNAUTHORIZED);
   }
 
-  await prisma.stock.create({
-    data: { userId, tipId },
+  await db.insert(stocks).values({
+    userId,
+    tipId,
+    clerkUserId: userId,
   });
 
   revalidatePath(replaceIDinPath(CLIENT_PATHS.TIP_DETAIL, tipId));

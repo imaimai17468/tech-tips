@@ -1,7 +1,8 @@
 "use server";
 
 import { CLIENT_PATHS } from "@/constants/clientPaths";
-import { prisma } from "@/libs/prisma";
+import { db } from "@/db";
+import { tips } from "@/db/schema";
 import type { ConformAction } from "@/types/conform";
 import { auth } from "@clerk/nextjs/server";
 import { parseWithZod } from "@conform-to/zod";
@@ -23,8 +24,11 @@ export const createTip = async (...[_prev, formData]: Parameters<ConformAction>)
     return submission.reply();
   }
 
-  await prisma.tip.create({
-    data: { ...submission.value, authorId: userId, isPublic: submission.value.isPublic ?? false },
+  await db.insert(tips).values({
+    ...submission.value,
+    authorId: userId,
+    isPublic: submission.value.isPublic ?? false,
+    clerkUserId: userId,
   });
 
   return submission.reply();

@@ -1,10 +1,12 @@
 "use server";
 
 import { CLIENT_PATHS } from "@/constants/clientPaths";
-import { prisma } from "@/libs/prisma";
+import { db } from "@/db";
+import { users } from "@/db/schema";
 import type { ConformAction } from "@/types/conform";
 import { auth } from "@clerk/nextjs/server";
 import { parseWithZod } from "@conform-to/zod";
+import { eq } from "drizzle-orm";
 import { redirect } from "next/navigation";
 import { UserValidator } from "../types";
 
@@ -21,7 +23,7 @@ export const updateUserName = async (...[_prev, formData]: Parameters<ConformAct
     return submission.reply();
   }
 
-  await prisma.user.update({ where: { id: userId }, data: submission.value });
+  await db.update(users).set(submission.value).where(eq(users.id, userId));
 
   return submission.reply();
 };
@@ -39,13 +41,10 @@ export const updateUserBio = async (...[_prev, formData]: Parameters<ConformActi
     return submission.reply();
   }
 
-  await prisma.user.update({
-    where: { id: userId },
-    data: {
-      ...submission.value,
-      bio: submission.value.bio ?? "",
-    },
-  });
+  await db
+    .update(users)
+    .set({ ...submission.value, bio: submission.value.bio ?? "" })
+    .where(eq(users.id, userId));
 
   return submission.reply();
 };
@@ -65,14 +64,14 @@ export const updateUserSNS = async (...[_prev, formData]: Parameters<ConformActi
     return submission.reply();
   }
 
-  await prisma.user.update({
-    where: { id: userId },
-    data: {
+  await db
+    .update(users)
+    .set({
       ...submission.value,
       twitterUsername: submission.value.twitterUsername ?? "",
       githubUsername: submission.value.githubUsername ?? "",
-    },
-  });
+    })
+    .where(eq(users.id, userId));
 
   return submission.reply();
 };

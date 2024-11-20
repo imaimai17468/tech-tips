@@ -1,9 +1,11 @@
 "use server";
 
 import { CLIENT_PATHS } from "@/constants/clientPaths";
-import { prisma } from "@/libs/prisma";
+import { db } from "@/db";
+import { tips, users } from "@/db/schema";
 import { UserValidator } from "@/repositories/user/types";
 import { auth } from "@clerk/nextjs/server";
+import { desc, eq } from "drizzle-orm";
 import { redirect } from "next/navigation";
 import { TipValidator } from "../types";
 
@@ -14,10 +16,11 @@ export const getTipByID = async (tipID: string) => {
     return redirect(CLIENT_PATHS.BAD_REQUEST);
   }
 
-  const tipResponse = await prisma.tip.findUnique({
-    where: { id: parsedId.data },
-    include: { author: true, stocks: true },
-  });
+  const tipResponse = await db
+    .select()
+    .from(tips)
+    .where(eq(tips.id, parsedId.data))
+    .innerJoin(users, eq(tips.authorId, users.id));
 
   if (!tipResponse) {
     return redirect(CLIENT_PATHS.NOT_FOUND);
@@ -39,11 +42,17 @@ export const getTipsByAuthorID = async (authorID: string) => {
     return redirect(CLIENT_PATHS.BAD_REQUEST);
   }
 
-  const tipsResponse = await prisma.tip.findMany({
-    where: { authorId: parsedId.data },
-    include: { author: true },
-    orderBy: { createdAt: "desc" },
-  });
+  const tipsResponse = await db
+    .select({
+      tips: {
+        ...tips,
+        author: users,
+      },
+    })
+    .from(tips)
+    .innerJoin(users, eq(tips.authorId, users.id))
+    .where(eq(tips.authorId, parsedId.data))
+    .orderBy(desc(tips.createdAt));
 
   const parsed = TipValidator.array().safeParse(tipsResponse);
 

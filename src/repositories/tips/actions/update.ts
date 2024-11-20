@@ -1,10 +1,12 @@
 "use server";
 
 import { CLIENT_PATHS } from "@/constants/clientPaths";
-import { prisma } from "@/libs/prisma";
+import { db } from "@/db";
+import { tips } from "@/db/schema";
 import type { ConformAction } from "@/types/conform";
 import { auth } from "@clerk/nextjs/server";
 import { parseWithZod } from "@conform-to/zod";
+import { eq } from "drizzle-orm";
 import { redirect } from "next/navigation";
 import { TipValidator } from "../types";
 
@@ -23,13 +25,10 @@ export const updateTip = async (...[_prev, formData]: Parameters<ConformAction>)
     return submission.reply();
   }
 
-  await prisma.tip.update({
-    where: { id: submission.value.id },
-    data: {
-      ...submission.value,
-      isPublic: submission.value.isPublic ?? false,
-    },
-  });
+  await db
+    .update(tips)
+    .set({ ...submission.value, isPublic: submission.value.isPublic ?? false })
+    .where(eq(tips.id, submission.value.id));
 
   return submission.reply();
 };

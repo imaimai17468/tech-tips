@@ -1,7 +1,9 @@
 import { CLIENT_PATHS } from "@/constants/clientPaths";
-import { prisma } from "@/libs/prisma";
+import { db } from "@/db";
+import { stocks, tips } from "@/db/schema";
 import { TipValidator } from "@/repositories/tips/types";
 import { auth } from "@clerk/nextjs/server";
+import { eq } from "drizzle-orm";
 import { redirect } from "next/navigation";
 
 export const getStocksByLoggedInUser = async () => {
@@ -11,13 +13,16 @@ export const getStocksByLoggedInUser = async () => {
     return redirect(CLIENT_PATHS.UNAUTHORIZED);
   }
 
-  const stocks = await prisma.stock.findMany({ where: { userId }, include: { tip: { include: { author: true } } } });
-  const stockedTips = stocks.map((stock) => stock.tip);
+  const userStocks = await db
+    .select()
+    .from(stocks)
+    .where(eq(stocks.userId, userId))
+    .innerJoin(tips, eq(stocks.tipId, tips.id));
+  const stockedTips = userStocks.map((stock) => stock.tips);
 
   const parsedStocksDetails = TipValidator.array().safeParse(stockedTips);
 
   if (!parsedStocksDetails.success) {
-    console.error(parsedStocksDetails.error);
     return redirect(CLIENT_PATHS.BAD_REQUEST);
   }
 
