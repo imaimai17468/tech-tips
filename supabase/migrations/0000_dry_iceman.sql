@@ -1,7 +1,7 @@
 CREATE TABLE IF NOT EXISTS "stocks" (
-	"user_id" uuid NOT NULL,
+	"user_id" text NOT NULL,
 	"tip_id" uuid NOT NULL,
-	"clerk_user_id" varchar(255),
+	"clerk_user_id" text,
 	CONSTRAINT "stocks_user_id_tip_id_pk" PRIMARY KEY("user_id","tip_id"),
 	CONSTRAINT "stocks_clerk_user_id_unique" UNIQUE("clerk_user_id")
 );
@@ -10,25 +10,25 @@ CREATE TABLE IF NOT EXISTS "tips" (
 	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
 	"created_at" timestamp DEFAULT now() NOT NULL,
 	"updated_at" timestamp DEFAULT now() NOT NULL,
-	"title" varchar(255) NOT NULL,
+	"title" text NOT NULL,
 	"content" text,
 	"tags" text[] DEFAULT ARRAY[]::text[] NOT NULL,
 	"is_public" boolean NOT NULL,
-	"author_id" uuid NOT NULL,
-	"clerk_user_id" varchar(255),
+	"author_id" text NOT NULL,
+	"clerk_user_id" text,
 	CONSTRAINT "tips_clerk_user_id_unique" UNIQUE("clerk_user_id")
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "users" (
-	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
+	"id" text PRIMARY KEY NOT NULL,
 	"created_at" timestamp DEFAULT now() NOT NULL,
 	"updated_at" timestamp DEFAULT now() NOT NULL,
-	"username" varchar(30) NOT NULL,
-	"bio" varchar(200),
-	"twitter_username" varchar(255),
-	"github_username" varchar(255),
-	"user_image_url" varchar(255),
-	"clerk_user_id" varchar(255),
+	"username" text NOT NULL,
+	"bio" text,
+	"twitter_username" text,
+	"github_username" text,
+	"user_image_url" text,
+	"clerk_user_id" text,
 	CONSTRAINT "users_clerk_user_id_unique" UNIQUE("clerk_user_id")
 );
 --> statement-breakpoint

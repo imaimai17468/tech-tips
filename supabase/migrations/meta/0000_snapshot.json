@@ -1,5 +1,5 @@
 {
-  "id": "0f18e7f7-4503-410e-9514-fe813ae78bb6",
+  "id": "b4f3e944-a345-466a-bf29-94089681de95",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -10,7 +10,7 @@
       "columns": {
         "user_id": {
           "name": "user_id",
-          "type": "uuid",
+          "type": "text",
           "primaryKey": false,
           "notNull": true
         },
@@ -22,7 +22,7 @@
         },
         "clerk_user_id": {
           "name": "clerk_user_id",
-          "type": "varchar(255)",
+          "type": "text",
           "primaryKey": false,
           "notNull": false
         }
@@ -92,7 +92,7 @@
         },
         "title": {
           "name": "title",
-          "type": "varchar(255)",
+          "type": "text",
           "primaryKey": false,
           "notNull": true
         },
@@ -117,13 +117,13 @@
         },
         "author_id": {
           "name": "author_id",
-          "type": "uuid",
+          "type": "text",
           "primaryKey": false,
           "notNull": true
         },
         "clerk_user_id": {
           "name": "clerk_user_id",
-          "type": "varchar(255)",
+          "type": "text",
           "primaryKey": false,
           "notNull": false
         }
@@ -158,10 +158,9 @@
       "columns": {
         "id": {
           "name": "id",
-          "type": "uuid",
+          "type": "text",
           "primaryKey": true,
-          "notNull": true,
-          "default": "gen_random_uuid()"
+          "notNull": true
         },
         "created_at": {
           "name": "created_at",
@@ -179,37 +178,37 @@
         },
         "username": {
           "name": "username",
-          "type": "varchar(30)",
+          "type": "text",
           "primaryKey": false,
           "notNull": true
         },
         "bio": {
           "name": "bio",
-          "type": "varchar(200)",
+          "type": "text",
           "primaryKey": false,
           "notNull": false
         },
         "twitter_username": {
           "name": "twitter_username",
-          "type": "varchar(255)",
+          "type": "text",
           "primaryKey": false,
           "notNull": false
         },
         "github_username": {
           "name": "github_username",
-          "type": "varchar(255)",
+          "type": "text",
           "primaryKey": false,
           "notNull": false
         },
         "user_image_url": {
           "name": "user_image_url",
-          "type": "varchar(255)",
+          "type": "text",
           "primaryKey": false,
           "notNull": false
         },
         "clerk_user_id": {
           "name": "clerk_user_id",
-          "type": "varchar(255)",
+          "type": "text",
           "primaryKey": false,
           "notNull": false
         }

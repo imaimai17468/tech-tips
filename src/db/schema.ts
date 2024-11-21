@@ -1,43 +1,43 @@
 import { sql } from "drizzle-orm";
 import { relations } from "drizzle-orm";
-import { boolean, pgTable, primaryKey, text, timestamp, uuid, varchar } from "drizzle-orm/pg-core";
+import { boolean, pgTable, primaryKey, text, timestamp, uuid } from "drizzle-orm/pg-core";
 
 export const users = pgTable("users", {
-  id: uuid("id").primaryKey().defaultRandom(),
+  id: text("id").primaryKey(),
   createdAt: timestamp("created_at").defaultNow().notNull(),
   updatedAt: timestamp("updated_at").defaultNow().notNull(),
-  username: varchar("username", { length: 30 }).notNull(),
-  bio: varchar("bio", { length: 200 }),
-  twitterUsername: varchar("twitter_username", { length: 255 }),
-  githubUsername: varchar("github_username", { length: 255 }),
-  userImageURL: varchar("user_image_url", { length: 255 }),
-  clerkUserId: varchar("clerk_user_id", { length: 255 }).unique(),
+  username: text("username").notNull(),
+  bio: text("bio"),
+  twitterUsername: text("twitter_username"),
+  githubUsername: text("github_username"),
+  userImageURL: text("user_image_url"),
+  clerkUserId: text("clerk_user_id").unique(),
 });
 
 export const tips = pgTable("tips", {
   id: uuid("id").primaryKey().defaultRandom(),
   createdAt: timestamp("created_at").defaultNow().notNull(),
   updatedAt: timestamp("updated_at").defaultNow().notNull(),
-  title: varchar("title", { length: 255 }).notNull(),
+  title: text("title").notNull(),
   content: text("content"),
   tags: text("tags").array().notNull().default(sql`ARRAY[]::text[]`),
   isPublic: boolean("is_public").notNull(),
-  authorId: uuid("author_id")
+  authorId: text("author_id")
     .references(() => users.id, { onDelete: "cascade" })
     .notNull(),
-  clerkUserId: varchar("clerk_user_id", { length: 255 }).unique(),
+  clerkUserId: text("clerk_user_id").unique(),
 });
 
 export const stocks = pgTable(
   "stocks",
   {
-    userId: uuid("user_id")
+    userId: text("user_id")
       .references(() => users.id, { onDelete: "cascade" })
       .notNull(),
     tipId: uuid("tip_id")
       .references(() => tips.id, { onDelete: "cascade" })
       .notNull(),
-    clerkUserId: varchar("clerk_user_id", { length: 255 }).unique(),
+    clerkUserId: text("clerk_user_id").unique(),
   },
   (t) => ({
     pk: primaryKey({ columns: [t.userId, t.tipId] }),
