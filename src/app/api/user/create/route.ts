@@ -45,14 +45,18 @@ export async function POST(req: Request) {
     const { id, first_name, last_name, image_url, username } = evt.data;
 
     try {
-      await db.insert(users).values({
-        username: username ?? `${first_name}_${last_name}`,
-        bio: "",
-        twitterUsername: "",
-        githubUsername: "",
-        userImageURL: image_url,
-        clerkUserId: id,
-      });
+      await db
+        .insert(users)
+        .values({
+          id: id,
+          username: username ?? `${first_name}_${last_name}`,
+          bio: "",
+          twitterUsername: "",
+          githubUsername: "",
+          userImageURL: image_url,
+          clerkUserId: id,
+        })
+        .onConflictDoNothing();
 
       console.log(`User with ID ${id} created in database.`);
     } catch (error) {
