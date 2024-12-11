@@ -11,7 +11,7 @@ export const users = pgTable("users", {
   twitterUsername: text("twitter_username"),
   githubUsername: text("github_username"),
   userImageURL: text("user_image_url"),
-  clerkUserId: text("clerk_user_id").unique(),
+  clerkUserId: text("clerk_user_id"),
 });
 
 export const tips = pgTable("tips", {
@@ -25,7 +25,7 @@ export const tips = pgTable("tips", {
   authorId: text("author_id")
     .references(() => users.id, { onDelete: "cascade" })
     .notNull(),
-  clerkUserId: text("clerk_user_id").unique(),
+  clerkUserId: text("clerk_user_id"),
 });
 
 export const stocks = pgTable(
@@ -37,7 +37,7 @@ export const stocks = pgTable(
     tipId: uuid("tip_id")
       .references(() => tips.id, { onDelete: "cascade" })
       .notNull(),
-    clerkUserId: text("clerk_user_id").unique(),
+    clerkUserId: text("clerk_user_id"),
   },
   (t) => ({
     pk: primaryKey({ columns: [t.userId, t.tipId] }),
