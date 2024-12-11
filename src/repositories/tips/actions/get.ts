@@ -2,7 +2,7 @@
 
 import { CLIENT_PATHS } from "@/constants/clientPaths";
 import { db } from "@/db";
-import { tips, users } from "@/db/schema";
+import { stocks, tips, users } from "@/db/schema";
 import { UserValidator } from "@/repositories/user/types";
 import { auth } from "@clerk/nextjs/server";
 import { desc, eq } from "drizzle-orm";
@@ -27,6 +27,8 @@ export const getTipByID = async (tipID: string) => {
     return redirect(CLIENT_PATHS.NOT_FOUND);
   }
 
+  const stocksResponse = await db.select().from(stocks).where(eq(stocks.tipId, parsedId.data));
+
   const { authorId, ...tipWithoutAuthorId } = tipResponse.tips;
   const mappedTipResponse: Tip = {
     ...tipWithoutAuthorId,
@@ -37,6 +39,7 @@ export const getTipByID = async (tipID: string) => {
       githubUsername: tipResponse.users.githubUsername ?? undefined,
       userImageURL: tipResponse.users.userImageURL ?? undefined,
     },
+    stocks: stocksResponse,
   };
 
   const parsed = TipValidator.safeParse(mappedTipResponse);
