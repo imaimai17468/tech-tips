@@ -3,7 +3,7 @@ import { StockValidator } from "../stock/types";
 import { UserValidator } from "../user/types";
 
 export const TipValidator = z.object({
-  id: z.string().ulid(),
+  id: z.string().uuid(),
   createdAt: z.date(),
   updatedAt: z.date(),
   title: z.string().min(1),

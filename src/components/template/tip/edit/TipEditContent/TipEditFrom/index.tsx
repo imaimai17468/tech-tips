@@ -14,7 +14,7 @@ import { PaperPlaneIcon } from "@radix-ui/react-icons";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
 import { useActionState, useEffect } from "react";
-import { ulid } from "ulidx";
+import { v4 as uuidv4 } from "uuid";
 
 const Editor = dynamic(() => import("@/components/parts/Editor").then((v) => v.Editor), {
   loading: () => <LoadingOverlay visible loaderProps={{ type: "bars" }} />,
@@ -36,7 +36,7 @@ export const TipEditForm: React.FC<Props> = ({ initialValues }) => {
       });
     },
     defaultValue: initialValues ?? {
-      id: ulid(),
+      id: uuidv4(),
     },
     shouldValidate: "onBlur",
     shouldRevalidate: "onInput",
