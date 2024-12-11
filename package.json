@@ -14,9 +14,9 @@
     "drizzle:push": "drizzle-kit push"
   },
   "dependencies": {
-    "@blocknote/core": "^0.18.0",
-    "@blocknote/mantine": "^0.18.1",
-    "@blocknote/react": "^0.18.1",
+    "@blocknote/core": "^0.20.0",
+    "@blocknote/mantine": "^0.20.0",
+    "@blocknote/react": "^0.20.0",
     "@clerk/nextjs": "^6.3.2",
     "@conform-to/react": "^1.2.2",
     "@conform-to/zod": "^1.2.2",
