@@ -34,7 +34,7 @@ export const StockButton: React.FC<Props> = ({ tipId, isStocked }) => {
       <Modal opened={opened} onClose={close} title="Please log in to stock this tip." centered>
         <Center>
           <SignInButton>
-            <Button variant="light">Get Started</Button>
+            <Button variant="light">はじめる</Button>
           </SignInButton>
         </Center>
       </Modal>
