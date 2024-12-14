@@ -15,6 +15,13 @@
       "when": 1733932246577,
       "tag": "0001_loving_alice",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1734175679803,
+      "tag": "0002_gigantic_spot",
+      "breakpoints": true
     }
   ]
 }
