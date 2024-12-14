@@ -2,7 +2,9 @@
 
 import { createStock } from "@/repositories/stock/actions/create";
 import { deleteStock } from "@/repositories/stock/actions/delete";
-import { ActionIcon } from "@mantine/core";
+import { SignInButton, useUser } from "@clerk/nextjs";
+import { ActionIcon, Button, Center, Modal } from "@mantine/core";
+import { useDisclosure } from "@mantine/hooks";
 import { BookmarkIcon } from "@radix-ui/react-icons";
 
 type Props = {
@@ -11,7 +13,15 @@ type Props = {
 };
 
 export const StockButton: React.FC<Props> = ({ tipId, isStocked }) => {
+  const { isSignedIn } = useUser();
+  const [opened, { open, close }] = useDisclosure(false);
+
   const handleStockButtonClick = async () => {
+    if (!isSignedIn) {
+      open();
+      return;
+    }
+
     if (isStocked) {
       await deleteStock(tipId);
     } else {
@@ -20,8 +30,17 @@ export const StockButton: React.FC<Props> = ({ tipId, isStocked }) => {
   };
 
   return (
-    <ActionIcon radius="xl" variant={isStocked ? "filled" : "light"} color="pink" onClick={handleStockButtonClick}>
-      <BookmarkIcon />
-    </ActionIcon>
+    <>
+      <Modal opened={opened} onClose={close} title="Please log in to stock this tip." centered>
+        <Center>
+          <SignInButton>
+            <Button variant="light">Get Started</Button>
+          </SignInButton>
+        </Center>
+      </Modal>
+      <ActionIcon radius="xl" variant={isStocked ? "filled" : "light"} color="pink" onClick={handleStockButtonClick}>
+        <BookmarkIcon />
+      </ActionIcon>
+    </>
   );
 };
