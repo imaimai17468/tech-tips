@@ -24,7 +24,7 @@ export const TopContent: React.FC = () => {
       <Card padding="xl" radius="lg" style={{ border: "1px solid var(--mantine-color-gray-3)" }}>
         <Stack align="center" gap={32}>
           <Text>技術のための静かな場所を作りましょう。</Text>
-          <Image src="/image/coder.svg" alt="Coder" maw={150} />
+          <Image src="/image/coder.svg" alt="コーディングしているプログラマーのイラスト" maw={150} />
           <StartButton />
         </Stack>
       </Card>
