@@ -65,44 +65,44 @@ export const stocksRelations = relations(stocks, ({ one }) => ({
   }),
 }));
 
-export const stocksPolicy = pgPolicy("authenticated role all policy", {
+export const stocksPolicy = pgPolicy("authenticated role stocks all policy", {
   for: "all",
   to: authenticatedRole,
   using: sql`requesting_user_id() = clerk_user_id`,
   withCheck: sql`requesting_user_id() = clerk_user_id`,
 }).link(stocks);
 
-export const usersInsertPolicy = pgPolicy("authenticated role insert policy", {
+export const usersInsertPolicy = pgPolicy("authenticated role users insert policy", {
   for: "insert",
   to: authenticatedRole,
   withCheck: sql`requesting_user_id() = clerk_user_id`,
 }).link(users);
 
-export const usersUpdatePolicy = pgPolicy("authenticated role update policy", {
+export const usersUpdatePolicy = pgPolicy("authenticated role users update policy", {
   for: "update",
   to: authenticatedRole,
   withCheck: sql`requesting_user_id() = clerk_user_id`,
 }).link(users);
 
-export const usersDeletePolicy = pgPolicy("authenticated role delete policy", {
+export const usersDeletePolicy = pgPolicy("authenticated role users delete policy", {
   for: "delete",
   to: authenticatedRole,
   using: sql`requesting_user_id() = clerk_user_id`,
 }).link(users);
 
-export const tipsInsertPolicy = pgPolicy("authenticated role insert policy", {
+export const tipsInsertPolicy = pgPolicy("authenticated role tips insert policy", {
   for: "insert",
   to: authenticatedRole,
   withCheck: sql`requesting_user_id() = clerk_user_id`,
 }).link(tips);
 
-export const tipsUpdatePolicy = pgPolicy("authenticated role update policy", {
+export const tipsUpdatePolicy = pgPolicy("authenticated role tips update policy", {
   for: "update",
   to: authenticatedRole,
   withCheck: sql`requesting_user_id() = clerk_user_id`,
 }).link(tips);
 
-export const tipsDeletePolicy = pgPolicy("authenticated role delete policy", {
+export const tipsDeletePolicy = pgPolicy("authenticated role tips delete policy", {
   for: "delete",
   to: authenticatedRole,
   using: sql`requesting_user_id() = clerk_user_id`,
