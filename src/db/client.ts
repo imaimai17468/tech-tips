@@ -3,31 +3,24 @@ import { createClient } from "@supabase/supabase-js";
 import type { Database } from "./types";
 
 // Implementation based on the URL: https://clerk.com/docs/integrations/databases/supabase
-export async function createClerkSupabaseClientSsr() {
+export const createClerkSupabaseClientSsr = async () => {
   const { getToken } = await auth();
 
-  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_KEY;
-
-  if (!supabaseUrl || !supabaseKey) {
+  if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_KEY) {
     throw new Error("Missing Supabase environment variables");
   }
 
-  return createClient<Database>(supabaseUrl, supabaseKey, {
+  const supabase = createClient<Database>(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.NEXT_PUBLIC_SUPABASE_KEY, {
     global: {
-      fetch: async (url, options = {}) => {
-        const clerkToken = await getToken({
-          template: "supabase",
-        });
-
-        const headers = new Headers(options?.headers);
-        headers.set("Authorization", `Bearer ${clerkToken}`);
-
-        return fetch(url, {
-          ...options,
-          headers,
-        });
+      headers: {
+        Authorization: `Bearer ${
+          (await getToken({
+            template: "supabase",
+          })) ?? process.env.NEXT_PUBLIC_SUPABASE_KEY
+        }`,
       },
     },
   });
-}
+
+  return supabase;
+};
