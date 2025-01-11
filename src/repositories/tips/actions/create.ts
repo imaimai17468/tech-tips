@@ -26,9 +26,12 @@ export const createTip = async (...[_prev, formData]: Parameters<ConformAction>)
   const supabase = await createClerkSupabaseClientSsr();
 
   const { error } = await supabase.from("tips").insert({
-    ...submission.value,
+    id: submission.value.id,
+    title: submission.value.title,
+    content: submission.value.content,
+    tags: submission.value.tags,
+    is_public: submission.value.isPublic,
     author_id: userId,
-    is_public: submission.value.isPublic ?? false,
     clerk_user_id: userId,
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString(),

@@ -10,7 +10,7 @@ export const TipValidator = z.object({
   content: z.string().optional().nullable(),
   tags: z.array(z.string()).max(5).optional(),
   author: UserValidator,
-  isPublic: z.boolean().optional(),
+  isPublic: z.boolean().default(false),
   stocks: z.array(StockValidator).optional(),
 });
 

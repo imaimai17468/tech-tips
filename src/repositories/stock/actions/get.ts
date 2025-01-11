@@ -34,11 +34,12 @@ export const getStocksByLoggedInUser = async () => {
   }
 
   const stockedTipsWithDetails: Tip[] = userStocks.map((stock) => {
-    const { author_id, ...tipWithoutAuthorId } = stock.tips;
+    const { author_id, is_public, ...tipWithoutAuthorId } = stock.tips;
     return {
       ...tipWithoutAuthorId,
       createdAt: new Date(stock.tips.created_at),
       updatedAt: new Date(stock.tips.updated_at),
+      isPublic: is_public,
       author: {
         ...stock.users,
         id: stock.users.id,

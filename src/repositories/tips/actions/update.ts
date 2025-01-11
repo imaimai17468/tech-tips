@@ -31,7 +31,7 @@ export const updateTip = async (...[_prev, formData]: Parameters<ConformAction>)
       title: submission.value.title,
       content: submission.value.content,
       tags: submission.value.tags,
-      is_public: submission.value.isPublic ?? false,
+      is_public: submission.value.isPublic,
       updated_at: new Date().toISOString(),
     })
     .eq("id", submission.value.id);

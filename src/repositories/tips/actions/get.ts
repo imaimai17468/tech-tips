@@ -40,11 +40,12 @@ export const getTipByID = async (tipID: string) => {
     redirect(CLIENT_PATHS.BAD_REQUEST);
   }
 
-  const { author_id, created_at, updated_at, ...tipWithoutAuthorId } = tipResponse;
+  const { author_id, created_at, updated_at, is_public, ...tipWithoutAuthorId } = tipResponse;
   const mappedTipResponse: Tip = {
     ...tipWithoutAuthorId,
     createdAt: new Date(created_at),
     updatedAt: new Date(updated_at),
+    isPublic: is_public,
     author: {
       ...tipResponse.users,
       bio: tipResponse.users.bio ?? undefined,
@@ -83,7 +84,7 @@ export const getTipsByAuthorID = async (authorID: string) => {
     .from("tips")
     .select(`
       *,
-      users!tips_author_id_users_id_fk (*)
+      users:author_id (*)
     `)
     .eq("author_id", parsedId.data)
     .order("created_at", { ascending: false });
@@ -94,11 +95,12 @@ export const getTipsByAuthorID = async (authorID: string) => {
   }
 
   const mappedTipsResponse: Tip[] = tipsResponse.map((tip) => {
-    const { author_id, created_at, updated_at, ...tipWithoutAuthorId } = tip;
+    const { author_id, created_at, updated_at, is_public, ...tipWithoutAuthorId } = tip;
     return {
       ...tipWithoutAuthorId,
       createdAt: new Date(created_at),
       updatedAt: new Date(updated_at),
+      isPublic: is_public,
       author: {
         ...tip.users,
         bio: tip.users.bio ?? undefined,
