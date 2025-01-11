@@ -6,7 +6,7 @@ import type { Database } from "../../db/types";
 export const createClerkSupabaseClientSsr = async () => {
   const { getToken } = await auth();
 
-  if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
+  if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY) {
     throw new Error("Missing Supabase environment variables");
   }
 
@@ -17,11 +17,11 @@ export const createClerkSupabaseClientSsr = async () => {
 
     const supabase = createClient<Database>(
       process.env.NEXT_PUBLIC_SUPABASE_URL,
-      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+      process.env.SUPABASE_SERVICE_ROLE_KEY,
       {
         global: {
           headers: {
-            Authorization: `Bearer ${token ?? process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY}`,
+            Authorization: `Bearer ${token ?? process.env.SUPABASE_SERVICE_ROLE_KEY}`,
           },
         },
       },
