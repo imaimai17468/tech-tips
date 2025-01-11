@@ -6,8 +6,9 @@ import type { User } from "@/repositories/user/types";
 import { UserValidator } from "@/repositories/user/types";
 import { useForm } from "@conform-to/react";
 import { parseWithZod } from "@conform-to/zod";
-import { Box, Button, Card, Flex, Image, Stack, Text, TextInput } from "@mantine/core";
+import { Box, Button, Card, Flex, Stack, Text, TextInput } from "@mantine/core";
 import { notifications } from "@mantine/notifications";
+import Image from "next/image";
 import { redirect } from "next/navigation";
 import { useActionState, useEffect, useState } from "react";
 
@@ -57,7 +58,7 @@ export const SNSCard: React.FC<Props> = ({ user }) => {
             <Stack>
               <Flex align="center" gap={16}>
                 <Box bg="white" p={2} style={{ borderRadius: "50%" }}>
-                  <Image src="/image/github-mark.svg" w={24} h={24} />
+                  <Image src="/image/github-mark.svg" width={24} height={24} alt="GitHub" />
                 </Box>
                 <TextInput
                   leftSection={"@"}
@@ -70,7 +71,7 @@ export const SNSCard: React.FC<Props> = ({ user }) => {
               </Flex>
               <Flex align="center" gap={16}>
                 <Box bg="black" p={8} style={{ borderRadius: "50%" }}>
-                  <Image src="/image/logo.svg" w={12} h={12} />
+                  <Image src="/image/logo.svg" width={12} height={12} alt="X(旧Twitter)" />
                 </Box>
                 <TextInput
                   leftSection={"@"}
@@ -101,13 +102,13 @@ export const SNSCard: React.FC<Props> = ({ user }) => {
           <Stack>
             <Flex align="center" gap={16}>
               <Box bg="white" p={2} style={{ borderRadius: "50%" }} w="fit-content">
-                <Image src="/image/github-mark.svg" w={24} h={24} />
+                <Image src="/image/github-mark.svg" width={24} height={24} alt="GitHub" />
               </Box>
               <Text c="gray">@{user.githubUsername}</Text>
             </Flex>
             <Flex align="center" gap={16}>
               <Box bg="black" p={8} style={{ borderRadius: "50%" }} w="fit-content">
-                <Image src="/image/logo.svg" w={12} h={12} />
+                <Image src="/image/logo.svg" width={12} height={12} alt="X(旧Twitter)" />
               </Box>
               <Text c="gray">@{user.twitterUsername}</Text>
             </Flex>

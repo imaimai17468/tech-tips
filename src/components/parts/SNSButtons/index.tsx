@@ -1,5 +1,6 @@
 import { createSitePath } from "@/utils/createSiteURL";
-import { ActionIcon, Flex, Image } from "@mantine/core";
+import { ActionIcon, Flex } from "@mantine/core";
+import Image from "next/image";
 import Link from "next/link";
 
 type Props = {
@@ -21,7 +22,7 @@ export const SNSButtons: React.FC<Props> = ({ githubUsername, twitterUsername })
           rel="noopener noreferrer"
           href={createSitePath("github", githubUsername)}
         >
-          <Image src="/image/github-mark.svg" w={16} h={16} />
+          <Image src="/image/github-mark.svg" width={16} height={16} alt="GitHub" />
         </ActionIcon>
       )}
       {twitterUsername && (
@@ -33,7 +34,7 @@ export const SNSButtons: React.FC<Props> = ({ githubUsername, twitterUsername })
           rel="noopener noreferrer"
           href={createSitePath("x", twitterUsername)}
         >
-          <Image src="/image/logo.svg" w={16} h={16} />
+          <Image src="/image/logo.svg" width={16} height={16} alt="X(旧Twitter)" />
         </ActionIcon>
       )}
     </Flex>

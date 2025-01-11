@@ -1,5 +1,6 @@
 "use client";
-import { Card, Image, Stack, Text, Title } from "@mantine/core";
+import { Card, Stack, Text, Title } from "@mantine/core";
+import Image from "next/image";
 import { StartButton } from "./StartButton";
 
 export const TopContent: React.FC = () => {
@@ -24,7 +25,7 @@ export const TopContent: React.FC = () => {
       <Card padding="xl" radius="lg" style={{ border: "1px solid var(--mantine-color-gray-3)" }}>
         <Stack align="center" gap={32}>
           <Text>技術のための静かな場所を作りましょう。</Text>
-          <Image src="/image/coder.svg" alt="コーディングしているプログラマーのイラスト" maw={150} />
+          <Image src="/image/coder.svg" alt="コーディングしているプログラマーのイラスト" width={150} height={150} />
           <StartButton />
         </Stack>
       </Card>

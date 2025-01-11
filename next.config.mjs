@@ -13,6 +13,7 @@ const nextConfig = {
   },
   images: {
     disableStaticImages: true,
+    domains: ["img.clerk.com"],
   },
   reactStrictMode: false,
 };

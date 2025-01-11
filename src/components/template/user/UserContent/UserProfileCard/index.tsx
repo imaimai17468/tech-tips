@@ -1,6 +1,7 @@
 import { SNSButtons } from "@/components/parts/SNSButtons";
 import { getUserByID } from "@/repositories/user/actions/get";
-import { Card, Flex, Image, Stack, Text } from "@mantine/core";
+import { Card, Flex, Stack, Text } from "@mantine/core";
+import Image from "next/image";
 
 type Props = {
   userID: string;
@@ -12,7 +13,13 @@ export const UserProfileCard: React.FC<Props> = async ({ userID }) => {
   return (
     <Card radius="md" shadow="sm" p={32}>
       <Flex gap={32} wrap={{ base: "wrap", sm: "nowrap" }}>
-        <Image w={100} h={100} src={user.userImageURL} alt={user.username} style={{ borderRadius: "50%" }} />
+        <Image
+          width={100}
+          height={100}
+          src={user.userImageURL || ""}
+          alt={user.username}
+          style={{ borderRadius: "50%" }}
+        />
         <Stack>
           <Text size="xl" fw="bold">
             {user.username}
