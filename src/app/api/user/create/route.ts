@@ -51,10 +51,10 @@ export async function POST(req: Request) {
         id: id,
         username: username ?? `${first_name}_${last_name}`,
         bio: "",
-        twitterUsername: "",
-        githubUsername: "",
-        userImageURL: image_url,
-        clerkUserId: id,
+        twitter_username: "",
+        github_username: "",
+        user_image_url: image_url,
+        clerk_user_id: id,
       });
 
       if (error) {
