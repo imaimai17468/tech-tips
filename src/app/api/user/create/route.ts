@@ -1,9 +1,9 @@
+"use server";
+
 import { createClerkSupabaseClientSsr } from "@/app/ssr/client";
 import type { WebhookEvent } from "@clerk/nextjs/server";
 import { headers } from "next/headers";
 import { Webhook } from "svix";
-
-const supabase = await createClerkSupabaseClientSsr();
 
 export async function POST(req: Request) {
   const WEBHOOK_SECRET = process.env.CLERK_WEBHOOK_SECRET;
@@ -46,7 +46,8 @@ export async function POST(req: Request) {
     const { id, first_name, last_name, image_url, username } = evt.data;
 
     try {
-      await supabase.from("users").upsert({
+      const client = await createClerkSupabaseClientSsr();
+      await client.from("users").insert({
         id: id,
         username: username ?? `${first_name}_${last_name}`,
         bio: "",
