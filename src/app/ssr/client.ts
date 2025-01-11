@@ -10,17 +10,26 @@ export const createClerkSupabaseClientSsr = async () => {
     throw new Error("Missing Supabase environment variables");
   }
 
-  const supabase = createClient<Database>(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.NEXT_PUBLIC_SUPABASE_KEY, {
-    global: {
-      headers: {
-        Authorization: `Bearer ${
-          (await getToken({
-            template: "supabase",
-          })) ?? process.env.NEXT_PUBLIC_SUPABASE_KEY
-        }`,
-      },
-    },
-  });
+  try {
+    const token = await getToken({
+      template: "supabase",
+    });
 
-  return supabase;
+    const supabase = createClient<Database>(
+      process.env.NEXT_PUBLIC_SUPABASE_URL,
+      process.env.NEXT_PUBLIC_SUPABASE_KEY,
+      {
+        global: {
+          headers: {
+            Authorization: `Bearer ${token ?? process.env.NEXT_PUBLIC_SUPABASE_KEY}`,
+          },
+        },
+      },
+    );
+
+    return supabase;
+  } catch (error) {
+    console.error("Failed to initialize Supabase client:", error);
+    throw new Error("Failed to initialize database connection");
+  }
 };

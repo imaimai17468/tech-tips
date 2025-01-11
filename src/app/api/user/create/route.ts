@@ -47,7 +47,7 @@ export async function POST(req: Request) {
 
     try {
       const client = await createClerkSupabaseClientSsr();
-      await client.from("users").insert({
+      const { error } = await client.from("users").insert({
         id: id,
         username: username ?? `${first_name}_${last_name}`,
         bio: "",
@@ -57,10 +57,15 @@ export async function POST(req: Request) {
         clerkUserId: id,
       });
 
+      if (error) {
+        console.error("Supabase error:", error);
+        return new Response(`Database error: ${error.message}`, { status: 500 });
+      }
+
       console.log(`User with ID ${id} created in database.`);
     } catch (error) {
-      console.error("Error saving user to database:", error);
-      return new Response("Failed to create user in database.", { status: 500 });
+      console.error("Unexpected error:", error);
+      return new Response("An unexpected error occurred.", { status: 500 });
     }
   } else {
     console.log(`Unhandled event type: ${evt.type}`);
