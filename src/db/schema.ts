@@ -1,7 +1,6 @@
 import { sql } from "drizzle-orm";
 import { relations } from "drizzle-orm";
-import { boolean, pgPolicy, pgTable, primaryKey, text, timestamp, uuid } from "drizzle-orm/pg-core";
-import { authenticatedRole } from "drizzle-orm/supabase";
+import { boolean, pgTable, primaryKey, text, timestamp, uuid } from "drizzle-orm/pg-core";
 
 export const users = pgTable("users", {
   id: text("id").primaryKey(),
@@ -64,46 +63,3 @@ export const stocksRelations = relations(stocks, ({ one }) => ({
     references: [tips.id],
   }),
 }));
-
-export const stocksPolicy = pgPolicy("authenticated role stocks all policy", {
-  for: "all",
-  to: authenticatedRole,
-  using: sql`requesting_user_id() = clerk_user_id`,
-  withCheck: sql`requesting_user_id() = clerk_user_id`,
-}).link(stocks);
-
-export const usersInsertPolicy = pgPolicy("authenticated role users insert policy", {
-  for: "insert",
-  to: authenticatedRole,
-  withCheck: sql`requesting_user_id() = clerk_user_id`,
-}).link(users);
-
-export const usersUpdatePolicy = pgPolicy("authenticated role users update policy", {
-  for: "update",
-  to: authenticatedRole,
-  withCheck: sql`requesting_user_id() = clerk_user_id`,
-}).link(users);
-
-export const usersDeletePolicy = pgPolicy("authenticated role users delete policy", {
-  for: "delete",
-  to: authenticatedRole,
-  using: sql`requesting_user_id() = clerk_user_id`,
-}).link(users);
-
-export const tipsInsertPolicy = pgPolicy("authenticated role tips insert policy", {
-  for: "insert",
-  to: authenticatedRole,
-  withCheck: sql`requesting_user_id() = clerk_user_id`,
-}).link(tips);
-
-export const tipsUpdatePolicy = pgPolicy("authenticated role tips update policy", {
-  for: "update",
-  to: authenticatedRole,
-  withCheck: sql`requesting_user_id() = clerk_user_id`,
-}).link(tips);
-
-export const tipsDeletePolicy = pgPolicy("authenticated role tips delete policy", {
-  for: "delete",
-  to: authenticatedRole,
-  using: sql`requesting_user_id() = clerk_user_id`,
-}).link(tips);
