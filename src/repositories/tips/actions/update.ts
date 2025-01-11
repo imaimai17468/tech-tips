@@ -1,7 +1,7 @@
 "use server";
 
+import { createClerkSupabaseClientSsr } from "@/app/ssr/client";
 import { CLIENT_PATHS } from "@/constants/clientPaths";
-import { createClerkSupabaseClientSsr } from "@/db/client";
 import type { ConformAction } from "@/types/conform";
 import { auth } from "@clerk/nextjs/server";
 import { parseWithZod } from "@conform-to/zod";

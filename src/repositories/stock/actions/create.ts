@@ -1,7 +1,7 @@
 "use server";
 
+import { createClerkSupabaseClientSsr } from "@/app/ssr/client";
 import { CLIENT_PATHS } from "@/constants/clientPaths";
-import { createClerkSupabaseClientSsr } from "@/db/client";
 import { TipValidator } from "@/repositories/tips/types";
 import { replaceIDinPath } from "@/utils/replaceIDinPath";
 import { auth } from "@clerk/nextjs/server";

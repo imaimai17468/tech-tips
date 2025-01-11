@@ -1,5 +1,5 @@
+import { createClerkSupabaseClientSsr } from "@/app/ssr/client";
 import { CLIENT_PATHS } from "@/constants/clientPaths";
-import { createClerkSupabaseClientSsr } from "@/db/client";
 import { type Tip, TipValidator } from "@/repositories/tips/types";
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";

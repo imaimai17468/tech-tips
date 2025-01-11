@@ -1,6 +1,6 @@
 import { auth } from "@clerk/nextjs/server";
 import { createClient } from "@supabase/supabase-js";
-import type { Database } from "./types";
+import type { Database } from "../../db/types";
 
 // Implementation based on the URL: https://clerk.com/docs/integrations/databases/supabase
 export const createClerkSupabaseClientSsr = async () => {

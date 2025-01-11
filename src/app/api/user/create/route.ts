@@ -1,11 +1,11 @@
-import { createClerkSupabaseClientSsr } from "@/db/client";
+import { createClerkSupabaseClientSsr } from "@/app/ssr/client";
 import type { WebhookEvent } from "@clerk/nextjs/server";
 import { headers } from "next/headers";
 import { Webhook } from "svix";
 
-export async function POST(req: Request) {
-  const supabase = await createClerkSupabaseClientSsr();
+const supabase = await createClerkSupabaseClientSsr();
 
+export async function POST(req: Request) {
   const WEBHOOK_SECRET = process.env.CLERK_WEBHOOK_SECRET;
 
   if (!WEBHOOK_SECRET) {
