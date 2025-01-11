@@ -1,13 +1,10 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
+import withBundleAnalyzer from "@next/bundle-analyzer";
+
+const config = {
   webpack: (config) => {
     config.module.rules.push({
       test: /\.svg$/,
-      use: [
-        {
-          loader: "@svgr/webpack",
-        },
-      ],
+      use: ["@svgr/webpack"],
     });
     return config;
   },
@@ -18,4 +15,6 @@ const nextConfig = {
   reactStrictMode: false,
 };
 
-export default nextConfig;
+export default withBundleAnalyzer({
+  enabled: process.env.ANALYZE === "true",
+})(config);
