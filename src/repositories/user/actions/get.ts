@@ -1,10 +1,8 @@
 "use server";
 
 import { CLIENT_PATHS } from "@/constants/clientPaths";
-import { db } from "@/db";
-import { users } from "@/db/schema";
+import { createClerkSupabaseClientSsr } from "@/db/client";
 import { auth } from "@clerk/nextjs/server";
-import { eq } from "drizzle-orm";
 import { redirect } from "next/navigation";
 import { type User, UserValidator } from "../types";
 
@@ -15,22 +13,22 @@ export const getUserByLoggedIn = async () => {
     return redirect(CLIENT_PATHS.UNAUTHORIZED);
   }
 
-  const userResponse = await db
-    .select()
-    .from(users)
-    .where(eq(users.id, userId))
-    .then((res) => res[0]);
+  const supabase = await createClerkSupabaseClientSsr();
 
-  if (!userResponse) {
+  const { data: userResponse, error } = await supabase.from("users").select("*").eq("id", userId).single();
+
+  if (error || !userResponse) {
     return redirect(CLIENT_PATHS.NOT_FOUND);
   }
 
   const mappedUserResponse: User = {
     ...userResponse,
     bio: userResponse.bio ?? undefined,
-    twitterUsername: userResponse.twitterUsername ?? undefined,
-    githubUsername: userResponse.githubUsername ?? undefined,
-    userImageURL: userResponse.userImageURL ?? undefined,
+    twitterUsername: userResponse.twitter_username ?? undefined,
+    githubUsername: userResponse.github_username ?? undefined,
+    userImageURL: userResponse.user_image_url ?? undefined,
+    createdAt: new Date(userResponse.created_at),
+    updatedAt: new Date(userResponse.updated_at),
   };
 
   const parsed = UserValidator.safeParse(mappedUserResponse);
@@ -49,22 +47,22 @@ export const getUserByID = async (userID: string) => {
     return redirect(CLIENT_PATHS.BAD_REQUEST);
   }
 
-  const userResponse = await db
-    .select()
-    .from(users)
-    .where(eq(users.id, parsedId.data))
-    .then((res) => res[0]);
+  const supabase = await createClerkSupabaseClientSsr();
 
-  if (!userResponse) {
+  const { data: userResponse, error } = await supabase.from("users").select("*").eq("id", parsedId.data).single();
+
+  if (error || !userResponse) {
     return redirect(CLIENT_PATHS.NOT_FOUND);
   }
 
   const mappedUserResponse: User = {
     ...userResponse,
     bio: userResponse.bio ?? undefined,
-    twitterUsername: userResponse.twitterUsername ?? undefined,
-    githubUsername: userResponse.githubUsername ?? undefined,
-    userImageURL: userResponse.userImageURL ?? undefined,
+    twitterUsername: userResponse.twitter_username ?? undefined,
+    githubUsername: userResponse.github_username ?? undefined,
+    userImageURL: userResponse.user_image_url ?? undefined,
+    createdAt: new Date(userResponse.created_at),
+    updatedAt: new Date(userResponse.updated_at),
   };
 
   const parsed = UserValidator.safeParse(mappedUserResponse);

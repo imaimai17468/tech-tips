@@ -1,11 +1,9 @@
 "use server";
 
 import { CLIENT_PATHS } from "@/constants/clientPaths";
-import { db } from "@/db";
-import { stocks, tips, users } from "@/db/schema";
+import { createClerkSupabaseClientSsr } from "@/db/client";
 import { UserValidator } from "@/repositories/user/types";
 import { auth } from "@clerk/nextjs/server";
-import { desc, eq } from "drizzle-orm";
 import { redirect } from "next/navigation";
 import { type Tip, TipValidator } from "../types";
 
@@ -16,30 +14,48 @@ export const getTipByID = async (tipID: string) => {
     return redirect(CLIENT_PATHS.BAD_REQUEST);
   }
 
-  const tipResponse = await db
-    .select()
-    .from(tips)
-    .where(eq(tips.id, parsedId.data))
-    .innerJoin(users, eq(tips.authorId, users.id))
-    .then((res) => res[0]);
+  const supabase = await createClerkSupabaseClientSsr();
 
-  if (!tipResponse) {
+  const { data: tipResponse, error } = await supabase
+    .from("tips")
+    .select(`
+      *,
+      users:author_id (*)
+    `)
+    .eq("id", parsedId.data)
+    .single();
+
+  if (error || !tipResponse) {
     return redirect(CLIENT_PATHS.NOT_FOUND);
   }
 
-  const stocksResponse = await db.select().from(stocks).where(eq(stocks.tipId, parsedId.data));
+  const { data: stocksResponse, error: stocksError } = await supabase
+    .from("stocks")
+    .select("*")
+    .eq("tip_id", parsedId.data);
 
-  const { authorId, ...tipWithoutAuthorId } = tipResponse.tips;
+  if (stocksError || !stocksResponse) {
+    return redirect(CLIENT_PATHS.BAD_REQUEST);
+  }
+
+  const { author_id, created_at, updated_at, ...tipWithoutAuthorId } = tipResponse;
   const mappedTipResponse: Tip = {
     ...tipWithoutAuthorId,
+    createdAt: new Date(created_at),
+    updatedAt: new Date(updated_at),
     author: {
       ...tipResponse.users,
       bio: tipResponse.users.bio ?? undefined,
-      twitterUsername: tipResponse.users.twitterUsername ?? undefined,
-      githubUsername: tipResponse.users.githubUsername ?? undefined,
-      userImageURL: tipResponse.users.userImageURL ?? undefined,
+      twitterUsername: tipResponse.users.twitter_username ?? undefined,
+      githubUsername: tipResponse.users.github_username ?? undefined,
+      userImageURL: tipResponse.users.user_image_url ?? undefined,
+      createdAt: new Date(tipResponse.users.created_at),
+      updatedAt: new Date(tipResponse.users.updated_at),
     },
-    stocks: stocksResponse,
+    stocks: stocksResponse.map((stock) => ({
+      userId: stock.user_id,
+      tipId: stock.tip_id,
+    })),
   };
 
   const parsed = TipValidator.safeParse(mappedTipResponse);
@@ -58,30 +74,35 @@ export const getTipsByAuthorID = async (authorID: string) => {
     return redirect(CLIENT_PATHS.BAD_REQUEST);
   }
 
-  const tipsResponse = await db
-    .select({
-      tips: {
-        ...tips,
-      },
-      users: {
-        ...users,
-      },
-    })
-    .from(tips)
-    .innerJoin(users, eq(tips.authorId, users.id))
-    .where(eq(tips.authorId, parsedId.data))
-    .orderBy(desc(tips.createdAt));
+  const supabase = await createClerkSupabaseClientSsr();
+
+  const { data: tipsResponse, error } = await supabase
+    .from("tips")
+    .select(`
+      *,
+      users!inner (*)
+    `)
+    .eq("author_id", parsedId.data)
+    .order("created_at", { ascending: false });
+
+  if (error || !tipsResponse) {
+    return redirect(CLIENT_PATHS.BAD_REQUEST);
+  }
 
   const mappedTipsResponse: Tip[] = tipsResponse.map((tip) => {
-    const { authorId, ...tipWithoutAuthorId } = tip.tips;
+    const { author_id, created_at, updated_at, ...tipWithoutAuthorId } = tip;
     return {
       ...tipWithoutAuthorId,
+      createdAt: new Date(created_at),
+      updatedAt: new Date(updated_at),
       author: {
         ...tip.users,
         bio: tip.users.bio ?? undefined,
-        twitterUsername: tip.users.twitterUsername ?? undefined,
-        githubUsername: tip.users.githubUsername ?? undefined,
-        userImageURL: tip.users.userImageURL ?? undefined,
+        twitterUsername: tip.users.twitter_username ?? undefined,
+        githubUsername: tip.users.github_username ?? undefined,
+        userImageURL: tip.users.user_image_url ?? undefined,
+        createdAt: new Date(tip.users.created_at),
+        updatedAt: new Date(tip.users.updated_at),
       },
     };
   });

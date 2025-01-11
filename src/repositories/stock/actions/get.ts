@@ -1,9 +1,7 @@
 import { CLIENT_PATHS } from "@/constants/clientPaths";
-import { db } from "@/db";
-import { stocks, tips, users } from "@/db/schema";
+import { createClerkSupabaseClientSsr } from "@/db/client";
 import { type Tip, TipValidator } from "@/repositories/tips/types";
 import { auth } from "@clerk/nextjs/server";
-import { eq } from "drizzle-orm";
 import { redirect } from "next/navigation";
 
 export const getStocksByLoggedInUser = async () => {
@@ -13,23 +11,43 @@ export const getStocksByLoggedInUser = async () => {
     return redirect(CLIENT_PATHS.UNAUTHORIZED);
   }
 
-  const userStocks = await db
-    .select()
-    .from(stocks)
-    .where(eq(stocks.userId, userId))
-    .innerJoin(tips, eq(stocks.tipId, tips.id))
-    .innerJoin(users, eq(tips.authorId, users.id));
+  const supabase = await createClerkSupabaseClientSsr();
+
+  const { data: userStocks } = await supabase
+    .from("stocks")
+    .select(
+      `
+      *,
+      tips!inner (
+        *
+      ),
+      users!inner (
+        *
+      )
+    `,
+    )
+    .eq("user_id", userId);
+
+  if (!userStocks) {
+    return [];
+  }
 
   const stockedTipsWithDetails: Tip[] = userStocks.map((stock) => {
-    const { authorId, ...tipWithoutAuthorId } = stock.tips;
+    const { author_id, ...tipWithoutAuthorId } = stock.tips;
     return {
       ...tipWithoutAuthorId,
+      createdAt: new Date(stock.tips.created_at),
+      updatedAt: new Date(stock.tips.updated_at),
       author: {
         ...stock.users,
+        id: stock.users.id,
+        username: stock.users.username,
+        createdAt: new Date(stock.users.created_at),
+        updatedAt: new Date(stock.users.updated_at),
         bio: stock.users.bio ?? undefined,
-        twitterUsername: stock.users.twitterUsername ?? undefined,
-        githubUsername: stock.users.githubUsername ?? undefined,
-        userImageURL: stock.users.userImageURL ?? undefined,
+        twitterUsername: stock.users.twitter_username ?? undefined,
+        githubUsername: stock.users.github_username ?? undefined,
+        userImageURL: stock.users.user_image_url ?? undefined,
       },
     };
   });

@@ -1,12 +1,10 @@
 "use server";
 
 import { CLIENT_PATHS } from "@/constants/clientPaths";
-import { db } from "@/db";
-import { tips } from "@/db/schema";
+import { createClerkSupabaseClientSsr } from "@/db/client";
 import type { ConformAction } from "@/types/conform";
 import { auth } from "@clerk/nextjs/server";
 import { parseWithZod } from "@conform-to/zod";
-import { eq } from "drizzle-orm";
 import { redirect } from "next/navigation";
 import { TipValidator } from "../types";
 
@@ -25,10 +23,22 @@ export const updateTip = async (...[_prev, formData]: Parameters<ConformAction>)
     return submission.reply();
   }
 
-  await db
-    .update(tips)
-    .set({ ...submission.value, isPublic: submission.value.isPublic ?? false })
-    .where(eq(tips.id, submission.value.id));
+  const supabase = await createClerkSupabaseClientSsr();
+
+  const { error } = await supabase
+    .from("tips")
+    .update({
+      title: submission.value.title,
+      content: submission.value.content,
+      tags: submission.value.tags,
+      is_public: submission.value.isPublic ?? false,
+      updated_at: new Date().toISOString(),
+    })
+    .eq("id", submission.value.id);
+
+  if (error) {
+    throw new Error(error.message);
+  }
 
   return submission.reply();
 };

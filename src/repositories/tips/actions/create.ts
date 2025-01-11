@@ -1,8 +1,7 @@
 "use server";
 
 import { CLIENT_PATHS } from "@/constants/clientPaths";
-import { db } from "@/db";
-import { tips } from "@/db/schema";
+import { createClerkSupabaseClientSsr } from "@/db/client";
 import type { ConformAction } from "@/types/conform";
 import { auth } from "@clerk/nextjs/server";
 import { parseWithZod } from "@conform-to/zod";
@@ -24,12 +23,20 @@ export const createTip = async (...[_prev, formData]: Parameters<ConformAction>)
     return submission.reply();
   }
 
-  await db.insert(tips).values({
+  const supabase = await createClerkSupabaseClientSsr();
+
+  const { error } = await supabase.from("tips").insert({
     ...submission.value,
-    authorId: userId,
-    isPublic: submission.value.isPublic ?? false,
-    clerkUserId: userId,
+    author_id: userId,
+    is_public: submission.value.isPublic ?? false,
+    clerk_user_id: userId,
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
   });
+
+  if (error) {
+    throw new Error(error.message);
+  }
 
   return submission.reply();
 };

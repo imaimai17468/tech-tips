@@ -1,8 +1,9 @@
-import { db } from "@/db";
-import { users } from "@/db/schema";
+import { createClerkSupabaseClientSsr } from "@/db/client";
 import type { WebhookEvent } from "@clerk/nextjs/server";
 import { headers } from "next/headers";
 import { Webhook } from "svix";
+
+const supabase = await createClerkSupabaseClientSsr();
 
 export async function POST(req: Request) {
   const WEBHOOK_SECRET = process.env.CLERK_WEBHOOK_SECRET;
@@ -45,18 +46,15 @@ export async function POST(req: Request) {
     const { id, first_name, last_name, image_url, username } = evt.data;
 
     try {
-      await db
-        .insert(users)
-        .values({
-          id: id,
-          username: username ?? `${first_name}_${last_name}`,
-          bio: "",
-          twitterUsername: "",
-          githubUsername: "",
-          userImageURL: image_url,
-          clerkUserId: id,
-        })
-        .onConflictDoNothing();
+      await supabase.from("users").upsert({
+        id: id,
+        username: username ?? `${first_name}_${last_name}`,
+        bio: "",
+        twitterUsername: "",
+        githubUsername: "",
+        userImageURL: image_url,
+        clerkUserId: id,
+      });
 
       console.log(`User with ID ${id} created in database.`);
     } catch (error) {

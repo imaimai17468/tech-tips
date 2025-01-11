@@ -1,9 +1,7 @@
 "use server";
 
 import { CLIENT_PATHS } from "@/constants/clientPaths";
-import { db } from "@/db";
-import { tips } from "@/db/schema";
-import { eq } from "drizzle-orm";
+import { createClerkSupabaseClientSsr } from "@/db/client";
 import { redirect } from "next/navigation";
 import { TipValidator } from "../types";
 
@@ -13,8 +11,13 @@ export const deleteTipByID = async (tipID: string) => {
   if (!parsedId.success) {
     return redirect(CLIENT_PATHS.BAD_REQUEST);
   }
+  const supabase = await createClerkSupabaseClientSsr();
 
-  await db.delete(tips).where(eq(tips.id, parsedId.data));
+  const { error } = await supabase.from("tips").delete().eq("id", parsedId.data);
+
+  if (error) {
+    return redirect(CLIENT_PATHS.BAD_REQUEST);
+  }
 
   return redirect(CLIENT_PATHS.SETTINGS_TIPS);
 };
