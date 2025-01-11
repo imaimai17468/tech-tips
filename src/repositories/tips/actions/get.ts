@@ -83,7 +83,7 @@ export const getTipsByAuthorID = async (authorID: string) => {
     .from("tips")
     .select(`
       *,
-      users!inner (*)
+      users!tips_author_id_users_id_fk (*)
     `)
     .eq("author_id", parsedId.data)
     .order("created_at", { ascending: false });
