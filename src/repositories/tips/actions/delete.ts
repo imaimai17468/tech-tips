@@ -16,6 +16,7 @@ export const deleteTipByID = async (tipID: string) => {
   const { error } = await supabase.from("tips").delete().eq("id", parsedId.data);
 
   if (error) {
+    console.error(error.message);
     return redirect(CLIENT_PATHS.BAD_REQUEST);
   }
 

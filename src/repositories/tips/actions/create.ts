@@ -35,7 +35,8 @@ export const createTip = async (...[_prev, formData]: Parameters<ConformAction>)
   });
 
   if (error) {
-    throw new Error(error.message);
+    console.error(error);
+    redirect(CLIENT_PATHS.BAD_REQUEST);
   }
 
   return submission.reply();

@@ -25,8 +25,9 @@ export const getTipByID = async (tipID: string) => {
     .eq("id", parsedId.data)
     .single();
 
-  if (error || !tipResponse) {
-    return redirect(CLIENT_PATHS.NOT_FOUND);
+  if (error) {
+    console.error(error);
+    redirect(CLIENT_PATHS.BAD_REQUEST);
   }
 
   const { data: stocksResponse, error: stocksError } = await supabase
@@ -34,8 +35,9 @@ export const getTipByID = async (tipID: string) => {
     .select("*")
     .eq("tip_id", parsedId.data);
 
-  if (stocksError || !stocksResponse) {
-    return redirect(CLIENT_PATHS.BAD_REQUEST);
+  if (stocksError) {
+    console.error(stocksError);
+    redirect(CLIENT_PATHS.BAD_REQUEST);
   }
 
   const { author_id, created_at, updated_at, ...tipWithoutAuthorId } = tipResponse;
@@ -61,6 +63,7 @@ export const getTipByID = async (tipID: string) => {
   const parsed = TipValidator.safeParse(mappedTipResponse);
 
   if (!parsed.success) {
+    console.error(parsed.error);
     return redirect(CLIENT_PATHS.BAD_REQUEST);
   }
 
@@ -85,8 +88,9 @@ export const getTipsByAuthorID = async (authorID: string) => {
     .eq("author_id", parsedId.data)
     .order("created_at", { ascending: false });
 
-  if (error || !tipsResponse) {
-    return redirect(CLIENT_PATHS.BAD_REQUEST);
+  if (error) {
+    console.error(error);
+    redirect(CLIENT_PATHS.BAD_REQUEST);
   }
 
   const mappedTipsResponse: Tip[] = tipsResponse.map((tip) => {
@@ -110,7 +114,8 @@ export const getTipsByAuthorID = async (authorID: string) => {
   const parsed = TipValidator.array().safeParse(mappedTipsResponse);
 
   if (!parsed.success) {
-    return redirect(CLIENT_PATHS.BAD_REQUEST);
+    console.error(parsed.error);
+    redirect(CLIENT_PATHS.BAD_REQUEST);
   }
 
   return parsed.data;

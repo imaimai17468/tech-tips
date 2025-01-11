@@ -23,7 +23,12 @@ export const deleteStock = async (tipId: string) => {
 
   const supabase = await createClerkSupabaseClientSsr();
 
-  await supabase.from("stocks").delete().eq("user_id", userId).eq("tip_id", tipId);
+  const { error } = await supabase.from("stocks").delete().eq("user_id", userId).eq("tip_id", tipId);
+
+  if (error) {
+    console.error(error);
+    redirect(CLIENT_PATHS.BAD_REQUEST);
+  }
 
   revalidatePath(replaceIDinPath(CLIENT_PATHS.TIP_DETAIL, tipId));
 };

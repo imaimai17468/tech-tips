@@ -17,7 +17,8 @@ export const getUserByLoggedIn = async () => {
 
   const { data: userResponse, error } = await supabase.from("users").select("*").eq("id", userId).single();
 
-  if (error || !userResponse) {
+  if (error) {
+    console.error(error);
     return redirect(CLIENT_PATHS.NOT_FOUND);
   }
 
@@ -34,6 +35,7 @@ export const getUserByLoggedIn = async () => {
   const parsed = UserValidator.safeParse(mappedUserResponse);
 
   if (!parsed.success) {
+    console.error(parsed.error);
     return redirect(CLIENT_PATHS.BAD_REQUEST);
   }
 
@@ -51,7 +53,8 @@ export const getUserByID = async (userID: string) => {
 
   const { data: userResponse, error } = await supabase.from("users").select("*").eq("id", parsedId.data).single();
 
-  if (error || !userResponse) {
+  if (error) {
+    console.error(error);
     return redirect(CLIENT_PATHS.NOT_FOUND);
   }
 
@@ -68,6 +71,7 @@ export const getUserByID = async (userID: string) => {
   const parsed = UserValidator.safeParse(mappedUserResponse);
 
   if (!parsed.success) {
+    console.error(parsed.error);
     return redirect(CLIENT_PATHS.BAD_REQUEST);
   }
 

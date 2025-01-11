@@ -23,11 +23,16 @@ export const createStock = async (tipId: string) => {
 
   const supabase = await createClerkSupabaseClientSsr();
 
-  await supabase.from("stocks").insert({
+  const { error } = await supabase.from("stocks").insert({
     user_id: userId,
     tip_id: tipId,
     clerk_user_id: userId,
   });
+
+  if (error) {
+    console.error(error);
+    redirect(CLIENT_PATHS.BAD_REQUEST);
+  }
 
   revalidatePath(replaceIDinPath(CLIENT_PATHS.TIP_DETAIL, tipId));
 };

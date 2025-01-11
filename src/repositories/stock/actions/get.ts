@@ -13,7 +13,7 @@ export const getStocksByLoggedInUser = async () => {
 
   const supabase = await createClerkSupabaseClientSsr();
 
-  const { data: userStocks } = await supabase
+  const { data: userStocks, error } = await supabase
     .from("stocks")
     .select(
       `
@@ -28,8 +28,9 @@ export const getStocksByLoggedInUser = async () => {
     )
     .eq("user_id", userId);
 
-  if (!userStocks) {
-    return [];
+  if (error) {
+    console.error(error);
+    redirect(CLIENT_PATHS.BAD_REQUEST);
   }
 
   const stockedTipsWithDetails: Tip[] = userStocks.map((stock) => {
@@ -55,6 +56,7 @@ export const getStocksByLoggedInUser = async () => {
   const parsedStocksDetails = TipValidator.array().safeParse(stockedTipsWithDetails);
 
   if (!parsedStocksDetails.success) {
+    console.error(parsedStocksDetails.error);
     return redirect(CLIENT_PATHS.BAD_REQUEST);
   }
 
