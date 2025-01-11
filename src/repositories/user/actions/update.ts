@@ -23,7 +23,10 @@ export const updateUserName = async (...[_prev, formData]: Parameters<ConformAct
 
   const supabase = await createClerkSupabaseClientSsr();
 
-  const { error } = await supabase.from("users").update(submission.value).eq("id", userId);
+  const { error } = await supabase
+    .from("users")
+    .update({ ...submission.value, updated_at: new Date().toISOString() })
+    .eq("id", userId);
 
   if (error) throw error;
   return submission.reply();
@@ -46,7 +49,7 @@ export const updateUserBio = async (...[_prev, formData]: Parameters<ConformActi
 
   const { error } = await supabase
     .from("users")
-    .update({ ...submission.value, bio: submission.value.bio ?? "" })
+    .update({ ...submission.value, bio: submission.value.bio ?? "", updated_at: new Date().toISOString() })
     .eq("id", userId);
 
   if (error) throw error;
@@ -75,6 +78,7 @@ export const updateUserSNS = async (...[_prev, formData]: Parameters<ConformActi
     .update({
       twitter_username: submission.value.twitterUsername ?? "",
       github_username: submission.value.githubUsername ?? "",
+      updated_at: new Date().toISOString(),
     })
     .eq("id", userId);
 
