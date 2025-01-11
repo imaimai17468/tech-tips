@@ -7,11 +7,9 @@ export const Footer: React.FC = () => {
       <Flex gap={16} align="end">
         <Stack gap={4}>
           <Logo />
-          <Text size="xs" c="gray.6">
-            Where Technologies Rest.
-          </Text>
+          <Text size="xs">Where Technologies Rest.</Text>
         </Stack>
-        <Flex gap={4} c="gray.6">
+        <Flex gap={4}>
           <Text size="sm">Build by</Text>
           <Anchor underline="hover" size="sm" href="https://x.com/imaimai17468">
             imaimai17468

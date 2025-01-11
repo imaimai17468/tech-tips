@@ -11,7 +11,7 @@ export const SettingsButton: React.FC<Props> = ({ userID }) => {
   return (
     <Menu offset={15} withArrow position="bottom-end" transitionProps={{ transition: "rotate-left", duration: 150 }}>
       <Menu.Target>
-        <ActionIcon variant="light">
+        <ActionIcon variant="light" aria-label="Settings menu">
           <GearIcon />
         </ActionIcon>
       </Menu.Target>
