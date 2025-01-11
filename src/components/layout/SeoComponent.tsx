@@ -13,7 +13,7 @@ export default function SeoComponent(Info: SEOProps): Metadata {
   const metadata: Metadata = {
     title: title,
     description: description,
-    icons: "/favicon.ico",
+    icons: "/icon.png",
     keywords: ["TechTips", "技術Tips", "技術", "Tips"],
     viewport: {
       width: "device-width",
