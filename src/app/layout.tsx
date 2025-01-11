@@ -8,7 +8,9 @@ import "@mantine/notifications/styles.css";
 import type { Viewport } from "next";
 
 export const viewport: Viewport = {
-  themeColor: "light",
+  themeColor: "dark",
+  width: "device-width",
+  initialScale: 1,
 };
 
 const theme = createTheme({

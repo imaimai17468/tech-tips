@@ -15,11 +15,6 @@ export default function SeoComponent(Info: SEOProps): Metadata {
     description: description,
     icons: "/icon.png",
     keywords: ["TechTips", "技術Tips", "技術", "Tips"],
-    viewport: {
-      width: "device-width",
-      initialScale: 1,
-      maximumScale: 1,
-    },
     twitter: {
       card: "summary_large_image",
       ...(imageUrl ? { images: [imageUrl] } : {}),
