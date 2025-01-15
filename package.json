@@ -12,7 +12,10 @@
     "init:lefthook": "lefthook install",
     "drizzle:generate": "drizzle-kit generate",
     "drizzle:push": "drizzle-kit push",
-    "analyze": "ANALYZE=true bun run build"
+    "analyze": "ANALYZE=true bun run build",
+    "test": "bun test",
+    "test:vitest": "vitest",
+    "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
     "@blocknote/core": "^0.20.0",
@@ -44,14 +47,19 @@
     "@biomejs/biome": "1.7.0",
     "@next/bundle-analyzer": "^15.1.4",
     "@svgr/webpack": "^8.1.0",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.1.0",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@vitejs/plugin-react": "^4.3.4",
     "dotenv-cli": "^7.4.2",
+    "happy-dom": "^16.6.0",
     "lefthook": "^1.7.9",
     "postcss": "^8.4.38",
     "postcss-preset-mantine": "^1.17.0",
     "postcss-simple-vars": "^7.0.1",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vitest": "^2.1.8"
   }
 }
