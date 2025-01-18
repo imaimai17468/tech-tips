@@ -13,7 +13,7 @@ export const MainLayout: React.FC<Props> = ({ children }: Props) => {
       <Aurora />
       <Box mih="100vh">
         <Header />
-        <Box maw={1120} mx="auto" p={32}>
+        <Box maw={1120} mx="auto" p={{ base: 16, xs: 32 }}>
           {children}
         </Box>
         <Footer />
