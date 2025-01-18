@@ -10,7 +10,7 @@ type Props = {
 
 export const AuthorCard: React.FC<Props> = ({ user }) => {
   return (
-    <Card shadow="xs" padding="xl" radius="lg" w={300} style={{ flexShrink: 0 }} h="fit-content">
+    <Card shadow="xs" padding="xl" radius="lg" w={{ base: "100%", xs: 300 }} style={{ flexShrink: 0 }} h="fit-content">
       <Stack gap={16}>
         <Flex align="center" gap={8}>
           <Avatar src={user.userImageURL} alt={user.username} />
